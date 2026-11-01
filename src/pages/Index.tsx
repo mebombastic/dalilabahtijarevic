@@ -187,7 +187,7 @@ const packs: Array<{
       { type: "image", src: packTotal1 },
       { type: "image", src: packTotal2 },
       { type: "image", src: packTotal3 },
-      { type: "video", src: "/videos/pack-total.mp4", poster: packTotal1 },
+      { type: "video", src: `${import.meta.env.BASE_URL}videos/pack-total.mp4`, poster: packTotal1 },
     ],
     desc: "The perfect breakfast and hydration combo for people who want to go all-in. Formula 1, the herbal drink and aloe vera work together to support your metabolism and your results from day one.",
     perfect: "People who want the most complete start and the biggest push toward results.",
