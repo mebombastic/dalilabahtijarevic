@@ -6,7 +6,13 @@ import { Check, Play, Users, Trophy, Heart, Sparkles, ArrowRight, ArrowUp, Mic, 
 import heroImg from "@/assets/hero-coach-light.jpg";
 import heroImgDark from "@/assets/hero-theme-gold.jpg";
 import storyImg from "@/assets/story-video.jpg";
-import heroProducts from "@/assets/hero-products.webp";
+import heroF1 from "@/assets/hero-f1.webp";
+import heroAloe from "@/assets/hero-aloe.webp";
+import heroPdm from "@/assets/hero-pdm.webp";
+import heroApple from "@/assets/hero-apple.webp";
+import heroTea from "@/assets/hero-tea.webp";
+import heroFibre from "@/assets/hero-fibre.webp";
+import heroNuts from "@/assets/hero-nuts.webp";
 import coachPhoto from "@/assets/coach-dalila.webp";
 import coachBubble from "@/assets/coach-bubble.webp";
 import packMorning1 from "@/assets/pack-morning-1.jpg";
@@ -211,10 +217,21 @@ const packs: Array<{
 
 const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
+/** Product line-up: positions (in % of the group box) come from the original photo. */
+const heroProducts = [
+  { src: heroF1, alt: "Formula 1 Shake Mix", left: 3.33, top: 0, width: 34.29, z: 1, anim: "roll-in-left", delay: 0.3, depth: 40, pd: 10, bob: "0s" },
+  { src: heroAloe, alt: "Herbal Aloe Concentrate", left: 40, top: 1.11, width: 19.9, z: 2, anim: "drop-in", delay: 0.6, depth: 30, pd: 6, bob: "-1.5s" },
+  { src: heroPdm, alt: "Protein Drink Mix", left: 60.38, top: 1.73, width: 30.95, z: 1, anim: "roll-in-right", delay: 0.9, depth: 40, pd: 10, bob: "-3s" },
+  { src: heroApple, alt: "Green apple", left: 0, top: 61.6, width: 23.62, z: 4, anim: "roll-in-far", delay: 1.2, depth: 90, pd: 22, bob: "-2s" },
+  { src: heroTea, alt: "Instant Herbal Beverage", left: 25.9, top: 51.23, width: 17.9, z: 5, anim: "pop-in", delay: 1.45, depth: 80, pd: 18, bob: "-4s" },
+  { src: heroFibre, alt: "Multifibre", left: 52.86, top: 54.32, width: 29.52, z: 5, anim: "roll-in-right", delay: 1.7, depth: 80, pd: 18, bob: "-5s" },
+  { src: heroNuts, alt: "Almonds", left: 79.05, top: 79.63, width: 20.95, z: 6, anim: "slide-in-right", delay: 1.95, depth: 100, pd: 26, bob: "-2.5s" },
+];
+
 const heroChips = [
-  { label: "Protein-packed breakfast", pos: "left-[0%] top-[50%] md:left-[4%] md:top-[18%]", delay: 1.0, bob: "0s" },
-  { label: "Energy & focus", pos: "right-[0%] top-[30%] md:right-[4%] md:top-[46%]", delay: 1.15, bob: "-2s" },
-  { label: "Hydration & gut balance", pos: "hidden md:block md:left-[2%] md:top-[52%]", delay: 1.3, bob: "-4s" },
+  { label: "Protein-packed breakfast", pos: "left-[0%] top-[50%] md:left-[4%] md:top-[18%]", delay: 2.5, bob: "0s" },
+  { label: "Energy & focus", pos: "right-[0%] top-[30%] md:right-[4%] md:top-[46%]", delay: 2.65, bob: "-2s" },
+  { label: "Hydration & gut balance", pos: "hidden md:block md:left-[2%] md:top-[52%]", delay: 2.8, bob: "-4s" },
 ];
 
 const Index = () => {
@@ -246,6 +263,15 @@ const Index = () => {
   useReveal();
   useParallax();
   useScrollProgress();
+
+  const stageRef = useRef<HTMLDivElement>(null);
+  const onStagePointer = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = stageRef.current;
+    if (!el || e.pointerType === "touch") return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", (((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
+    el.style.setProperty("--my", (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
+  };
 
   const railRef = useRef<HTMLDivElement>(null);
   const [railProgress, setRailProgress] = useState(0);
@@ -314,18 +340,35 @@ const Index = () => {
             <SectionLabel>Dalila Bahtijarevic · FitLife Coach</SectionLabel>
           </div>
 
-          <div data-reveal="stage" className="relative w-full max-w-5xl h-[400px] sm:h-[480px] md:h-[60vh] md:min-h-[500px] md:max-h-[620px]">
+          <div
+            ref={stageRef}
+            onPointerMove={onStagePointer}
+            onPointerLeave={() => { stageRef.current?.style.setProperty("--mx", "0"); stageRef.current?.style.setProperty("--my", "0"); }}
+            data-reveal="stage"
+            className="relative w-full max-w-5xl h-[400px] sm:h-[480px] md:h-[60vh] md:min-h-[500px] md:max-h-[620px]">
             {/* products */}
-            <div className="stage-parallax absolute inset-x-0 bottom-[17%] md:bottom-[15%] flex justify-center" style={{ "--depth": "70px" } as CSSProperties}>
-              <div className="stage-item w-[94%] sm:w-[72%] md:w-[46%] lg:max-w-[540px]" style={d(0.2)}>
-                <img src={heroProducts} alt="Herbalife Formula 1, Aloe, Protein Drink Mix, herbal tea and Multifibre" className="animate-bob-soft w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.6)]" />
+            <div className="absolute inset-x-0 bottom-[17%] md:bottom-[15%] flex justify-center">
+              <div className="relative w-[94%] sm:w-[72%] md:w-[46%] lg:max-w-[540px] aspect-[1050/810]">
+                {heroProducts.map((it) => (
+                  <div key={it.alt} className="absolute" style={{ left: `${it.left}%`, top: `${it.top}%`, width: `${it.width}%`, zIndex: it.z }}>
+                    <div className="stage-parallax" style={{ "--depth": `${it.depth}px` } as CSSProperties}>
+                      <div className="pointer-shift" style={{ "--pd": `${it.pd}px` } as CSSProperties}>
+                        <div className={`product-anim ${it.anim}`} style={{ animationDelay: `${it.delay}s` }}>
+                          <div className="product-hit">
+                            <img src={it.src} alt={it.alt} draggable={false} className="animate-bob-soft w-full select-none drop-shadow-[0_24px_24px_rgba(0,0,0,0.5)]" style={{ animationDelay: it.bob }} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* giant headline in front of the products */}
             <h1 className="words-in absolute inset-x-0 bottom-0 z-20 font-display leading-[0.9] text-[14vw] sm:text-[12vw] md:text-[8.6vw] lg:text-[7.6rem] drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)]">
-              <Words text="Prove" start={0.6} /> <span className="italic"><Words text="Yourself" start={0.72} /></span><br className="md:hidden" />{" "}
-              <Words text="Right." className="gold-text" start={0.86} />
+              <Words text="Prove" start={1.7} /> <span className="italic"><Words text="Yourself" start={1.82} /></span><br className="md:hidden" />{" "}
+              <Words text="Right." className="gold-text" start={1.96} />
             </h1>
 
             {/* benefit chips */}
@@ -341,7 +384,7 @@ const Index = () => {
 
             {/* coach bubble */}
             <div className="absolute z-30 right-[0%] top-[2%] md:right-[6%] md:top-[6%]">
-              <div className="stage-chip" style={d(1.5)}>
+              <div className="stage-chip" style={d(3.0)}>
                 <a href="#coach" className="animate-bob group flex items-center gap-3 rounded-full bg-[hsl(36_28%_94%/0.1)] backdrop-blur-md border border-[hsl(42_52%_52%/0.35)] p-1.5 pr-4 md:pr-5" style={{ "--bd": "-3s" } as CSSProperties}>
                   <span className="relative block h-12 w-12 md:h-16 md:w-16 shrink-0">
                     <span className="absolute inset-0 rounded-full ring-2 ring-gold animate-ping-slow" />
@@ -356,11 +399,11 @@ const Index = () => {
             </div>
           </div>
 
-          <p className="animate-blur-up font-body text-base md:text-lg text-[hsl(36_28%_94%/0.75)] max-w-lg mx-auto mt-6 mb-8 leading-relaxed" style={{ animationDelay: "1.35s" }}>
+          <p className="animate-blur-up font-body text-base md:text-lg text-[hsl(36_28%_94%/0.75)] max-w-lg mx-auto mt-6 mb-8 leading-relaxed" style={{ animationDelay: "2.2s" }}>
             Join a community dedicated to growth, discipline, and results.
             Your transformation starts with a single decision.
           </p>
-          <div className="animate-blur-up flex flex-wrap gap-4 justify-center" style={{ animationDelay: "1.5s" }}>
+          <div className="animate-blur-up flex flex-wrap gap-4 justify-center" style={{ animationDelay: "2.35s" }}>
             <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
               Create Account
             </Button>
@@ -368,7 +411,7 @@ const Index = () => {
               <a href="#packs">Choose Your Pack <ArrowRight className="ml-2 h-3 w-3" /></a>
             </Button>
           </div>
-          <div className="animate-fade-up mt-10 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(36_28%_94%/0.55)]" style={{ animationDelay: "1.8s" }}>
+          <div className="animate-fade-up mt-10 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(36_28%_94%/0.55)]" style={{ animationDelay: "2.7s" }}>
             <ShieldCheck className="h-3 w-3 text-gold" /> Certified Coach · Real Results
           </div>
         </div>
