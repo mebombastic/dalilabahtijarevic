@@ -305,3 +305,14 @@
 
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+@keyframes bob-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-bob-soft { animation: bob-soft 7s ease-in-out infinite; }
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.7; }
+  80%, 100% { transform: scale(1.45); opacity: 0; }
+}
+.animate-ping-slow { animation: ping-slow 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; }

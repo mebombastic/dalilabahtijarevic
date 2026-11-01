@@ -6,9 +6,9 @@ import { Check, Play, Users, Trophy, Heart, Sparkles, ArrowRight, ArrowUp, Mic, 
 import heroImg from "@/assets/hero-coach-light.jpg";
 import heroImgDark from "@/assets/hero-theme-gold.jpg";
 import storyImg from "@/assets/story-video.jpg";
-import heroPoster from "@/assets/hero-poster.jpg";
-import productF1 from "@/assets/product-f1.webp";
-import productTea from "@/assets/product-tea.webp";
+import heroProducts from "@/assets/hero-products.webp";
+import coachPhoto from "@/assets/coach-dalila.webp";
+import coachBubble from "@/assets/coach-bubble.webp";
 import packMorning1 from "@/assets/pack-morning-1.jpg";
 import packMorning2 from "@/assets/pack-morning-2.jpg";
 import packMorning3 from "@/assets/pack-morning-3.jpg";
@@ -211,71 +211,11 @@ const packs: Array<{
 
 const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
-const stageChips = [
-  { label: "Protein-packed breakfast", pos: "left-[2%] top-[14%] md:left-[18%] md:top-[18%]", delay: 0.9, bob: "0s" },
-  { label: "Energy & focus", pos: "right-[2%] top-[30%] md:right-[20%] md:top-[26%]", delay: 1.05, bob: "-2s" },
-  { label: "Ready in 2 minutes", pos: "left-[4%] top-[52%] md:left-[24%] md:top-[56%]", delay: 1.2, bob: "-4s" },
-  { label: "Hydration & gut balance", pos: "right-[4%] top-[64%] md:right-[22%] md:top-[60%]", delay: 1.35, bob: "-1s" },
+const heroChips = [
+  { label: "Protein-packed breakfast", pos: "left-[0%] top-[50%] md:left-[4%] md:top-[18%]", delay: 1.0, bob: "0s" },
+  { label: "Energy & focus", pos: "right-[0%] top-[30%] md:right-[4%] md:top-[46%]", delay: 1.15, bob: "-2s" },
+  { label: "Hydration & gut balance", pos: "hidden md:block md:left-[2%] md:top-[52%]", delay: 1.3, bob: "-4s" },
 ];
-
-/** Dark product stage: bottles rise in, float, chips pop in, big word drifts on scroll. */
-const ProductStage = () => (
-  <section id="products" data-progress="through" className="bg-stage relative overflow-hidden py-24 md:py-32 text-[hsl(36_28%_94%)]">
-    <div className="container mx-auto relative">
-      <div className="text-center max-w-xl mx-auto relative z-30" data-reveal="words">
-        <SectionLabel>Signature Products</SectionLabel>
-        <h2 className="font-display text-4xl md:text-6xl">
-          <Words text="Fuel that" /> <em className="font-normal"><Words text="fits your day." className="gold-text" start={0.16} /></em>
-        </h2>
-      </div>
-
-      <div data-reveal="stage" className="relative h-[460px] sm:h-[540px] md:h-[640px] mt-6">
-        {/* big drifting word */}
-        <div className="absolute inset-x-0 bottom-[4%] md:bottom-[2%] z-20 pointer-events-none flex justify-center">
-          <div className="stage-item" style={d(0.55)}>
-            <div className="stage-word font-display italic leading-none whitespace-nowrap text-[26vw] md:text-[15vw] gold-text pr-[0.1em]">
-              Nourish.
-            </div>
-          </div>
-        </div>
-
-        {/* tea bottle, behind */}
-        <div className="stage-parallax absolute z-0 left-[3%] bottom-[24%] w-[34%] sm:w-[26%] md:left-[27%] md:bottom-[26%] md:w-[13%]" style={{ "--depth": "120px" } as CSSProperties}>
-          <div className="stage-item" style={d(0.35)}>
-            <img src={productTea} alt="Herbalife instant herbal beverage" className="animate-bob w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)]" style={{ "--r": "-8deg", "--bd": "-3s" } as CSSProperties} />
-          </div>
-        </div>
-
-        {/* Formula 1, hero product */}
-        <div className="stage-parallax absolute z-10 left-1/2 bottom-[16%] w-[66%] sm:w-[48%] md:w-[30%]" style={{ "--depth": "60px", translate: "-50% 0" } as CSSProperties}>
-          <div className="stage-item" style={d(0.15)}>
-            <img src={productF1} alt="Herbalife Formula 1 Nutritional Shake Mix" className="animate-bob w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.6)]" />
-          </div>
-        </div>
-
-        {/* floating chips */}
-        {stageChips.map((c) => (
-          <div key={c.label} className={`absolute z-30 ${c.pos}`}>
-            <div className="stage-chip" style={d(c.delay)}>
-              <span className="animate-bob inline-flex items-center gap-2 rounded-full bg-[hsl(36_28%_94%/0.1)] backdrop-blur-md border border-[hsl(42_52%_52%/0.35)] px-3 py-1.5 md:px-4 md:py-2 font-body text-[9px] md:text-[11px] tracking-wide-2 uppercase whitespace-nowrap" style={{ "--bd": c.bob } as CSSProperties}>
-                <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_10px_hsl(42_52%_52%)]" /> {c.label}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="relative z-30 text-center max-w-lg mx-auto -mt-2" data-reveal="blur">
-        <p className="font-body text-sm md:text-base text-[hsl(36_28%_94%/0.7)] leading-relaxed mb-8">
-          The exact products behind every pack — Formula 1 breakfast, herbal drink and aloe — combined into a routine that is simple to follow and built for results.
-        </p>
-        <Button asChild size="lg" className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
-          <a href="#packs">Shop the Packs <ArrowRight className="ml-2 h-3 w-3" /></a>
-        </Button>
-      </div>
-    </div>
-  </section>
-);
 
 const Index = () => {
   const [authOpen, setAuthOpen] = useState(false);
@@ -367,47 +307,68 @@ const Index = () => {
         </div>
       </header>
 
-      {/* HERO - original slogans, Nolla-style prompt + pills below */}
-      <section id="coach" className="relative min-h-screen pt-28 overflow-hidden">
-        <div className="absolute inset-0 z-0 pointer-events-none animate-hero-zoom" data-parallax>
-          <img
-            src={heroPoster}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-[center_24%] scale-110 blur-md opacity-100 parallax-slow"
-          />
-          <div className="absolute inset-0 bg-background/30" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/20 to-background/10" />
-        </div>
-
-        <div className="container mx-auto relative z-10 min-h-[calc(100vh-7rem)] flex flex-col items-center justify-center py-20 text-center">
-          <div className="w-full max-w-2xl">
-            <div className="animate-blur-up" style={{ animationDelay: "0.5s" }}>
-              <SectionLabel>Meet Your Coach</SectionLabel>
-            </div>
-            <h1 className="words-in font-display text-6xl md:text-8xl leading-[0.95] mb-6">
-              <Words text="Prove" start={0.7} /> <br />
-              <span className="italic font-normal"><Words text="Yourself" start={0.85} /></span>{" "}
-              <Words text="Right." className="gold-text" start={1.0} />
-            </h1>
-            <div className="animate-blur-up font-script text-3xl text-gold mb-6" style={{ animationDelay: "1.25s" }}>Dalila Bahtijarevic</div>
-            <p className="animate-blur-up font-body text-lg text-foreground/80 max-w-lg mx-auto mb-10 leading-relaxed" style={{ animationDelay: "1.4s" }}>
-              Join a community dedicated to growth, discipline, and results.
-              Your transformation starts with a single decision.
-            </p>
-
-            <div className="animate-blur-up flex flex-wrap gap-4 justify-center mb-2" style={{ animationDelay: "1.55s" }}>
-              <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
-                Create Account
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-foreground/30 hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 bg-background/40 backdrop-blur">
-                <a href="#packs">Choose Your Pack <ArrowRight className="ml-2 h-3 w-3" /></a>
-              </Button>
-            </div>
-
+      {/* HERO — product stage: products rise in, float, chips + coach bubble pop in, giant headline */}
+      <section id="top" data-progress="through" className="bg-stage relative min-h-screen pt-24 pb-12 overflow-hidden text-[hsl(36_28%_94%)]">
+        <div className="container mx-auto relative flex flex-col items-center text-center">
+          <div className="animate-blur-up relative z-30 mt-4 md:mt-6" style={{ animationDelay: "0.4s" }}>
+            <SectionLabel>Dalila Bahtijarevic · FitLife Coach</SectionLabel>
           </div>
 
-          <div className="animate-fade-up absolute bottom-6 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-muted-foreground">
+          <div data-reveal="stage" className="relative w-full max-w-5xl h-[400px] sm:h-[480px] md:h-[60vh] md:min-h-[500px] md:max-h-[620px]">
+            {/* products */}
+            <div className="stage-parallax absolute inset-x-0 bottom-[17%] md:bottom-[15%] flex justify-center" style={{ "--depth": "70px" } as CSSProperties}>
+              <div className="stage-item w-[94%] sm:w-[72%] md:w-[46%] lg:max-w-[540px]" style={d(0.2)}>
+                <img src={heroProducts} alt="Herbalife Formula 1, Aloe, Protein Drink Mix, herbal tea and Multifibre" className="animate-bob-soft w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.6)]" />
+              </div>
+            </div>
+
+            {/* giant headline in front of the products */}
+            <h1 className="words-in absolute inset-x-0 bottom-0 z-20 font-display leading-[0.9] text-[14vw] sm:text-[12vw] md:text-[8.6vw] lg:text-[7.6rem] drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)]">
+              <Words text="Prove" start={0.6} /> <span className="italic"><Words text="Yourself" start={0.72} /></span><br className="md:hidden" />{" "}
+              <Words text="Right." className="gold-text" start={0.86} />
+            </h1>
+
+            {/* benefit chips */}
+            {heroChips.map((c) => (
+              <div key={c.label} className={`absolute z-30 ${c.pos}`}>
+                <div className="stage-chip" style={d(c.delay)}>
+                  <span className="animate-bob inline-flex items-center gap-2 rounded-full bg-[hsl(36_28%_94%/0.1)] backdrop-blur-md border border-[hsl(42_52%_52%/0.35)] px-3 py-1.5 md:px-4 md:py-2 font-body text-[9px] md:text-[11px] tracking-wide-2 uppercase whitespace-nowrap" style={{ "--bd": c.bob } as CSSProperties}>
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_10px_hsl(42_52%_52%)]" /> {c.label}
+                  </span>
+                </div>
+              </div>
+            ))}
+
+            {/* coach bubble */}
+            <div className="absolute z-30 right-[0%] top-[2%] md:right-[6%] md:top-[6%]">
+              <div className="stage-chip" style={d(1.5)}>
+                <a href="#coach" className="animate-bob group flex items-center gap-3 rounded-full bg-[hsl(36_28%_94%/0.1)] backdrop-blur-md border border-[hsl(42_52%_52%/0.35)] p-1.5 pr-4 md:pr-5" style={{ "--bd": "-3s" } as CSSProperties}>
+                  <span className="relative block h-12 w-12 md:h-16 md:w-16 shrink-0">
+                    <span className="absolute inset-0 rounded-full ring-2 ring-gold animate-ping-slow" />
+                    <img src={coachBubble} alt="Coach Dalila" className="relative h-full w-full rounded-full object-cover ring-2 ring-gold" />
+                  </span>
+                  <span className="text-left leading-tight">
+                    <span className="block font-body text-[8px] md:text-[9px] tracking-luxe uppercase text-gold">Your coach</span>
+                    <span className="block font-script text-xl md:text-2xl">Dalila</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <p className="animate-blur-up font-body text-base md:text-lg text-[hsl(36_28%_94%/0.75)] max-w-lg mx-auto mt-6 mb-8 leading-relaxed" style={{ animationDelay: "1.35s" }}>
+            Join a community dedicated to growth, discipline, and results.
+            Your transformation starts with a single decision.
+          </p>
+          <div className="animate-blur-up flex flex-wrap gap-4 justify-center" style={{ animationDelay: "1.5s" }}>
+            <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
+              Create Account
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-[hsl(36_28%_94%/0.35)] text-[hsl(36_28%_94%)] hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 bg-transparent">
+              <a href="#packs">Choose Your Pack <ArrowRight className="ml-2 h-3 w-3" /></a>
+            </Button>
+          </div>
+          <div className="animate-fade-up mt-10 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(36_28%_94%/0.55)]" style={{ animationDelay: "1.8s" }}>
             <ShieldCheck className="h-3 w-3 text-gold" /> Certified Coach · Real Results
           </div>
         </div>
@@ -422,7 +383,55 @@ const Index = () => {
         </div>
       </section>
 
-      <ProductStage />
+      {/* MEET YOUR COACH */}
+      <section id="coach" className="py-28 md:py-36 bg-background overflow-hidden">
+        <div className="container mx-auto grid md:grid-cols-2 gap-16 md:gap-20 items-center">
+          <div className="relative max-w-md mx-auto w-full" data-reveal>
+            <span className="absolute -top-8 -left-8 h-36 w-36 rounded-full border border-gold/40 animate-float" aria-hidden="true" />
+            <div className="img-reveal relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-soft">
+              <img src={coachPhoto} alt="Coach Dalila Bahtijarevic with her Herbalife shake" loading="lazy" className="w-full h-full object-cover object-[center_30%]" />
+            </div>
+            <div className="absolute -bottom-6 right-2 md:-right-10" data-reveal="blur" data-reveal-delay="3">
+              <div className="animate-bob rounded-2xl bg-background/90 backdrop-blur border border-gold/40 px-5 py-3 shadow-soft">
+                <div className="font-script text-3xl text-gold leading-none">Dalila</div>
+                <div className="font-body text-[9px] tracking-luxe uppercase text-muted-foreground mt-1">Certified FitLife Coach</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div data-reveal="words">
+              <SectionLabel>Meet Your Coach</SectionLabel>
+              <h2 className="font-display text-5xl md:text-6xl mb-8">
+                <Words text="Hi, I'm" /> <em className="font-normal"><Words text="Dalila." className="gold-text" start={0.15} /></em>
+              </h2>
+            </div>
+            <p className="font-body text-foreground/80 leading-relaxed mb-5" data-reveal="blur" data-reveal-delay="1">
+              I know how hard it is to stay consistent when life gets busy. That's why my approach is simple:
+              a good breakfast, better hydration and small daily habits that add up to real change.
+            </p>
+            <p className="font-body text-muted-foreground leading-relaxed mb-8" data-reveal="blur" data-reveal-delay="2">
+              No extremes, no crash diets — just routines you can actually keep, and someone in your corner every step of the way.
+            </p>
+            <ul className="space-y-3 mb-10" data-reveal data-reveal-delay="3">
+              {["A plan built around your day", "Nutrition that's simple to follow", "Real support when you need it"].map((t) => (
+                <li key={t} className="flex items-center gap-3 font-body text-sm">
+                  <span className="h-6 w-6 inline-flex items-center justify-center rounded-full bg-gold/15"><Check className="h-3.5 w-3.5 text-gold" /></span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-4" data-reveal data-reveal-delay="4">
+              <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
+                Start With Me
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-foreground/30 hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 bg-transparent">
+                <a href="https://www.instagram.com/dalilafitlife" target="_blank" rel="noopener noreferrer"><Camera className="mr-2 h-3.5 w-3.5" /> Instagram</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* STORY — pill image that opens up on scroll */}
       <section className="py-32 bg-background overflow-hidden">
