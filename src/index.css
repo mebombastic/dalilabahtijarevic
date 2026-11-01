@@ -263,13 +263,3 @@
   to { transform: translateX(-50%); }
 }
 .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal], .word, .animate-hero-zoom, .animate-nav-in, .animate-blur-up, .animate-fade-up {
-    opacity: 1 !important; filter: none !important; transform: none !important;
-    transition: none !important; animation: none !important;
-  }
-  .marquee-track { animation: none; }
-  .pill-expand { clip-path: inset(0 round 24px); }
-  .pill-expand img { transform: none; }
-}
