@@ -19,6 +19,8 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { PackDialog, type Pack } from "@/components/PackDialog";
 import { useReveal } from "@/hooks/use-reveal";
 import { useParallax } from "@/hooks/use-parallax";
+import { useScrollProgress } from "@/hooks/use-scroll-progress";
+import { Words } from "@/components/Words";
 
 type Lang = "en" | "de" | "sr";
 
@@ -233,11 +235,12 @@ const Index = () => {
 
   useReveal();
   useParallax();
+  useScrollProgress();
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* NAV */}
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/50">
+      <header className="animate-nav-in fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/50">
         <div className="container mx-auto flex items-center justify-between py-4">
           <a href="#" className="flex items-center gap-3">
             <Monogram className="text-2xl" />
@@ -287,7 +290,7 @@ const Index = () => {
 
       {/* HERO - original slogans, Nolla-style prompt + pills below */}
       <section id="coach" className="relative min-h-screen pt-28 overflow-hidden">
-        <div className="absolute inset-0 z-0 pointer-events-none" data-parallax>
+        <div className="absolute inset-0 z-0 pointer-events-none animate-hero-zoom" data-parallax>
           <img
             src={heroPoster}
             alt=""
@@ -299,19 +302,22 @@ const Index = () => {
         </div>
 
         <div className="container mx-auto relative z-10 min-h-[calc(100vh-7rem)] flex flex-col items-center justify-center py-20 text-center">
-          <div className="w-full max-w-2xl animate-fade-up">
-            <SectionLabel>Meet Your Coach</SectionLabel>
-            <h1 className="font-display text-6xl md:text-8xl leading-[0.95] mb-6">
-              Prove <br />
-              <span className="italic font-normal">Yourself</span> <span className="gold-text">Right.</span>
+          <div className="w-full max-w-2xl">
+            <div className="animate-blur-up" style={{ animationDelay: "0.5s" }}>
+              <SectionLabel>Meet Your Coach</SectionLabel>
+            </div>
+            <h1 className="words-in font-display text-6xl md:text-8xl leading-[0.95] mb-6">
+              <Words text="Prove" start={0.7} /> <br />
+              <span className="italic font-normal"><Words text="Yourself" start={0.85} /></span>{" "}
+              <Words text="Right." className="gold-text" start={1.0} />
             </h1>
-            <div className="font-script text-3xl text-gold mb-6">Dalila Bahtijarevic</div>
-            <p className="font-body text-lg text-foreground/80 max-w-lg mx-auto mb-10 leading-relaxed">
+            <div className="animate-blur-up font-script text-3xl text-gold mb-6" style={{ animationDelay: "1.25s" }}>Dalila Bahtijarevic</div>
+            <p className="animate-blur-up font-body text-lg text-foreground/80 max-w-lg mx-auto mb-10 leading-relaxed" style={{ animationDelay: "1.4s" }}>
               Join a community dedicated to growth, discipline, and results.
               Your transformation starts with a single decision.
             </p>
 
-            <div className="flex flex-wrap gap-4 justify-center mb-2">
+            <div className="animate-blur-up flex flex-wrap gap-4 justify-center mb-2" style={{ animationDelay: "1.55s" }}>
               <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
                 Create Account
               </Button>
@@ -322,7 +328,7 @@ const Index = () => {
 
           </div>
 
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-muted-foreground">
+          <div className="animate-fade-up absolute bottom-6 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-muted-foreground">
             <ShieldCheck className="h-3 w-3 text-gold" /> Certified Coach · Real Results
           </div>
         </div>
@@ -337,17 +343,50 @@ const Index = () => {
         </div>
       </section>
 
+      {/* STORY — pill image that opens up on scroll */}
+      <section className="py-32 bg-background overflow-hidden">
+        <div className="container mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-14" data-reveal="words">
+            <SectionLabel>The Method</SectionLabel>
+            <h2 className="font-display text-5xl md:text-6xl mb-6">
+              <Words text="Training. Nutrition." /> <br />
+              <em className="font-normal"><Words text="Made Simple." className="gold-text" start={0.2} /></em>
+            </h2>
+          </div>
+          <p className="font-body text-muted-foreground text-center max-w-xl mx-auto mb-16 leading-relaxed" data-reveal="blur">
+            No guesswork, no extremes. A clear plan for how you move, what you eat and how you show up —
+            built around your life, so the results actually last.
+          </p>
+
+          <div data-progress className="pill-expand relative aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-ink">
+            <img src={storyImg} alt="Training gear and shaker" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            <div className="absolute bottom-6 inset-x-0 flex flex-wrap justify-center gap-3 px-4">
+              {[
+                { icon: Dumbbell, label: "Training" },
+                { icon: Heart, label: "Nutrition" },
+                { icon: Sparkles, label: "Mindset" },
+              ].map((c, i) => (
+                <span key={c.label} data-reveal="blur" data-reveal-delay={String(i + 1)} className="inline-flex items-center gap-2 rounded-full bg-background/85 backdrop-blur px-4 py-2 font-body text-[10px] tracking-luxe uppercase text-foreground">
+                  <c.icon className="h-3.5 w-3.5 text-gold" /> {c.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* WHY CHOOSE US */}
       <section id="why" className="py-32 bg-secondary/30 relative overflow-hidden">
         <div className="container mx-auto">
-          <div className="text-center mb-20" data-reveal>
+          <div className="text-center mb-20" data-reveal="words">
             <SectionLabel>Why Choose Us</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl">Everything you need <br /><em className="font-normal gold-text">to succeed</em></h2>
+            <h2 className="font-display text-5xl md:text-6xl"><Words text="Everything you need" /> <br /><em className="font-normal"><Words text="to succeed" className="gold-text" start={0.25} /></em></h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {features.map((f, i) => (
-              <Card key={i} data-reveal data-reveal-delay={String(i + 1)} className="hover-lift group bg-background/60 border-border hover:border-gold/60 hover:shadow-soft transition-all duration-500 p-8 rounded-2xl relative">
+              <Card key={i} data-reveal="fan" data-fan={["left", "center", "right"][i]} className="hover-lift group bg-background/60 border-border hover:border-gold/60 hover:shadow-soft transition-all duration-500 p-8 rounded-2xl relative">
                 <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/0 to-transparent group-hover:via-gold transition-all duration-500" />
                 <div className="font-display text-5xl gold-text/30 mb-6 opacity-30">0{i + 1}</div>
                 <f.icon className="h-7 w-7 text-gold mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6" strokeWidth={1.2} />
@@ -362,9 +401,9 @@ const Index = () => {
       {/* PACKS */}
       <section id="packs" className="py-32 bg-secondary/30">
         <div className="container mx-auto">
-          <div className="text-center mb-20" data-reveal>
+          <div className="text-center mb-20" data-reveal="words">
             <SectionLabel>Available Packages</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl">Choose <em className="font-normal gold-text">Your Pack</em></h2>
+            <h2 className="font-display text-5xl md:text-6xl"><Words text="Choose" /> <em className="font-normal"><Words text="Your Pack" className="gold-text" start={0.1} /></em></h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -419,15 +458,31 @@ const Index = () => {
         </div>
       </section>
 
+      {/* MARQUEE */}
+      <section className="py-14 overflow-hidden border-y border-border bg-background" aria-hidden="true">
+        <div className="marquee-track font-display text-6xl md:text-8xl whitespace-nowrap leading-none">
+          {[0, 1].map((k) => (
+            <div key={k} className="flex items-center">
+              {["Strong Body", "Strong Mind", "Better Life", "You vs. You", "Prove Yourself Right"].map((t, i) => (
+                <span key={t} className="flex items-center">
+                  <span className={i % 2 ? "italic gold-text pr-2" : ""}>{t}</span>
+                  <span className="mx-8 md:mx-12 text-gold text-3xl md:text-5xl">✦</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(42_52%_52%/0.15),transparent_60%)]" />
         </div>
-        <div className="container mx-auto text-center max-w-3xl" data-reveal>
+        <div className="container mx-auto text-center max-w-3xl" data-reveal="words">
           <SectionLabel>Ready to Transform?</SectionLabel>
           <h2 className="font-display text-6xl md:text-7xl mb-8">
-            Start Your <br /><em className="font-normal gold-text">Journey Today</em>
+            <Words text="Start Your" /> <br /><em className="font-normal"><Words text="Journey Today" className="gold-text" start={0.2} /></em>
           </h2>
           <p className="font-script text-2xl text-gold mb-10">You vs. You.</p>
           <p className="font-body text-muted-foreground max-w-xl mx-auto mb-10">
