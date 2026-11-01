@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,6 +7,8 @@ import heroImg from "@/assets/hero-coach-light.jpg";
 import heroImgDark from "@/assets/hero-theme-gold.jpg";
 import storyImg from "@/assets/story-video.jpg";
 import heroPoster from "@/assets/hero-poster.jpg";
+import productF1 from "@/assets/product-f1.webp";
+import productTea from "@/assets/product-tea.webp";
 import packMorning1 from "@/assets/pack-morning-1.jpg";
 import packMorning2 from "@/assets/pack-morning-2.jpg";
 import packMorning3 from "@/assets/pack-morning-3.jpg";
@@ -207,6 +209,74 @@ const packs: Array<{
   },
 ];
 
+const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
+
+const stageChips = [
+  { label: "Protein-packed breakfast", pos: "left-[2%] top-[14%] md:left-[18%] md:top-[18%]", delay: 0.9, bob: "0s" },
+  { label: "Energy & focus", pos: "right-[2%] top-[30%] md:right-[20%] md:top-[26%]", delay: 1.05, bob: "-2s" },
+  { label: "Ready in 2 minutes", pos: "left-[4%] top-[52%] md:left-[24%] md:top-[56%]", delay: 1.2, bob: "-4s" },
+  { label: "Hydration & gut balance", pos: "right-[4%] top-[64%] md:right-[22%] md:top-[60%]", delay: 1.35, bob: "-1s" },
+];
+
+/** Dark product stage: bottles rise in, float, chips pop in, big word drifts on scroll. */
+const ProductStage = () => (
+  <section id="products" data-progress="through" className="bg-stage relative overflow-hidden py-24 md:py-32 text-[hsl(36_28%_94%)]">
+    <div className="container mx-auto relative">
+      <div className="text-center max-w-xl mx-auto relative z-30" data-reveal="words">
+        <SectionLabel>Signature Products</SectionLabel>
+        <h2 className="font-display text-4xl md:text-6xl">
+          <Words text="Fuel that" /> <em className="font-normal"><Words text="fits your day." className="gold-text" start={0.16} /></em>
+        </h2>
+      </div>
+
+      <div data-reveal="stage" className="relative h-[460px] sm:h-[540px] md:h-[640px] mt-6">
+        {/* big drifting word */}
+        <div className="absolute inset-x-0 bottom-[4%] md:bottom-[2%] z-20 pointer-events-none flex justify-center">
+          <div className="stage-item" style={d(0.55)}>
+            <div className="stage-word font-display italic leading-none whitespace-nowrap text-[26vw] md:text-[15vw] gold-text pr-[0.1em]">
+              Nourish.
+            </div>
+          </div>
+        </div>
+
+        {/* tea bottle, behind */}
+        <div className="stage-parallax absolute z-0 left-[3%] bottom-[24%] w-[34%] sm:w-[26%] md:left-[27%] md:bottom-[26%] md:w-[13%]" style={{ "--depth": "120px" } as CSSProperties}>
+          <div className="stage-item" style={d(0.35)}>
+            <img src={productTea} alt="Herbalife instant herbal beverage" className="animate-bob w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)]" style={{ "--r": "-8deg", "--bd": "-3s" } as CSSProperties} />
+          </div>
+        </div>
+
+        {/* Formula 1, hero product */}
+        <div className="stage-parallax absolute z-10 left-1/2 bottom-[16%] w-[66%] sm:w-[48%] md:w-[30%]" style={{ "--depth": "60px", translate: "-50% 0" } as CSSProperties}>
+          <div className="stage-item" style={d(0.15)}>
+            <img src={productF1} alt="Herbalife Formula 1 Nutritional Shake Mix" className="animate-bob w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.6)]" />
+          </div>
+        </div>
+
+        {/* floating chips */}
+        {stageChips.map((c) => (
+          <div key={c.label} className={`absolute z-30 ${c.pos}`}>
+            <div className="stage-chip" style={d(c.delay)}>
+              <span className="animate-bob inline-flex items-center gap-2 rounded-full bg-[hsl(36_28%_94%/0.1)] backdrop-blur-md border border-[hsl(42_52%_52%/0.35)] px-3 py-1.5 md:px-4 md:py-2 font-body text-[9px] md:text-[11px] tracking-wide-2 uppercase whitespace-nowrap" style={{ "--bd": c.bob } as CSSProperties}>
+                <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_10px_hsl(42_52%_52%)]" /> {c.label}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="relative z-30 text-center max-w-lg mx-auto -mt-2" data-reveal="blur">
+        <p className="font-body text-sm md:text-base text-[hsl(36_28%_94%/0.7)] leading-relaxed mb-8">
+          The exact products behind every pack — Formula 1 breakfast, herbal drink and aloe — combined into a routine that is simple to follow and built for results.
+        </p>
+        <Button asChild size="lg" className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
+          <a href="#packs">Shop the Packs <ArrowRight className="ml-2 h-3 w-3" /></a>
+        </Button>
+      </div>
+    </div>
+  </section>
+);
+
 const Index = () => {
   const [authOpen, setAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"register" | "login">("register");
@@ -236,6 +306,15 @@ const Index = () => {
   useReveal();
   useParallax();
   useScrollProgress();
+
+  const railRef = useRef<HTMLDivElement>(null);
+  const [railProgress, setRailProgress] = useState(0);
+  const onRailScroll = () => {
+    const el = railRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setRailProgress(max > 0 ? el.scrollLeft / max : 0);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -343,6 +422,8 @@ const Index = () => {
         </div>
       </section>
 
+      <ProductStage />
+
       {/* STORY — pill image that opens up on scroll */}
       <section className="py-32 bg-background overflow-hidden">
         <div className="container mx-auto">
@@ -406,14 +487,22 @@ const Index = () => {
             <h2 className="font-display text-5xl md:text-6xl"><Words text="Choose" /> <em className="font-normal"><Words text="Your Pack" className="gold-text" start={0.1} /></em></h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            ref={railRef}
+            onScroll={onRailScroll}
+            className="no-scrollbar flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-8 px-8 md:mx-0 md:px-0 pb-6 md:pb-0 lg:pt-4"
+          >
             {packs.map((p, i) => (
-              <Card key={p.name} data-reveal data-reveal-delay={String(i + 1)} className={`hover-lift relative bg-background border rounded-2xl overflow-hidden flex flex-col group ${p.popular ? "border-gold shadow-gold lg:-translate-y-4" : "border-border hover:border-gold/40 hover:shadow-soft"} transition-all duration-500`}>
+              <Card key={p.name} data-reveal data-reveal-delay={String(i + 1)} className={`hover-lift shrink-0 w-[84%] sm:w-[60%] md:w-auto snap-center relative bg-background border rounded-2xl overflow-hidden flex flex-col group ${p.popular ? "border-gold shadow-gold lg:-translate-y-4" : "border-border hover:border-gold/40 hover:shadow-soft"} transition-all duration-500`}>
                 {p.popular && (
                   <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-gold font-body text-[10px] tracking-luxe uppercase text-primary-foreground">Popular</div>
                 )}
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <PackMediaViewer media={p.media} alt={p.name} />
+                  <div className="img-reveal absolute inset-0">
+                    <div className="relative w-full h-full">
+                      <PackMediaViewer media={p.media} alt={p.name} />
+                    </div>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent pointer-events-none" />
                   <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-background/80 backdrop-blur font-body text-[10px] tracking-luxe uppercase text-gold border border-gold/40">Ready</div>
                 </div>
@@ -454,6 +543,9 @@ const Index = () => {
                 </div>
               </Card>
             ))}
+          </div>
+          <div className="md:hidden mx-auto mt-2 h-[3px] w-40 rounded-full bg-border overflow-hidden">
+            <div className="h-full rounded-full bg-gold transition-[width] duration-200" style={{ width: `${Math.max(1 / packs.length, railProgress) * 100}%` }} />
           </div>
         </div>
       </section>

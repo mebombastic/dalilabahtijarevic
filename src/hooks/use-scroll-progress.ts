@@ -2,7 +2,8 @@ import { useEffect } from "react";
 
 /**
  * Sets --p (0 → 1) on every [data-progress] element as it scrolls
- * from the bottom of the viewport up to ~20% from the top.
+ * from the bottom of the viewport up to ~20% from the top
+ * (or across its whole pass with data-progress="through").
  */
 export const useScrollProgress = () => {
   useEffect(() => {
@@ -14,8 +15,10 @@ export const useScrollProgress = () => {
       raf = 0;
       const vh = window.innerHeight;
       els.forEach((el) => {
-        const top = el.getBoundingClientRect().top;
-        const p = Math.min(1, Math.max(0, (vh - top) / (vh * 0.8)));
+        const { top, height } = el.getBoundingClientRect();
+        // "through": 0 when the element enters at the bottom, 1 when it leaves at the top
+        const raw = el.dataset.progress === "through" ? (vh - top) / (vh + height) : (vh - top) / (vh * 0.8);
+        const p = Math.min(1, Math.max(0, raw));
         el.style.setProperty("--p", p.toFixed(4));
       });
     };
