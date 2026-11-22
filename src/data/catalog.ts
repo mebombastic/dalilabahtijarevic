@@ -11,7 +11,6 @@ import f1Vanilla from "@/assets/f1-vanilla.webp";
 import f1Banana from "@/assets/f1-banana.webp";
 import pTea from "@/assets/p-tea.webp";
 import pFibreConc from "@/assets/p-fibreconc.webp";
-import pOatFibre from "@/assets/p-oatfibre.webp";
 import pShaker from "@/assets/p-shaker.webp";
 import pKit from "@/assets/p-kit.webp";
 import pSkin from "@/assets/p-skin.webp";
@@ -47,7 +46,6 @@ const lineup: { src: string; name: L; color: string; scale?: number; f1?: boolea
   { src: f1Chocolate, name: flavour.chocolate, f1: true, color: "#7a4a33" },
   { src: pTea, name: { en: "Herbal Beverage · Mango & Pitaya", de: "Kräutergetränk · Mango & Pitaya", sr: "Biljni napitak · Mango i pitaja" }, color: "#f2a33a", scale: 0.74 },
   { src: f1Raspberry, name: flavour.raspberry, f1: true, color: "#e79bb4" },
-  { src: pOatFibre, name: { en: "Oat Apple Fibre", de: "Hafer-Apfel-Ballaststoffe", sr: "Vlakna od ovsa i jabuke" }, color: "#b3262f", scale: 0.56 },
   { src: f1Mint, name: flavour.mint, f1: true, color: "#9fd3a6" },
   { src: pFibreConc, name: { en: "Fibre Concentrate · Orange & Goji", de: "Ballaststoff-Konzentrat · Orange & Goji", sr: "Koncentrat vlakana · Narandža i goji" }, color: "#f39a1e", scale: 1.04 },
   { src: f1Latte, name: flavour.latte, f1: true, color: "#c08b62" },
@@ -103,21 +101,6 @@ const defs: ProductDef[] = [
       { en: "Formula 1 Healthy Meal (550 g)", de: "Formula 1 Healthy Meal (550 g)", sr: "Formula 1 Healthy Meal (550 g)" },
       { en: "Oat Apple Fibre (204 g)", de: "Hafer-Apfel-Ballaststoffe (204 g)", sr: "Vlakna od ovsa i jabuke (204 g)" },
       { en: "Shaker + measuring scoop", de: "Shaker + Messlöffel", sr: "Šejker + merica" },
-    ],
-  },
-  {
-    name: { en: "Oat Apple Fibre", de: "Hafer-Apfel-Ballaststoffe", sr: "Vlakna od ovsa i jabuke" },
-    subtitle: { en: "Apple flavour · 204 g", de: "Apfelgeschmack · 204 g", sr: "Ukus jabuke · 204 g" },
-    category: cat.fibre, kind: "cutout", images: () => [{ src: pOatFibre }],
-    desc: {
-      en: "A smooth, apple-flavoured fibre drink from six fibre sources — apple, oat, maize, citrus, chicory and soya. Stir into water, juice or your shake.",
-      de: "Ein cremiger Ballaststoff-Drink mit Apfelgeschmack aus sechs Quellen — Apfel, Hafer, Mais, Zitrus, Chicorée und Soja. In Wasser, Saft oder deinen Shake rühren.",
-      sr: "Napitak sa vlaknima ukusa jabuke iz šest izvora — jabuka, ovas, kukuruz, citrusi, cikorija i soja. Umešaj u vodu, sok ili šejk.",
-    },
-    facts: [
-      { en: "5 g of fibre per serving", de: "5 g Ballaststoffe pro Portion", sr: "5 g vlakana po porciji" },
-      { en: "Only 18 kcal per serving", de: "Nur 18 kcal pro Portion", sr: "Samo 18 kcal po porciji" },
-      { en: "No artificial sweeteners", de: "Ohne künstliche Süßstoffe", sr: "Bez veštačkih zaslađivača" },
     ],
   },
   {
@@ -225,9 +208,9 @@ const steps: { time: L; title: L; text: L; img: string; kind: RitualStep["kind"]
     time: { en: "Afternoon · 16:00", de: "Nachmittags · 16:00", sr: "Popodne · 16:00" },
     title: { en: "Feel light with fibre", de: "Leicht mit Ballaststoffen", sr: "Lakoća uz vlakna" },
     text: {
-      en: "Mix Fibre Concentrate or Oat Apple Fibre into water — an easy way to get more fibre into your day.",
-      de: "Rühre Ballaststoff-Konzentrat oder Hafer-Apfel-Ballaststoffe in Wasser — ein einfacher Weg zu mehr Ballaststoffen.",
-      sr: "Umešaj koncentrat vlakana ili vlakna od ovsa i jabuke u vodu — lak način da uneseš više vlakana tokom dana.",
+      en: "Mix Fibre Concentrate into water — an easy way to get more fibre into your day.",
+      de: "Rühre Ballaststoff-Konzentrat in Wasser — ein einfacher Weg zu mehr Ballaststoffen.",
+      sr: "Umešaj koncentrat vlakana u vodu — lak način da uneseš više vlakana tokom dana.",
     },
     img: pFibreConc, kind: "cutout",
   },
