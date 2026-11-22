@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check, Trophy, Heart, Sparkles, ArrowRight, Camera, Dumbbell, ShieldCheck } from "lucide-react";
-import storyImg from "@/assets/story-video.jpg";
+import methodImg from "@/assets/method-products.webp";
 import coachPhoto from "@/assets/coach-dalila.webp";
 import coachBubble from "@/assets/coach-bubble.webp";
 import { FlavourCarousel } from "@/components/FlavourCarousel";
@@ -169,10 +169,10 @@ const Index = () => {
           </div>
           <p className="font-body text-muted-foreground text-center max-w-xl mx-auto mb-16 leading-relaxed" data-reveal="blur">{t.method.p}</p>
 
-          <div data-progress className="pill-expand relative aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-ink">
-            <img src={storyImg} alt={t.method.imgAlt} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-            <div className="absolute bottom-6 inset-x-0 flex flex-wrap justify-center gap-3 px-4">
+          <div data-progress className="pill-expand relative aspect-[21/11] sm:aspect-[21/9] overflow-hidden bg-[#0F372B]">
+            <img src={methodImg} alt={t.method.imgAlt} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+            <div className="absolute bottom-6 inset-x-0 hidden sm:flex flex-wrap justify-center gap-3 px-4">
               {t.method.chips.map((label, i) => {
                 const Icon = methodIcons[i];
                 return (
@@ -182,6 +182,16 @@ const Index = () => {
                 );
               })}
             </div>
+          </div>
+          <div className="sm:hidden flex flex-wrap justify-center gap-2 mt-5">
+            {t.method.chips.map((label, i) => {
+              const Icon = methodIcons[i];
+              return (
+                <span key={i} data-reveal="blur" data-reveal-delay={String(i + 1)} className="inline-flex items-center gap-2 rounded-full bg-secondary border border-border px-4 py-2 font-body text-[10px] tracking-luxe uppercase text-foreground">
+                  <Icon className="h-3.5 w-3.5 text-gold" /> {label}
+                </span>
+              );
+            })}
           </div>
         </div>
       </section>

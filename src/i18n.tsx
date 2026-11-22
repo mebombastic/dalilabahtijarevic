@@ -28,7 +28,7 @@ const en = {
   method: {
     label: "The Method", h2a: "Training. Nutrition.", h2b: "Made Simple.",
     p: "No guesswork, no extremes. A clear plan for how you move, what you eat and how you show up — built around your life, so the results actually last.",
-    chips: ["Training", "Nutrition", "Mindset"], imgAlt: "Training gear and shaker",
+    chips: ["Training", "Nutrition", "Mindset"], imgAlt: "Herbalife shakes, tea, fibre drink and shaker",
   },
   why: {
     label: "Why Choose Us", h2a: "Everything you need", h2b: "to succeed",
@@ -89,7 +89,7 @@ const de: Dict = {
   method: {
     label: "Die Methode", h2a: "Training. Ernährung.", h2b: "Ganz einfach.",
     p: "Kein Rätselraten, keine Extreme. Ein klarer Plan dafür, wie du dich bewegst, was du isst und wie du auftrittst — passend zu deinem Leben, damit die Ergebnisse bleiben.",
-    chips: ["Training", "Ernährung", "Mindset"], imgAlt: "Trainingsausrüstung und Shaker",
+    chips: ["Training", "Ernährung", "Mindset"], imgAlt: "Herbalife Shakes, Tee, Ballaststoff-Drink und Shaker",
   },
   why: {
     label: "Warum wir", h2a: "Alles, was du brauchst,", h2b: "um es zu schaffen",
@@ -148,7 +148,7 @@ const sr: Dict = {
   method: {
     label: "Metoda", h2a: "Trening. Ishrana.", h2b: "Jednostavno.",
     p: "Bez nagađanja, bez ekstrema. Jasan plan za to kako se krećeš, šta jedeš i kako se pojavljuješ — prilagođen tvom životu, da rezultati zaista ostanu.",
-    chips: ["Trening", "Ishrana", "Mentalni stav"], imgAlt: "Oprema za trening i šejker",
+    chips: ["Trening", "Ishrana", "Mentalni stav"], imgAlt: "Herbalife šejkovi, čaj, napitak sa vlaknima i šejker",
   },
   why: {
     label: "Zašto mi", h2a: "Sve što ti treba", h2b: "za uspeh",
