@@ -16,7 +16,7 @@ export type Product = {
   badge?: string;
 };
 
-const ProductCard = ({ p, index, dmUrl, profileUrl }: { p: Product; index: number; dmUrl: string; profileUrl: string }) => {
+const ProductCard = ({ p, index, dmUrl, profileUrl, textMe }: { p: Product; index: number; dmUrl: string; profileUrl: string; textMe: string }) => {
   const [img, setImg] = useState(0);
   const current = p.images[img];
   return (
@@ -73,7 +73,7 @@ const ProductCard = ({ p, index, dmUrl, profileUrl }: { p: Product; index: numbe
         {p.note && <p className="font-body text-[11px] text-muted-foreground italic mb-5">{p.note}</p>}
         <div className="mt-auto flex items-center gap-3">
           <Button asChild className="flex-1 rounded-full font-body text-[11px] tracking-luxe uppercase h-11 bg-foreground text-background hover:bg-gold hover:text-primary-foreground">
-            <a href={dmUrl} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> Text Me</a>
+            <a href={dmUrl} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> {textMe}</a>
           </Button>
           <a href={profileUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram @dalilafitlife" className="h-11 w-11 shrink-0 inline-flex items-center justify-center rounded-full border border-border hover:border-gold hover:text-gold transition-colors">
             <Instagram className="h-4 w-4" />
@@ -85,10 +85,12 @@ const ProductCard = ({ p, index, dmUrl, profileUrl }: { p: Product; index: numbe
 };
 
 /** Filterable product menu: category tabs, product cards, swipe rail on phones. */
-export const ProductMenu = ({ products, dmUrl, profileUrl }: { products: Product[]; dmUrl: string; profileUrl: string }) => {
-  const cats = ["All", ...Array.from(new Set(products.map((p) => p.category)))];
-  const [cat, setCat] = useState("All");
-  const shown = cat === "All" ? products : products.filter((p) => p.category === cat);
+export const ProductMenu = ({
+  products, dmUrl, profileUrl, allLabel = "All", textMe = "Text Me", showTabs = true,
+}: { products: Product[]; dmUrl: string; profileUrl: string; allLabel?: string; textMe?: string; showTabs?: boolean }) => {
+  const cats = [allLabel, ...Array.from(new Set(products.map((p) => p.category)))];
+  const [cat, setCat] = useState(allLabel);
+  const shown = cat === allLabel ? products : products.filter((p) => p.category === cat);
   const railRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const onScroll = () => {
@@ -105,7 +107,7 @@ export const ProductMenu = ({ products, dmUrl, profileUrl }: { products: Product
 
   return (
     <>
-      <div className="no-scrollbar flex md:flex-wrap md:justify-center gap-2 overflow-x-auto -mx-8 px-8 md:mx-0 md:px-0 mb-10 md:mb-14">
+      {showTabs && <div className="no-scrollbar flex md:flex-wrap md:justify-center gap-2 overflow-x-auto -mx-8 px-8 md:mx-0 md:px-0 mb-10 md:mb-14">
         {cats.map((c) => (
           <button
             key={c}
@@ -116,7 +118,7 @@ export const ProductMenu = ({ products, dmUrl, profileUrl }: { products: Product
             {c}
           </button>
         ))}
-      </div>
+      </div>}
 
       <div
         key={cat}
@@ -125,7 +127,7 @@ export const ProductMenu = ({ products, dmUrl, profileUrl }: { products: Product
         className="no-scrollbar flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-8 px-8 md:mx-0 md:px-0 pb-6 md:pb-0"
       >
         {shown.map((p, i) => (
-          <ProductCard key={p.name} p={p} index={i} dmUrl={dmUrl} profileUrl={profileUrl} />
+          <ProductCard key={p.name} p={p} index={i} dmUrl={dmUrl} profileUrl={profileUrl} textMe={textMe} />
         ))}
       </div>
       {shown.length > 1 && (
