@@ -112,12 +112,12 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg p-0 overflow-hidden border-gold/30 bg-background rounded-2xl [&>button]:hidden">
+      <DialogContent className="w-[calc(100%-1.5rem)] max-w-lg max-h-[calc(100dvh-1.5rem)] overflow-y-auto overscroll-contain p-0 gap-0 border-gold/30 bg-background rounded-2xl [&>button]:hidden">
         <DialogTitle className="sr-only">{isRegister ? c.create : c.signIn}</DialogTitle>
         <DialogDescription className="sr-only">{c.tagline}</DialogDescription>
 
         {/* Header banner */}
-        <div className="relative h-40 overflow-hidden border-b border-gold/30">
+        <div className="relative h-32 sm:h-40 shrink-0 overflow-hidden border-b border-gold/30">
           <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40 block dark:hidden" />
           <img src={heroImgDark} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40 hidden dark:block" />
 
@@ -165,7 +165,7 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
         </div>
 
         {/* Body */}
-        <div className="p-8 md:p-10">
+        <div className="p-6 sm:p-8 md:p-10">
           {/* Mode tabs */}
           <div className="flex border border-border mb-8">
             <button

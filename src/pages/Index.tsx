@@ -2,7 +2,7 @@ import { useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Check, Play, Users, Trophy, Heart, Sparkles, ArrowRight, ArrowUp, Mic, Camera, Menu, Globe, Sun, Moon, ChevronLeft, ChevronRight, Dumbbell, Search, ShoppingBag, ShieldCheck, MessageCircle, Instagram } from "lucide-react";
+import { Check, Play, Users, Trophy, Heart, Sparkles, ArrowRight, ArrowUp, Mic, Camera, Menu, Globe, Sun, Moon, ChevronLeft, ChevronRight, Dumbbell, Search, ShoppingBag, ShieldCheck, MessageCircle, Instagram, X } from "lucide-react";
 import storyImg from "@/assets/story-video.jpg";
 import f1Chocolate from "@/assets/f1-chocolate.webp";
 import f1Raspberry from "@/assets/f1-raspberry.webp";
@@ -215,6 +215,7 @@ const Index = () => {
   const [authMode, setAuthMode] = useState<"register" | "login">("register");
   const [lang, setLang] = useState<Lang>("en");
   const [langOpen, setLangOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window === "undefined") return "light";
     const stored = localStorage.getItem("theme");
@@ -283,11 +284,48 @@ const Index = () => {
             <Button size="sm" onClick={() => openAuth("login")} variant="outline" className="hidden sm:inline-flex border-foreground/30 hover:border-gold hover:text-gold rounded-2xl font-body text-[10px] tracking-luxe uppercase bg-transparent">
               Sign In
             </Button>
-            <Button size="sm" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-2xl font-body text-[10px] tracking-luxe uppercase">
+            <Button size="sm" onClick={() => openAuth("register")} className="hidden sm:inline-flex btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-2xl font-body text-[10px] tracking-luxe uppercase">
               Create Account
             </Button>
-            <Menu className="md:hidden h-5 w-5 text-foreground/70" />
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              className="md:hidden inline-flex items-center justify-center h-9 w-9 -mr-1 text-foreground/80 hover:text-gold transition-colors"
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
+        </div>
+
+        {/* mobile menu */}
+        <div className={`md:hidden grid transition-[grid-template-rows,opacity] duration-500 ease-luxe ${menuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none"}`}>
+          <nav className="overflow-hidden">
+            <div className="container mx-auto pb-6 pt-2 flex flex-col">
+              {[
+                { href: "#coach", label: "Coach" },
+                { href: "#why", label: "Why Us" },
+                { href: "#products", label: "Products" },
+                { href: "#ritual", label: "Daily Ritual" },
+              ].map((l) => (
+                <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)} className="py-3.5 border-b border-border/60 font-display text-2xl hover:text-gold transition-colors">
+                  {l.label}
+                </a>
+              ))}
+              <Button onClick={() => { setMenuOpen(false); openAuth("register"); }} className="btn-shine mt-6 h-12 rounded-full bg-gold text-primary-foreground hover:bg-gold/90 font-body text-[11px] tracking-luxe uppercase shadow-gold">
+                Create Account
+              </Button>
+              <div className="flex gap-3 mt-3">
+                <Button onClick={() => { setMenuOpen(false); openAuth("login"); }} variant="outline" className="flex-1 h-11 rounded-full border-foreground/30 hover:border-gold hover:text-gold font-body text-[10px] tracking-luxe uppercase bg-transparent">
+                  Sign In
+                </Button>
+                <Button asChild variant="outline" className="flex-1 h-11 rounded-full border-foreground/30 hover:border-gold hover:text-gold font-body text-[10px] tracking-luxe uppercase bg-transparent">
+                  <a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> Text Me</a>
+                </Button>
+              </div>
+            </div>
+          </nav>
         </div>
       </header>
 
