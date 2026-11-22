@@ -6,9 +6,14 @@ import { Check, Play, Users, Trophy, Heart, Sparkles, ArrowRight, ArrowUp, Mic, 
 import heroImg from "@/assets/hero-coach-light.jpg";
 import heroImgDark from "@/assets/hero-theme-gold.jpg";
 import storyImg from "@/assets/story-video.jpg";
-import tinStraw from "@/assets/tin-straw.webp";
-import tinBanana from "@/assets/tin-banana.webp";
-import tinLatte from "@/assets/tin-latte.webp";
+import f1Chocolate from "@/assets/f1-chocolate.webp";
+import f1Raspberry from "@/assets/f1-raspberry.webp";
+import f1Mint from "@/assets/f1-mint.webp";
+import f1Cookie from "@/assets/f1-cookie.webp";
+import f1Latte from "@/assets/f1-latte.webp";
+import f1Vanilla from "@/assets/f1-vanilla.webp";
+import f1Banana from "@/assets/f1-banana.webp";
+import { FlavourCarousel, type FlavourTin } from "@/components/FlavourCarousel";
 import coachPhoto from "@/assets/coach-dalila.webp";
 import coachBubble from "@/assets/coach-bubble.webp";
 import packMorning1 from "@/assets/pack-morning-1.jpg";
@@ -215,17 +220,19 @@ const IG_DM = "https://ig.me/m/dalilafitlife";
 
 const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
-/** Product line-up: positions (in % of the group box) come from the original photo. */
-const heroProducts = [
-  { src: tinStraw, alt: "Formula 1 shake – strawberry", left: 0, top: 0, width: 45.97, z: 1, anim: "roll-in-left", delay: 0.3, depth: 40, pd: 12, bob: "0s" },
-  { src: tinLatte, alt: "Formula 1 shake – caramel", left: 53.4, top: 0, width: 46.6, z: 1, anim: "roll-in-right", delay: 0.75, depth: 40, pd: 12, bob: "-2s" },
-  { src: tinBanana, alt: "Formula 1 shake – banana cream", left: 26.38, top: 10.74, width: 43.76, z: 2, anim: "roll-in-left", delay: 1.2, depth: 80, pd: 22, bob: "-4s" },
+const flavours: FlavourTin[] = [
+  { src: f1Chocolate, name: "Smooth Chocolate", color: "#7a4a33" },
+  { src: f1Raspberry, name: "Raspberry & White Chocolate", color: "#e79bb4" },
+  { src: f1Mint, name: "Mint Chocolate", color: "#9fd3a6" },
+  { src: f1Cookie, name: "Cookie Crunch", color: "#c9ad95" },
+  { src: f1Latte, name: "Café Latte", color: "#c08b62" },
+  { src: f1Vanilla, name: "Vanilla Crème", color: "#f3e6bf" },
+  { src: f1Banana, name: "Banana Cream", color: "#f2cf6a" },
 ];
 
 const heroChips = [
-  { label: "Protein-packed breakfast", pos: "left-[0%] top-[50%] md:left-[4%] md:top-[18%]", delay: 2.3, bob: "0s" },
-  { label: "Energy & focus", pos: "right-[0%] top-[30%] md:right-[4%] md:top-[46%]", delay: 2.45, bob: "-2s" },
-  { label: "Hydration & gut balance", pos: "hidden md:block md:left-[2%] md:top-[52%]", delay: 2.6, bob: "-4s" },
+  { label: "7 delicious flavours", pos: "hidden md:block md:left-[2%] md:top-[4%]", delay: 2.3, bob: "0s" },
+  { label: "Protein-packed breakfast", pos: "hidden md:block md:left-[6%] md:top-[14%]", delay: 2.45, bob: "-2s" },
 ];
 
 const Index = () => {
@@ -255,14 +262,6 @@ const Index = () => {
   useParallax();
   useScrollProgress();
 
-  const stageRef = useRef<HTMLDivElement>(null);
-  const onStagePointer = (e: React.PointerEvent<HTMLDivElement>) => {
-    const el = stageRef.current;
-    if (!el || e.pointerType === "touch") return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", (((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
-    el.style.setProperty("--my", (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
-  };
 
   const railRef = useRef<HTMLDivElement>(null);
   const [railProgress, setRailProgress] = useState(0);
@@ -332,28 +331,11 @@ const Index = () => {
           </div>
 
           <div
-            ref={stageRef}
-            onPointerMove={onStagePointer}
-            onPointerLeave={() => { stageRef.current?.style.setProperty("--mx", "0"); stageRef.current?.style.setProperty("--my", "0"); }}
             data-reveal="stage"
             className="relative w-full max-w-5xl h-[440px] sm:h-[500px] md:h-[60vh] md:min-h-[500px] md:max-h-[620px]">
-            {/* products */}
-            <div className="absolute inset-x-0 bottom-[30%] sm:bottom-[24%] md:bottom-[17%] flex justify-center">
-              <div className="relative w-[78%] sm:w-[60%] md:w-[38%] lg:max-w-[440px] aspect-[633/605]">
-                {heroProducts.map((it) => (
-                  <div key={it.alt} className="absolute" style={{ left: `${it.left}%`, top: `${it.top}%`, width: `${it.width}%`, zIndex: it.z }}>
-                    <div className="stage-parallax" style={{ "--depth": `${it.depth}px` } as CSSProperties}>
-                      <div className="pointer-shift" style={{ "--pd": `${it.pd}px` } as CSSProperties}>
-                        <div className={`product-anim ${it.anim}`} style={{ animationDelay: `${it.delay}s` }}>
-                          <div className="product-hit">
-                            <img src={it.src} alt={it.alt} draggable={false} className="animate-bob-soft w-full select-none drop-shadow-[0_24px_24px_rgba(0,0,0,0.5)]" style={{ animationDelay: it.bob }} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            {/* flavour carousel */}
+            <div className="stage-parallax absolute inset-x-0 top-[14%] md:top-[6%] bottom-[29%] sm:bottom-[25%] md:bottom-[21%]" style={{ "--depth": "50px" } as CSSProperties}>
+              <FlavourCarousel tins={flavours} startDelay={0.3} />
             </div>
 
             {/* giant headline in front of the products */}
