@@ -1,10 +1,8 @@
-import { useRef, useState, type CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check, Play, Users, Trophy, Heart, Sparkles, ArrowRight, ArrowUp, Mic, Camera, Menu, Globe, Sun, Moon, ChevronLeft, ChevronRight, Dumbbell, Search, ShoppingBag, ShieldCheck, MessageCircle, Instagram } from "lucide-react";
-import heroImg from "@/assets/hero-coach-light.jpg";
-import heroImgDark from "@/assets/hero-theme-gold.jpg";
 import storyImg from "@/assets/story-video.jpg";
 import f1Chocolate from "@/assets/f1-chocolate.webp";
 import f1Raspberry from "@/assets/f1-raspberry.webp";
@@ -14,15 +12,17 @@ import f1Latte from "@/assets/f1-latte.webp";
 import f1Vanilla from "@/assets/f1-vanilla.webp";
 import f1Banana from "@/assets/f1-banana.webp";
 import { FlavourCarousel, type FlavourTin } from "@/components/FlavourCarousel";
+import { ProductMenu, type Product } from "@/components/ProductMenu";
+import { DailyRitual, type RitualStep } from "@/components/DailyRitual";
+import pTea from "@/assets/p-tea.webp";
+import pFibreConc from "@/assets/p-fibreconc.webp";
+import pOatFibre from "@/assets/p-oatfibre.webp";
+import pShaker from "@/assets/p-shaker.webp";
+import pKit from "@/assets/p-kit.webp";
+import pSkin from "@/assets/p-skin.webp";
+import pBioniq from "@/assets/p-bioniq.webp";
 import coachPhoto from "@/assets/coach-dalila.webp";
 import coachBubble from "@/assets/coach-bubble.webp";
-import packMorning1 from "@/assets/pack-morning-1.jpg";
-import packMorning2 from "@/assets/pack-morning-2.jpg";
-import packMorning3 from "@/assets/pack-morning-3.jpg";
-import packHydration from "@/assets/pack-hydration-new.jpg";
-import packTotal1 from "@/assets/pack-total-1.jpg";
-import packTotal2 from "@/assets/pack-total-2.jpg";
-import packTotal3 from "@/assets/pack-total-3.jpg";
 import { AuthDialog } from "@/components/AuthDialog";
 import { CookieBanner } from "@/components/CookieBanner";
 import { useReveal } from "@/hooks/use-reveal";
@@ -92,72 +92,6 @@ const PromptCard = ({
   </div>
 );
 
-type PackMedia = { type: "image" | "video"; src: string; poster?: string };
-
-const PackMediaViewer = ({ media, alt }: { media: PackMedia[]; alt: string }) => {
-  const [idx, setIdx] = useState(0);
-  const current = media[idx];
-  const go = (dir: number) => setIdx((i) => (i + dir + media.length) % media.length);
-  return (
-    <>
-      {current.type === "video" ? (
-        <video
-          key={current.src}
-          src={current.src}
-          poster={current.poster}
-          controls
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <img
-          key={current.src}
-          src={current.src}
-          alt={alt}
-          loading="lazy"
-          width={900}
-          height={700}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-      )}
-      {media.length > 1 && (
-        <>
-          <button
-            type="button"
-            aria-label="Previous"
-            onClick={() => go(-1)}
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 h-9 w-9 inline-flex items-center justify-center bg-background/80 backdrop-blur border border-gold/40 text-gold hover:bg-gold hover:text-primary-foreground transition-colors"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            aria-label="Next"
-            onClick={() => go(1)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 h-9 w-9 inline-flex items-center justify-center bg-background/80 backdrop-blur border border-gold/40 text-gold hover:bg-gold hover:text-primary-foreground transition-colors"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-            {media.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`Go to media ${i + 1}`}
-                onClick={() => setIdx(i)}
-                className={`h-1.5 w-5 transition-colors ${i === idx ? "bg-gold" : "bg-background/60 border border-gold/40"}`}
-              />
-            ))}
-          </div>
-        </>
-      )}
-    </>
-  );
-};
 
 const features = [
   { icon: Trophy, title: "Proven Results", desc: "Real transformations from real clients who showed up and did the work." },
@@ -166,72 +100,113 @@ const features = [
 ];
 
 
-const packs: Array<{
-  name: string;
-  tagline: string;
-  price: string;
-  media: PackMedia[];
-  desc: string;
-  perfect: string;
-  items: string[];
-  popular?: boolean;
-}> = [
-  {
-    name: "Morning Kickstart Pack",
-    tagline: "Your clean, easy morning reset starts here.",
-    price: "€65.75",
-    media: [
-      { type: "image", src: packMorning1 },
-      { type: "image", src: packMorning2 },
-      { type: "image", src: packMorning3 },
-    ],
-    desc: "A strong day starts with a strong morning. This pack puts the focus on breakfast with Formula 1 so you feel more in control, more consistent, and ready to go.",
-    perfect: "Busy people who want a simple healthy routine that is easy to stick to.",
-    items: ["Formula 1 breakfast support", "A simple, healthy start to your day", "More structure and consistency"],
-  },
-  {
-    name: "Total Results Pack",
-    tagline: "Your all-in combo for stronger results, faster.",
-    price: "€156.80",
-    media: [
-      { type: "image", src: packTotal1 },
-      { type: "image", src: packTotal2 },
-      { type: "image", src: packTotal3 },
-      { type: "video", src: `${import.meta.env.BASE_URL}videos/pack-total.mp4`, poster: packTotal1 },
-    ],
-    desc: "The perfect breakfast and hydration combo for people who want to go all-in. Formula 1, the herbal drink and aloe vera work together to support your metabolism and your results from day one.",
-    perfect: "People who want the most complete start and the biggest push toward results.",
-    items: ["Formula 1 breakfast", "Herbal drink for energy & focus", "Aloe vera for hydration & digestion"],
-    popular: true,
-  },
-  {
-    name: "Hydration Boost Pack",
-    tagline: "Hydrate better, feel lighter, boost your daily flow.",
-    price: "€95.90",
-    media: [{ type: "image", src: packHydration }],
-    desc: "Feel sharper and more energized throughout the day. Herbal drink in lemon, peach or raspberry plus aloe vera mango — hydration, detox, energy, fat burning and gut balance in one routine.",
-    perfect: "Anyone who wants more energy, better hydration and visible momentum.",
-    items: ["Herbal drink (lemon, peach, raspberry)", "Aloe vera mango for hydration", "Detox, energy, and gut balance"],
-  },
-];
-
 const IG_PROFILE = "https://www.instagram.com/dalilafitlife";
 const IG_DM = "https://ig.me/m/dalilafitlife";
 
 const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
-const flavours: FlavourTin[] = [
-  { src: f1Chocolate, name: "Smooth Chocolate", color: "#7a4a33" },
-  { src: f1Raspberry, name: "Raspberry & White Chocolate", color: "#e79bb4" },
-  { src: f1Mint, name: "Mint Chocolate", color: "#9fd3a6" },
-  { src: f1Cookie, name: "Cookie Crunch", color: "#c9ad95" },
-  { src: f1Latte, name: "Café Latte", color: "#c08b62" },
-  { src: f1Vanilla, name: "Vanilla Crème", color: "#f3e6bf" },
-  { src: f1Banana, name: "Banana Cream", color: "#f2cf6a" },
+const heroLineup: FlavourTin[] = [
+  { src: f1Chocolate, name: "Formula 1 · Smooth Chocolate", color: "#7a4a33" },
+  { src: pTea, name: "Herbal Beverage · Mango & Pitaya", color: "#f2a33a", scale: 0.74 },
+  { src: f1Raspberry, name: "Formula 1 · Raspberry & White Choc", color: "#e79bb4" },
+  { src: pOatFibre, name: "Oat Apple Fibre", color: "#b3262f", scale: 0.56 },
+  { src: f1Mint, name: "Formula 1 · Mint Chocolate", color: "#9fd3a6" },
+  { src: pFibreConc, name: "Fibre Concentrate · Orange & Goji", color: "#f39a1e", scale: 1.04 },
+  { src: f1Latte, name: "Formula 1 · Café Latte", color: "#c08b62" },
+  { src: pShaker, name: "Herbalife Shaker", color: "#1f6b3a", scale: 0.9 },
+  { src: f1Vanilla, name: "Formula 1 · Vanilla Crème", color: "#f3e6bf" },
+  { src: f1Banana, name: "Formula 1 · Banana Cream", color: "#f2cf6a" },
+];
+
+const f1Flavours = [
+  { src: f1Chocolate, label: "Smooth Chocolate", color: "#7a4a33" },
+  { src: f1Raspberry, label: "Raspberry & White Chocolate", color: "#e79bb4" },
+  { src: f1Mint, label: "Mint Chocolate", color: "#9fd3a6" },
+  { src: f1Cookie, label: "Cookie Crunch", color: "#c9ad95" },
+  { src: f1Latte, label: "Café Latte", color: "#c08b62" },
+  { src: f1Vanilla, label: "Vanilla Crème", color: "#f3e6bf" },
+  { src: f1Banana, label: "Banana Cream", color: "#f2cf6a" },
+];
+
+const products: Product[] = [
+  {
+    name: "Formula 1 Healthy Meal",
+    subtitle: "Nutritional shake mix",
+    category: "Shakes",
+    badge: "Bestseller",
+    kind: "cutout",
+    images: f1Flavours,
+    desc: "A balanced, nutritious meal in a glass — the heart of a healthy breakfast. Just shake with milk or a plant drink and go.",
+    facts: ["High-quality protein in every serving", "25 vitamins & minerals", "Ready in under 2 minutes", "7 delicious flavours — tap a colour"],
+  },
+  {
+    name: "Breakfast Starter Kit",
+    subtitle: "Everything to begin",
+    category: "Shakes",
+    kind: "cutout",
+    images: [{ src: pKit }],
+    desc: "Formula 1 Healthy Meal, Oat Apple Fibre, a Herbalife shaker and a measuring scoop — the easiest way to start your morning routine.",
+    facts: ["Formula 1 Healthy Meal (550 g)", "Oat Apple Fibre (204 g)", "Shaker + measuring scoop"],
+  },
+  {
+    name: "Oat Apple Fibre",
+    subtitle: "Apple flavour · 204 g",
+    category: "Fibre & Digestion",
+    kind: "cutout",
+    images: [{ src: pOatFibre }],
+    desc: "A smooth, apple-flavoured fibre drink from six fibre sources — apple, oat, maize, citrus, chicory and soya. Stir into water, juice or your shake.",
+    facts: ["5 g of fibre per serving", "Only 18 kcal per serving", "No artificial sweeteners"],
+  },
+  {
+    name: "Fibre Concentrate",
+    subtitle: "Orange & goji berry · 500 ml",
+    category: "Fibre & Digestion",
+    kind: "cutout",
+    images: [{ src: pFibreConc }],
+    desc: "A concentrated fibre drink you mix with water. Calcium supports normal digestive enzyme function and vitamin C supports the immune system.",
+    facts: ["High in fibre", "With calcium & vitamin C", "Sugar-free, vegan & gluten-free"],
+  },
+  {
+    name: "Instant Herbal Beverage",
+    subtitle: "Mango & pitaya · 102 g",
+    category: "Tea & Energy",
+    kind: "cutout",
+    images: [{ src: pTea }],
+    desc: "A refreshing, low-calorie tea drink with tea extracts — enjoy it hot or over ice for a natural lift during the day.",
+    facts: ["With green & black tea extracts", "Sweetened with stevia", "Delicious hot or iced"],
+    note: "Contains caffeine — not for children, pregnant or breastfeeding women.",
+  },
+  {
+    name: "HL/Skin Collection",
+    subtitle: "New skincare line",
+    category: "Skin Care",
+    badge: "New",
+    kind: "photo",
+    images: [{ src: pSkin }],
+    desc: "Herbalife's new skincare, made with Korean skincare science — from a gentle resurfacing gel cleanser to a 10% niacinamide serum and the Ultimate Tension Cream.",
+    facts: ["Cleanser, serum, lotion & creams", "Brightens and evens skin tone", "No added parabens"],
+  },
+  {
+    name: "Bioniq GO",
+    subtitle: "Personalised supplement",
+    category: "Personalised",
+    badge: "New",
+    kind: "photo",
+    images: [{ src: pBioniq }],
+    desc: "Daily supplement granules made for you: a short wellness assessment matches you with one of 40 personalised formulas.",
+    facts: ["Personalised to your needs", "Just 2 scoops a day", "Now part of the Herbalife family"],
+  },
+];
+
+const ritual: RitualStep[] = [
+  { time: "Morning · 7:00", title: "Shake up your breakfast", text: "Start with a Formula 1 Healthy Meal — protein, vitamins and minerals in two minutes, so you're full and focused until lunch.", img: f1Vanilla, kind: "cutout" },
+  { time: "Midday · 12:00", title: "Hydrate & refresh", text: "A glass of Instant Herbal Beverage, hot or iced, for a natural lift and to help you drink more through the day.", img: pTea, kind: "cutout" },
+  { time: "Afternoon · 16:00", title: "Feel light with fibre", text: "Mix Fibre Concentrate or Oat Apple Fibre into water — an easy way to get more fibre into your day.", img: pFibreConc, kind: "cutout" },
+  { time: "Evening · 21:00", title: "Glow while you rest", text: "Wind down with your HL/Skin routine — cleanse, treat and moisturise so your skin looks as good as you feel.", img: pSkin, kind: "photo" },
 ];
 
 const heroChips = [
-  { label: "7 delicious flavours", pos: "hidden md:block md:left-[2%] md:top-[4%]", delay: 2.3, bob: "0s" },
+  { label: "Shakes · fibre · tea · skin", pos: "hidden md:block md:left-[2%] md:top-[4%]", delay: 2.3, bob: "0s" },
   { label: "Protein-packed breakfast", pos: "hidden md:block md:left-[6%] md:top-[14%]", delay: 2.45, bob: "-2s" },
 ];
 
@@ -263,14 +238,6 @@ const Index = () => {
   useScrollProgress();
 
 
-  const railRef = useRef<HTMLDivElement>(null);
-  const [railProgress, setRailProgress] = useState(0);
-  const onRailScroll = () => {
-    const el = railRef.current;
-    if (!el) return;
-    const max = el.scrollWidth - el.clientWidth;
-    setRailProgress(max > 0 ? el.scrollLeft / max : 0);
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -284,7 +251,8 @@ const Index = () => {
           <nav className="hidden md:flex items-center gap-10 font-body text-xs tracking-wide-2 uppercase">
             <a href="#coach" className="hover:text-gold transition-colors">Coach</a>
             <a href="#why" className="hover:text-gold transition-colors">Why Us</a>
-            <a href="#packs" className="hover:text-gold transition-colors">Packs</a>
+            <a href="#products" className="hover:text-gold transition-colors">Products</a>
+            <a href="#ritual" className="hover:text-gold transition-colors">Ritual</a>
           </nav>
           <div className="flex items-center gap-3">
             <div className="relative">
@@ -335,7 +303,7 @@ const Index = () => {
             className="relative w-full max-w-5xl h-[440px] sm:h-[500px] md:h-[60vh] md:min-h-[500px] md:max-h-[620px]">
             {/* flavour carousel */}
             <div className="stage-parallax absolute inset-x-0 top-[14%] md:top-[6%] bottom-[29%] sm:bottom-[25%] md:bottom-[21%]" style={{ "--depth": "50px" } as CSSProperties}>
-              <FlavourCarousel tins={flavours} startDelay={0.3} />
+              <FlavourCarousel tins={heroLineup} startDelay={0.3} />
             </div>
 
             {/* giant headline in front of the products */}
@@ -381,7 +349,7 @@ const Index = () => {
               Create Account
             </Button>
             <Button asChild size="lg" variant="outline" className="border-[hsl(36_28%_94%/0.35)] text-[hsl(36_28%_94%)] hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 bg-transparent">
-              <a href="#packs">Choose Your Pack <ArrowRight className="ml-2 h-3 w-3" /></a>
+              <a href="#products">Explore Products <ArrowRight className="ml-2 h-3 w-3" /></a>
             </Button>
           </div>
           <div className="animate-fade-up mt-10 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(36_28%_94%/0.55)]" style={{ animationDelay: "2.5s" }}>
@@ -504,52 +472,27 @@ const Index = () => {
         </div>
       </section>
 
-      {/* PACKS */}
-      <section id="packs" className="py-32 bg-secondary/30">
+      {/* PRODUCTS MENU */}
+      <section id="products" className="py-28 md:py-32 bg-secondary/30">
         <div className="container mx-auto">
-          <div className="text-center mb-20" data-reveal="words">
-            <SectionLabel>Available Packages</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl"><Words text="Choose" /> <em className="font-normal"><Words text="Your Pack" className="gold-text" start={0.1} /></em></h2>
-            <p className="font-body text-muted-foreground mt-6">Text me on Instagram for details and prices.</p>
+          <div className="text-center mb-10 md:mb-12" data-reveal="words">
+            <SectionLabel>The Product Menu</SectionLabel>
+            <h2 className="font-display text-5xl md:text-6xl"><Words text="Everything" /> <em className="font-normal"><Words text="you need." className="gold-text" start={0.1} /></em></h2>
+            <p className="font-body text-muted-foreground mt-6 max-w-xl mx-auto">Shakes, fibre, tea, skincare and more. Text me on Instagram for prices, advice and your personal plan.</p>
           </div>
+          <ProductMenu products={products} dmUrl={IG_DM} profileUrl={IG_PROFILE} />
+        </div>
+      </section>
 
-          <div
-            ref={railRef}
-            onScroll={onRailScroll}
-            className="no-scrollbar flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-8 px-8 md:mx-0 md:px-0 pb-6 md:pb-0 lg:pt-4"
-          >
-            {packs.map((p, i) => (
-              <Card key={p.name} data-reveal data-reveal-delay={String(i + 1)} className={`hover-lift shrink-0 w-[84%] sm:w-[60%] md:w-auto snap-center relative bg-background border rounded-2xl overflow-hidden flex flex-col group ${p.popular ? "border-gold shadow-gold lg:-translate-y-4" : "border-border hover:border-gold/40 hover:shadow-soft"} transition-all duration-500`}>
-                {p.popular && (
-                  <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-gold font-body text-[10px] tracking-luxe uppercase text-primary-foreground">Popular</div>
-                )}
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <div className="img-reveal absolute inset-0">
-                    <div className="relative w-full h-full">
-                      <PackMediaViewer media={p.media} alt={p.name} />
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent pointer-events-none" />
-                  <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-background/80 backdrop-blur font-body text-[10px] tracking-luxe uppercase text-gold border border-gold/40">Ready</div>
-                </div>
-
-                <div className="p-8 flex-1 flex flex-col items-center text-center">
-                  <h3 className="font-display text-3xl mb-6">{p.name}</h3>
-                  <div className="mt-auto w-full flex flex-col gap-3">
-                    <Button asChild className={`rounded-full font-body text-xs tracking-luxe uppercase h-12 ${p.popular ? "btn-shine bg-gold text-primary-foreground hover:bg-gold/90 shadow-gold" : "bg-foreground text-background hover:bg-gold hover:text-primary-foreground"}`}>
-                      <a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> Text Me</a>
-                    </Button>
-                    <a href={IG_PROFILE} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 font-body text-[10px] tracking-luxe uppercase text-muted-foreground hover:text-gold transition-colors">
-                      <Instagram className="h-3.5 w-3.5" /> @dalilafitlife
-                    </a>
-                  </div>
-                </div>
-              </Card>
-            ))}
+      {/* DAILY RITUAL */}
+      <section id="ritual" className="py-28 md:py-36 bg-background overflow-hidden">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 md:mb-20" data-reveal="words">
+            <SectionLabel>Your Daily Ritual</SectionLabel>
+            <h2 className="font-display text-5xl md:text-6xl"><Words text="One day," /> <em className="font-normal"><Words text="done right." className="gold-text" start={0.15} /></em></h2>
+            <p className="font-body text-muted-foreground mt-6 max-w-xl mx-auto">How the products fit into a normal day — simple habits that add up to real change.</p>
           </div>
-          <div className="md:hidden mx-auto mt-2 h-[3px] w-40 rounded-full bg-border overflow-hidden">
-            <div className="h-full rounded-full bg-gold transition-[width] duration-200" style={{ width: `${Math.max(1 / packs.length, railProgress) * 100}%` }} />
-          </div>
+          <DailyRitual steps={ritual} />
         </div>
       </section>
 
@@ -614,7 +557,8 @@ const Index = () => {
               <ul className="space-y-2 font-body text-sm">
                 <li><a href="#coach" className="text-foreground/80 hover:text-gold transition-colors">Coach</a></li>
                 <li><a href="#why" className="text-foreground/80 hover:text-gold transition-colors">Why Us</a></li>
-                <li><a href="#packs" className="text-foreground/80 hover:text-gold transition-colors">Packs</a></li>
+                <li><a href="#products" className="text-foreground/80 hover:text-gold transition-colors">Products</a></li>
+                <li><a href="#ritual" className="text-foreground/80 hover:text-gold transition-colors">Daily Ritual</a></li>
                 <li><button onClick={() => openAuth("register")} className="text-foreground/80 hover:text-gold transition-colors">Create Account</button></li>
               </ul>
             </div>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export type FlavourTin = { src: string; name: string; color: string };
+export type FlavourTin = { src: string; name: string; color: string; /** height relative to a shake tin */ scale?: number };
 
 const TAU = Math.PI * 2;
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -66,7 +66,7 @@ export const FlavourCarousel = ({ tins, startDelay = 0.3 }: { tins: FlavourTin[]
 
       const W = wrap.clientWidth;
       const H = wrap.clientHeight;
-      const R = Math.min(W * 0.4, 430);
+      const R = Math.min(W * (n > 8 ? 0.44 : 0.4), 470);
       const tilt = clamp(-c.vel * 4, -14, 14);
       let best = -2, bestI = 0;
 
@@ -141,11 +141,11 @@ export const FlavourCarousel = ({ tins, startDelay = 0.3 }: { tins: FlavourTin[]
           <div
             key={tin.name}
             ref={(el) => (tinRefs.current[i] = el)}
-            className="absolute left-1/2 bottom-0 h-[78%] aspect-[195/377] origin-bottom will-change-transform"
-            style={{ opacity: 0 }}
+            className="absolute left-1/2 bottom-0 origin-bottom will-change-transform"
+            style={{ opacity: 0, height: `${78 * (tin.scale ?? 1)}%` }}
             onClick={() => ctrl.current.jump(i)}
           >
-            <img src={tin.src} alt={`Formula 1 shake – ${tin.name}`} draggable={false} className="h-full w-full object-contain drop-shadow-[0_26px_22px_rgba(0,0,0,0.55)] pointer-events-none" />
+            <img src={tin.src} alt={tin.name} draggable={false} className="h-full w-auto max-w-none drop-shadow-[0_26px_22px_rgba(0,0,0,0.55)] pointer-events-none" />
           </div>
         ))}
       </div>
