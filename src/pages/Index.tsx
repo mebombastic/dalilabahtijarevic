@@ -44,7 +44,7 @@ const Index = () => {
       <SiteHeader onAuth={openAuth} />
 
       {/* HERO — product carousel, giant headline, chips + coach bubble */}
-      <section id="top" data-progress="through" className="bg-stage relative min-h-screen pt-24 pb-12 overflow-hidden text-[hsl(36_28%_94%)]">
+      <section id="top" data-progress="through" className="bg-stage relative min-h-screen pt-24 pb-12 overflow-hidden text-[hsl(40_33%_90%)]">
         <div className="container mx-auto relative flex flex-col items-center text-center">
           <div className="animate-blur-up relative z-30 mt-4 md:mt-6" style={{ animationDelay: "0.4s" }}>
             <SectionLabel>Dalila Bahtijarevic · FitLife Coach</SectionLabel>
@@ -63,8 +63,8 @@ const Index = () => {
             {heroChips.map((c) => (
               <div key={c.pos} className={`absolute z-30 ${c.pos}`}>
                 <div className="stage-chip" style={d(c.delay)}>
-                  <span className="animate-bob inline-flex items-center gap-2 rounded-full bg-[hsl(36_28%_94%/0.1)] backdrop-blur-md border border-[hsl(42_52%_52%/0.35)] px-3 py-1.5 md:px-4 md:py-2 font-body text-[9px] md:text-[11px] tracking-wide-2 uppercase whitespace-nowrap" style={{ "--bd": c.bob } as CSSProperties}>
-                    <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_10px_hsl(42_52%_52%)]" /> {c.label}
+                  <span className="animate-bob inline-flex items-center gap-2 rounded-full bg-[hsl(40_33%_90%/0.1)] backdrop-blur-md border border-[hsl(var(--gold)/0.35)] px-3 py-1.5 md:px-4 md:py-2 font-body text-[9px] md:text-[11px] tracking-wide-2 uppercase whitespace-nowrap" style={{ "--bd": c.bob } as CSSProperties}>
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_10px_hsl(var(--gold))]" /> {c.label}
                   </span>
                 </div>
               </div>
@@ -72,7 +72,7 @@ const Index = () => {
 
             <div className="absolute z-30 right-[0%] top-[2%] md:right-[6%] md:top-[6%]">
               <div className="stage-chip" style={d(2.8)}>
-                <a href="#coach" className="animate-bob group flex items-center gap-3 rounded-full bg-[hsl(36_28%_94%/0.1)] backdrop-blur-md border border-[hsl(42_52%_52%/0.35)] p-1.5 pr-4 md:pr-5" style={{ "--bd": "-3s" } as CSSProperties}>
+                <a href="#coach" className="animate-bob group flex items-center gap-3 rounded-full bg-[hsl(40_33%_90%/0.1)] backdrop-blur-md border border-[hsl(var(--gold)/0.35)] p-1.5 pr-4 md:pr-5" style={{ "--bd": "-3s" } as CSSProperties}>
                   <span className="relative block h-12 w-12 md:h-16 md:w-16 shrink-0">
                     <span className="absolute inset-0 rounded-full ring-2 ring-gold animate-ping-slow" />
                     <img src={coachBubble} alt="Coach Dalila" className="relative h-full w-full rounded-full object-cover ring-2 ring-gold" />
@@ -86,18 +86,18 @@ const Index = () => {
             </div>
           </div>
 
-          <p className="animate-blur-up font-body text-base md:text-lg text-[hsl(36_28%_94%/0.75)] max-w-lg mx-auto mt-6 mb-8 leading-relaxed" style={{ animationDelay: "2.0s" }}>
+          <p className="animate-blur-up font-body text-base md:text-lg text-[hsl(40_33%_90%/0.75)] max-w-lg mx-auto mt-6 mb-8 leading-relaxed" style={{ animationDelay: "2.0s" }}>
             {t.hero.text}
           </p>
           <div className="animate-blur-up flex flex-wrap gap-4 justify-center" style={{ animationDelay: "2.15s" }}>
             <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
               {t.nav.createAccount}
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-[hsl(36_28%_94%/0.35)] text-[hsl(36_28%_94%)] hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 bg-transparent">
+            <Button asChild size="lg" variant="outline" className="border-[hsl(40_33%_90%/0.35)] text-[hsl(40_33%_90%)] hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 bg-transparent">
               <Link to="/products">{t.hero.explore} <ArrowRight className="ml-2 h-3 w-3" /></Link>
             </Button>
           </div>
-          <div className="animate-fade-up mt-10 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(36_28%_94%/0.55)]" style={{ animationDelay: "2.5s" }}>
+          <div className="animate-fade-up mt-10 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(40_33%_90%/0.55)]" style={{ animationDelay: "2.5s" }}>
             <ShieldCheck className="h-3 w-3 text-gold" /> {t.hero.certified}
           </div>
         </div>
@@ -258,7 +258,7 @@ const Index = () => {
       {/* CTA */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(42_52%_52%/0.15),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--gold)/0.15),transparent_60%)]" />
         </div>
         <div className="container mx-auto text-center max-w-3xl" data-reveal="words" key={lang}>
           <SectionLabel>{t.cta.label}</SectionLabel>

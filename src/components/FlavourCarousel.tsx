@@ -127,7 +127,7 @@ export const FlavourCarousel = ({ tins, startDelay = 0.3 }: { tins: FlavourTin[]
   return (
     <div className="absolute inset-0 select-none">
       {/* floor glow */}
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-[34px] md:bottom-[40px] w-[88%] h-[18%] rounded-[50%] bg-[radial-gradient(closest-side,hsl(42_52%_52%/0.35),transparent)] blur-md" />
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-[34px] md:bottom-[40px] w-[88%] h-[18%] rounded-[50%] bg-[radial-gradient(closest-side,hsl(var(--gold)/0.35),transparent)] blur-md" />
       <div
         ref={wrapRef}
         className="absolute inset-x-0 top-0 bottom-[40px] md:bottom-[48px] cursor-grab active:cursor-grabbing"
@@ -154,7 +154,7 @@ export const FlavourCarousel = ({ tins, startDelay = 0.3 }: { tins: FlavourTin[]
       <div className="absolute inset-x-0 bottom-0 flex justify-center z-[200] pointer-events-none">
         <div
           key={front}
-          className="animate-blur-up inline-flex items-center gap-2 rounded-full bg-[hsl(36_28%_94%/0.08)] backdrop-blur-md border border-[hsl(42_52%_52%/0.35)] px-4 py-1.5 font-body text-[10px] md:text-xs tracking-luxe uppercase"
+          className="animate-blur-up inline-flex items-center gap-2 rounded-full bg-[hsl(40_33%_90%/0.08)] backdrop-blur-md border border-[hsl(var(--gold)/0.35)] px-4 py-1.5 font-body text-[10px] md:text-xs tracking-luxe uppercase"
           style={{ animationDuration: "0.6s" }}
         >
           <span className="h-2 w-2 rounded-full" style={{ background: tins[front].color, boxShadow: `0 0 10px ${tins[front].color}` }} />

@@ -24,7 +24,7 @@ const ProductCard = ({ p, index, dmUrl, profileUrl, textMe }: { p: Product; inde
       className="animate-blur-up group shrink-0 w-[84%] sm:w-[60%] md:w-auto snap-center flex flex-col rounded-3xl border border-border bg-background overflow-hidden hover:border-gold/50 hover:shadow-soft transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-1.5"
       style={{ animationDelay: `${index * 0.07}s`, animationDuration: "0.8s" }}
     >
-      <div className={`relative aspect-[4/5] overflow-hidden ${p.kind === "cutout" ? "bg-[radial-gradient(70%_60%_at_50%_60%,hsl(42_52%_52%/0.22),transparent_70%),linear-gradient(180deg,hsl(36_28%_96%),hsl(36_22%_88%))] dark:bg-[radial-gradient(70%_60%_at_50%_60%,hsl(42_52%_52%/0.22),transparent_70%),linear-gradient(180deg,hsl(28_16%_16%),hsl(28_18%_10%))]" : "bg-secondary"}`}>
+      <div className={`relative aspect-[4/5] overflow-hidden ${p.kind === "cutout" ? "bg-[radial-gradient(70%_60%_at_50%_60%,hsl(var(--gold)/0.22),transparent_70%),linear-gradient(180deg,hsl(40_38%_95%),hsl(39_30%_84%))] dark:bg-[radial-gradient(70%_60%_at_50%_60%,hsl(var(--gold)/0.22),transparent_70%),linear-gradient(180deg,hsl(164_24%_13%),hsl(165_28%_8%))]" : "bg-secondary"}`}>
         {p.kind === "cutout" ? (
           <>
             <div className="absolute left-1/2 bottom-[9%] -translate-x-1/2 w-[70%] h-[8%] rounded-[50%] bg-black/25 blur-xl" />

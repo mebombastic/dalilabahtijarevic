@@ -19,10 +19,10 @@ export const DailyRitual = ({ steps }: { steps: RitualStep[] }) => (
         return (
           <li key={s.time} className="relative grid md:grid-cols-2 md:gap-16 items-center pl-16 md:pl-0">
             {/* dot */}
-            <span className="absolute left-[27px] md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-10 h-4 w-4 rounded-full bg-background border-2 border-gold shadow-[0_0_0_6px_hsl(var(--background)),0_0_18px_hsl(42_52%_52%/0.6)]" />
+            <span className="absolute left-[27px] md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-10 h-4 w-4 rounded-full bg-background border-2 border-gold shadow-[0_0_0_6px_hsl(var(--background)),0_0_18px_hsl(var(--gold)/0.6)]" />
 
             <div className={`${right ? "md:order-2" : ""} mb-5 md:mb-0`} data-reveal={right ? "right" : "left"}>
-              <div className={`relative mx-auto w-full max-w-[340px] aspect-[5/4] rounded-[2rem] overflow-hidden ${s.kind === "cutout" ? "bg-[radial-gradient(60%_60%_at_50%_60%,hsl(42_52%_52%/0.25),transparent_70%),linear-gradient(180deg,hsl(36_28%_96%),hsl(36_22%_88%))] dark:bg-[radial-gradient(60%_60%_at_50%_60%,hsl(42_52%_52%/0.25),transparent_70%),linear-gradient(180deg,hsl(28_16%_16%),hsl(28_18%_10%))]" : ""}`}>
+              <div className={`relative mx-auto w-full max-w-[340px] aspect-[5/4] rounded-[2rem] overflow-hidden ${s.kind === "cutout" ? "bg-[radial-gradient(60%_60%_at_50%_60%,hsl(var(--gold)/0.25),transparent_70%),linear-gradient(180deg,hsl(40_38%_95%),hsl(39_30%_84%))] dark:bg-[radial-gradient(60%_60%_at_50%_60%,hsl(var(--gold)/0.25),transparent_70%),linear-gradient(180deg,hsl(164_24%_13%),hsl(165_28%_8%))]" : ""}`}>
                 {s.kind === "cutout" ? (
                   <img src={s.img} alt={s.title} loading="lazy" className="absolute inset-x-0 mx-auto bottom-[8%] h-[80%] w-auto object-contain drop-shadow-[0_18px_20px_rgba(0,0,0,0.3)] animate-bob-soft" style={{ animationDelay: `${-i * 1.3}s` }} />
                 ) : (
