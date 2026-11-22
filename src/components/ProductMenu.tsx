@@ -24,7 +24,7 @@ const ProductCard = ({ p, index, dmUrl, profileUrl, textMe }: { p: Product; inde
       className="animate-blur-up group shrink-0 w-[84%] sm:w-[60%] md:w-auto snap-center flex flex-col rounded-3xl border border-border bg-background overflow-hidden hover:border-gold/50 hover:shadow-soft transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-1.5"
       style={{ animationDelay: `${index * 0.07}s`, animationDuration: "0.8s" }}
     >
-      <div className={`relative aspect-[4/5] overflow-hidden ${p.kind === "cutout" ? "bg-[radial-gradient(70%_60%_at_50%_60%,hsl(var(--gold)/0.22),transparent_70%),linear-gradient(180deg,hsl(40_38%_95%),hsl(39_30%_84%))] dark:bg-[radial-gradient(70%_60%_at_50%_60%,hsl(var(--gold)/0.22),transparent_70%),linear-gradient(180deg,hsl(164_24%_13%),hsl(165_28%_8%))]" : "bg-secondary"}`}>
+      <div className={`relative aspect-[4/5] overflow-hidden ${p.kind === "cutout" ? "bg-[radial-gradient(70%_60%_at_50%_60%,hsl(var(--gold)/0.22),transparent_70%),linear-gradient(180deg,hsl(37_45%_94%),hsl(36_32%_85%))] dark:bg-[radial-gradient(70%_60%_at_50%_60%,hsl(var(--gold)/0.22),transparent_70%),linear-gradient(180deg,hsl(162_40%_12%),hsl(162_45%_7%))]" : "bg-secondary"}`}>
         {p.kind === "cutout" ? (
           <>
             <div className="absolute left-1/2 bottom-[9%] -translate-x-1/2 w-[70%] h-[8%] rounded-[50%] bg-black/25 blur-xl" />
@@ -41,7 +41,7 @@ const ProductCard = ({ p, index, dmUrl, profileUrl, textMe }: { p: Product; inde
           <img src={current.src} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-luxe group-hover:scale-105" />
         )}
         <span className="absolute top-4 left-4 rounded-full bg-background/85 backdrop-blur px-3 py-1 font-body text-[9px] tracking-luxe uppercase text-gold border border-gold/40">{p.category}</span>
-        {p.badge && <span className="absolute top-4 right-4 rounded-full bg-gold px-3 py-1 font-body text-[9px] tracking-luxe uppercase text-primary-foreground">{p.badge}</span>}
+        {p.badge && <span className="absolute top-4 right-4 rounded-full bg-vermilion px-3 py-1 font-body text-[9px] tracking-luxe uppercase text-white">{p.badge}</span>}
         {p.images.length > 1 && (
           <div className="absolute bottom-3 inset-x-0 flex flex-wrap justify-center gap-1.5 px-4">
             {p.images.map((im, i) => (

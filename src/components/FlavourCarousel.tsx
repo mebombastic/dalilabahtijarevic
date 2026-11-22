@@ -154,7 +154,7 @@ export const FlavourCarousel = ({ tins, startDelay = 0.3 }: { tins: FlavourTin[]
       <div className="absolute inset-x-0 bottom-0 flex justify-center z-[200] pointer-events-none">
         <div
           key={front}
-          className="animate-blur-up inline-flex items-center gap-2 rounded-full bg-[hsl(40_33%_90%/0.08)] backdrop-blur-md border border-[hsl(var(--gold)/0.35)] px-4 py-1.5 font-body text-[10px] md:text-xs tracking-luxe uppercase"
+          className="animate-blur-up inline-flex items-center gap-2 rounded-full bg-[hsl(37_40%_90%/0.08)] backdrop-blur-md border border-[hsl(var(--gold)/0.35)] px-4 py-1.5 font-body text-[10px] md:text-xs tracking-luxe uppercase"
           style={{ animationDuration: "0.6s" }}
         >
           <span className="h-2 w-2 rounded-full" style={{ background: tins[front].color, boxShadow: `0 0 10px ${tins[front].color}` }} />

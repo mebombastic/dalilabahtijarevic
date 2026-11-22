@@ -39,10 +39,10 @@ const Products = () => {
       <SiteHeader onAuth={openAuth} />
 
       {/* BANNER */}
-      <section className="bg-stage relative overflow-hidden pt-28 md:pt-32 pb-0 text-[hsl(40_33%_90%)]">
+      <section className="bg-stage relative overflow-hidden pt-28 md:pt-32 pb-0 text-[hsl(37_40%_90%)]">
         <div className="container mx-auto grid md:grid-cols-2 gap-10 items-end">
           <div className="pb-10 md:pb-20 text-center md:text-left">
-            <Link to="/" className="animate-blur-up inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(40_33%_90%/0.6)] hover:text-gold transition-colors mb-8">
+            <Link to="/" className="animate-blur-up inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(37_40%_90%/0.6)] hover:text-gold transition-colors mb-8">
               <ArrowLeft className="h-3 w-3" /> {t.products.back}
             </Link>
             <div className="animate-blur-up" style={{ animationDelay: "0.15s" }}>
@@ -51,14 +51,14 @@ const Products = () => {
             <h1 key={lang} className="words-in font-display text-6xl md:text-7xl lg:text-8xl leading-[0.95] mb-6">
               <Words text={t.products.pageH1a} start={0.2} /> <em className="font-normal"><Words text={t.products.pageH1b} className="gold-text" start={0.35} /></em>
             </h1>
-            <p className="animate-blur-up font-body text-[hsl(40_33%_90%/0.75)] max-w-md mx-auto md:mx-0 leading-relaxed mb-8" style={{ animationDelay: "0.6s" }}>
+            <p className="animate-blur-up font-body text-[hsl(37_40%_90%/0.75)] max-w-md mx-auto md:mx-0 leading-relaxed mb-8" style={{ animationDelay: "0.6s" }}>
               {t.products.pageIntro}
             </p>
             <div className="animate-blur-up flex flex-wrap gap-3 justify-center md:justify-start" style={{ animationDelay: "0.75s" }}>
               <Button asChild size="lg" className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-12 px-7 shadow-gold">
                 <a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> {t.nav.textMe}</a>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-[hsl(40_33%_90%/0.35)] text-[hsl(40_33%_90%)] hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-12 px-7 bg-transparent">
+              <Button asChild size="lg" variant="outline" className="border-[hsl(37_40%_90%/0.35)] text-[hsl(37_40%_90%)] hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-12 px-7 bg-transparent">
                 <a href={IG_PROFILE} target="_blank" rel="noopener noreferrer"><Instagram className="mr-2 h-4 w-4" /> @dalilafitlife</a>
               </Button>
             </div>

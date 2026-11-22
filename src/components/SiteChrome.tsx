@@ -15,9 +15,9 @@ export const Monogram = ({ className = "" }: { className?: string }) => (
 
 export const SectionLabel = ({ children }: { children: ReactNode }) => (
   <div className="inline-flex items-center gap-3 mb-4">
-    <span className="h-px w-8 bg-gold" />
+    <span className="h-px w-8 bg-vermilion" />
     <span className="font-body text-xs tracking-luxe uppercase text-gold">{children}</span>
-    <span className="h-px w-8 bg-gold" />
+    <span className="h-px w-8 bg-vermilion" />
   </div>
 );
 
