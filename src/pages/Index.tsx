@@ -2,7 +2,7 @@ import { useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Check, Play, Users, Trophy, Heart, Sparkles, ArrowRight, ArrowUp, Mic, Camera, Menu, Globe, Sun, Moon, ChevronLeft, ChevronRight, Dumbbell, Search, ShoppingBag, ShieldCheck } from "lucide-react";
+import { Check, Play, Users, Trophy, Heart, Sparkles, ArrowRight, ArrowUp, Mic, Camera, Menu, Globe, Sun, Moon, ChevronLeft, ChevronRight, Dumbbell, Search, ShoppingBag, ShieldCheck, MessageCircle, Instagram } from "lucide-react";
 import heroImg from "@/assets/hero-coach-light.jpg";
 import heroImgDark from "@/assets/hero-theme-gold.jpg";
 import storyImg from "@/assets/story-video.jpg";
@@ -24,7 +24,6 @@ import packTotal2 from "@/assets/pack-total-2.jpg";
 import packTotal3 from "@/assets/pack-total-3.jpg";
 import { AuthDialog } from "@/components/AuthDialog";
 import { CookieBanner } from "@/components/CookieBanner";
-import { PackDialog, type Pack } from "@/components/PackDialog";
 import { useReveal } from "@/hooks/use-reveal";
 import { useParallax } from "@/hooks/use-parallax";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
@@ -215,6 +214,9 @@ const packs: Array<{
   },
 ];
 
+const IG_PROFILE = "https://www.instagram.com/dalilafitlife";
+const IG_DM = "https://ig.me/m/dalilafitlife";
+
 const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
 /** Product line-up: positions (in % of the group box) come from the original photo. */
@@ -239,9 +241,6 @@ const Index = () => {
   const [authMode, setAuthMode] = useState<"register" | "login">("register");
   const [lang, setLang] = useState<Lang>("en");
   const [langOpen, setLangOpen] = useState(false);
-  const [activePack, setActivePack] = useState<Pack | null>(null);
-  const [packOpen, setPackOpen] = useState(false);
-  const openPack = (p: Pack) => { setActivePack(p); setPackOpen(true); };
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window === "undefined") return "light";
     const stored = localStorage.getItem("theme");
@@ -537,6 +536,7 @@ const Index = () => {
           <div className="text-center mb-20" data-reveal="words">
             <SectionLabel>Available Packages</SectionLabel>
             <h2 className="font-display text-5xl md:text-6xl"><Words text="Choose" /> <em className="font-normal"><Words text="Your Pack" className="gold-text" start={0.1} /></em></h2>
+            <p className="font-body text-muted-foreground mt-6">Text me on Instagram for details and prices.</p>
           </div>
 
           <div
@@ -559,38 +559,15 @@ const Index = () => {
                   <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-background/80 backdrop-blur font-body text-[10px] tracking-luxe uppercase text-gold border border-gold/40">Ready</div>
                 </div>
 
-                <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="font-display text-2xl mb-2">{p.name}</h3>
-                  <p className="font-body text-sm text-muted-foreground italic mb-6">{p.tagline}</p>
-
-                  <div className="flex items-baseline gap-2 mb-6">
-                    <span className="font-display text-4xl gold-text">{p.price}</span>
-                  </div>
-
-                  <p className="font-body text-sm text-foreground/70 leading-relaxed mb-6">{p.desc}</p>
-
-                  <div className="gold-divider mb-6" />
-
-                  <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-3">Perfect For</div>
-                  <p className="font-body text-sm text-foreground/80 mb-6">{p.perfect}</p>
-
-                  <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-3">What's Included</div>
-                  <ul className="space-y-2 mb-8">
-                    {p.items.map((it) => (
-                      <li key={it} className="flex gap-3 font-body text-sm text-foreground/80">
-                        <Check className="h-4 w-4 text-gold shrink-0 mt-0.5" strokeWidth={2} />
-                        {it}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-auto flex flex-col gap-2">
-                    <Button onClick={() => openPack(p)} className={`rounded-2xl font-body text-xs tracking-luxe uppercase h-12 ${p.popular ? "bg-gold text-primary-foreground hover:bg-gold/90" : "bg-foreground text-background hover:bg-gold hover:text-primary-foreground"}`}>
-                      View Details
+                <div className="p-8 flex-1 flex flex-col items-center text-center">
+                  <h3 className="font-display text-3xl mb-6">{p.name}</h3>
+                  <div className="mt-auto w-full flex flex-col gap-3">
+                    <Button asChild className={`rounded-full font-body text-xs tracking-luxe uppercase h-12 ${p.popular ? "btn-shine bg-gold text-primary-foreground hover:bg-gold/90 shadow-gold" : "bg-foreground text-background hover:bg-gold hover:text-primary-foreground"}`}>
+                      <a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> Text Me</a>
                     </Button>
-                    <button onClick={() => openPack(p)} className="font-body text-[10px] tracking-luxe uppercase text-muted-foreground hover:text-gold transition-colors">
-                      Quick look →
-                    </button>
+                    <a href={IG_PROFILE} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 font-body text-[10px] tracking-luxe uppercase text-muted-foreground hover:text-gold transition-colors">
+                      <Instagram className="h-3.5 w-3.5" /> @dalilafitlife
+                    </a>
                   </div>
                 </div>
               </Card>
@@ -691,7 +668,6 @@ const Index = () => {
       </footer>
 
       <AuthDialog open={authOpen} onOpenChange={setAuthOpen} defaultMode={authMode} lang={lang} onLangChange={setLang} />
-      <PackDialog pack={activePack} open={packOpen} onOpenChange={setPackOpen} />
       <CookieBanner lang={lang} />
     </div>
   );
