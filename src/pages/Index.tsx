@@ -113,7 +113,7 @@ const Index = () => {
       </section>
 
       {/* MEET YOUR COACH */}
-      <section id="coach" className="py-28 md:py-36 bg-background overflow-hidden scroll-mt-20">
+      <section id="coach" className="py-20 md:py-36 bg-background overflow-hidden scroll-mt-20">
         <div className="container mx-auto grid md:grid-cols-2 gap-16 md:gap-20 items-center">
           <div className="relative max-w-md mx-auto w-full" data-reveal>
             <span className="absolute -top-8 -left-8 h-36 w-36 rounded-full border border-gold/40 animate-float" aria-hidden="true" />
@@ -131,7 +131,7 @@ const Index = () => {
           <div>
             <div data-reveal="words" key={lang}>
               <SectionLabel>{t.coach.label}</SectionLabel>
-              <h2 className="font-display text-5xl md:text-6xl mb-8">
+              <h2 className="font-display text-[2.6rem] leading-[1.05] sm:text-5xl md:text-6xl mb-8">
                 <Words text={t.coach.h2a} /> <em className="font-normal"><Words text={t.coach.h2b} className="gold-text" start={0.15} /></em>
               </h2>
             </div>
@@ -158,11 +158,11 @@ const Index = () => {
       </section>
 
       {/* METHOD — pill image that opens up on scroll */}
-      <section className="py-32 bg-background overflow-hidden">
+      <section className="py-20 md:py-32 bg-background overflow-hidden">
         <div className="container mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14" data-reveal="words" key={lang}>
             <SectionLabel>{t.method.label}</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl mb-6">
+            <h2 className="font-display text-[2.6rem] leading-[1.05] sm:text-5xl md:text-6xl mb-6">
               <Words text={t.method.h2a} /> <br />
               <em className="font-normal"><Words text={t.method.h2b} className="gold-text" start={0.2} /></em>
             </h2>
@@ -197,11 +197,11 @@ const Index = () => {
       </section>
 
       {/* WHY CHOOSE US */}
-      <section id="why" className="py-32 bg-secondary/30 relative overflow-hidden scroll-mt-20">
+      <section id="why" className="py-20 md:py-32 bg-secondary/30 relative overflow-hidden scroll-mt-20">
         <div className="container mx-auto">
           <div className="text-center mb-20" data-reveal="words" key={lang}>
             <SectionLabel>{t.why.label}</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl"><Words text={t.why.h2a} /> <br /><em className="font-normal"><Words text={t.why.h2b} className="gold-text" start={0.25} /></em></h2>
+            <h2 className="font-display text-[2.6rem] leading-[1.05] sm:text-5xl md:text-6xl"><Words text={t.why.h2a} /> <br /><em className="font-normal"><Words text={t.why.h2b} className="gold-text" start={0.25} /></em></h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {t.why.features.map((f, i) => {
@@ -221,11 +221,11 @@ const Index = () => {
       </section>
 
       {/* PRODUCTS PREVIEW */}
-      <section id="products" className="py-28 md:py-32 bg-secondary/30 scroll-mt-20">
+      <section id="products" className="py-20 md:py-32 bg-secondary/30 scroll-mt-20">
         <div className="container mx-auto">
           <div className="text-center mb-10 md:mb-12" data-reveal="words" key={lang}>
             <SectionLabel>{t.products.label}</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl"><Words text={t.products.h2a} /> <em className="font-normal"><Words text={t.products.h2b} className="gold-text" start={0.1} /></em></h2>
+            <h2 className="font-display text-[2.6rem] leading-[1.05] sm:text-5xl md:text-6xl"><Words text={t.products.h2a} /> <em className="font-normal"><Words text={t.products.h2b} className="gold-text" start={0.1} /></em></h2>
             <p className="font-body text-muted-foreground mt-6 max-w-xl mx-auto">{t.products.p}</p>
           </div>
           <ProductMenu key={lang} products={getProducts(lang).slice(0, 3)} dmUrl={IG_DM} profileUrl={IG_PROFILE} textMe={t.products.textMe} showTabs={false} />
@@ -238,11 +238,11 @@ const Index = () => {
       </section>
 
       {/* DAILY RITUAL */}
-      <section id="ritual" className="py-28 md:py-36 bg-background overflow-hidden scroll-mt-20">
+      <section id="ritual" className="py-20 md:py-36 bg-background overflow-hidden scroll-mt-20">
         <div className="container mx-auto">
           <div className="text-center mb-16 md:mb-20" data-reveal="words" key={lang}>
             <SectionLabel>{t.ritual.label}</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl"><Words text={t.ritual.h2a} /> <em className="font-normal"><Words text={t.ritual.h2b} className="gold-text" start={0.15} /></em></h2>
+            <h2 className="font-display text-[2.6rem] leading-[1.05] sm:text-5xl md:text-6xl"><Words text={t.ritual.h2a} /> <em className="font-normal"><Words text={t.ritual.h2b} className="gold-text" start={0.15} /></em></h2>
             <p className="font-body text-muted-foreground mt-6 max-w-xl mx-auto">{t.ritual.p}</p>
           </div>
           <DailyRitual steps={getRitual(lang)} />
@@ -250,8 +250,8 @@ const Index = () => {
       </section>
 
       {/* MARQUEE */}
-      <section className="py-14 overflow-hidden border-y border-border bg-background" aria-hidden="true">
-        <div className="marquee-track font-display text-6xl md:text-8xl whitespace-nowrap leading-none">
+      <section className="py-10 md:py-14 overflow-hidden border-y border-border bg-background" aria-hidden="true">
+        <div className="marquee-track font-display text-5xl md:text-8xl whitespace-nowrap leading-none">
           {[0, 1].map((k) => (
             <div key={k} className="flex items-center">
               {t.marquee.map((m, i) => (
@@ -266,13 +266,13 @@ const Index = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-32 relative overflow-hidden">
+      <section className="py-20 md:py-32 relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--gold)/0.15),transparent_60%)]" />
         </div>
         <div className="container mx-auto text-center max-w-3xl" data-reveal="words" key={lang}>
           <SectionLabel>{t.cta.label}</SectionLabel>
-          <h2 className="font-display text-6xl md:text-7xl mb-8">
+          <h2 className="font-display text-5xl sm:text-6xl md:text-7xl mb-8">
             <Words text={t.cta.h2a} /> <br /><em className="font-normal"><Words text={t.cta.h2b} className="gold-text" start={0.2} /></em>
           </h2>
           <p className="font-script text-2xl text-gold mb-10">{t.cta.script}</p>

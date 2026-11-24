@@ -107,7 +107,7 @@ export const ProductMenu = ({
 
   return (
     <>
-      {showTabs && <div className="no-scrollbar flex md:flex-wrap md:justify-center gap-2 overflow-x-auto -mx-8 px-8 md:mx-0 md:px-0 mb-10 md:mb-14">
+      {showTabs && <div className="no-scrollbar flex md:flex-wrap md:justify-center gap-2 overflow-x-auto -mx-5 px-5 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 mb-10 md:mb-14">
         {cats.map((c) => (
           <button
             key={c}
@@ -124,7 +124,7 @@ export const ProductMenu = ({
         key={cat}
         ref={railRef}
         onScroll={onScroll}
-        className="no-scrollbar flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-8 px-8 md:mx-0 md:px-0 pb-6 md:pb-0"
+        className="no-scrollbar flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pb-6 md:pb-0"
       >
         {shown.map((p, i) => (
           <ProductCard key={p.name} p={p} index={i} dmUrl={dmUrl} profileUrl={profileUrl} textMe={textMe} />

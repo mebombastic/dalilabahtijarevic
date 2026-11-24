@@ -63,7 +63,7 @@ const Products = () => {
               </Button>
             </div>
           </div>
-          <div className="relative h-[260px] sm:h-[320px] md:h-[420px]">
+          <div className="relative h-[230px] sm:h-[320px] md:h-[420px]">
             <div className="absolute left-1/2 -translate-x-1/2 bottom-2 w-[90%] h-[16%] rounded-[50%] bg-[radial-gradient(closest-side,hsl(var(--gold)/0.4),transparent)] blur-md" />
             {banner.map((b) => (
               <div key={b.src} className={`absolute ${b.cls}`}>
@@ -77,14 +77,14 @@ const Products = () => {
       </section>
 
       {/* MENU */}
-      <section className="py-20 md:py-24 bg-secondary/30">
+      <section className="py-14 md:py-24 bg-secondary/30">
         <div className="container mx-auto">
           <ProductMenu key={lang} products={getProducts(lang)} dmUrl={IG_DM} profileUrl={IG_PROFILE} allLabel={t.products.all} textMe={t.products.textMe} />
         </div>
       </section>
 
       {/* HELP */}
-      <section className="py-24 md:py-28 bg-background">
+      <section className="py-16 md:py-28 bg-background">
         <div className="container mx-auto max-w-3xl text-center" data-reveal="words" key={lang}>
           <SectionLabel>{t.products.helpLabel}</SectionLabel>
           <h2 className="font-display text-5xl md:text-6xl mb-6">

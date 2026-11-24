@@ -25,7 +25,7 @@ import coachBubble from "@/assets/coach-bubble.webp";
 const IMG: Record<string, string> = { "f1-vanilla": f1Vanilla, "f1-chocolate": f1Chocolate, "f1-raspberry": f1Raspberry, "p-tea": pTea, "p-fibreconc": pFibre, "p-shaker": pShaker, "p-bioniq": pBioniq, "p-skin": pSkin };
 const DAYS = { en: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], de: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"], sr: ["Pon", "Uto", "Sre", "Čet", "Pet", "Sub", "Ned"] };
 type Entry = { d: string; w?: string; wa?: string; sq?: string; pu?: string; su?: string; pl?: string };
-const card = "rounded-3xl border border-border bg-card p-6 md:p-8";
+const card = "min-w-0 rounded-3xl border border-border bg-card p-5 md:p-8";
 
 const Account = () => {
   const { lang, setLang, t } = useLang();
@@ -112,11 +112,11 @@ const Account = () => {
       ) : (
         <>
           {/* welcome band */}
-          <section className="bg-stage text-[hsl(37_40%_90%)] pt-28 pb-12">
+          <section className="bg-stage text-[hsl(37_40%_90%)] pt-24 md:pt-28 pb-10 md:pb-12">
             <div className="container mx-auto flex flex-wrap items-end justify-between gap-6">
               <div>
                 <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-3">{m.account}</div>
-                <h1 className="font-display text-5xl md:text-6xl leading-none">{m.hello}{name ? "," : ""} <em className="gold-text">{name || ""}{name ? "." : ""}</em></h1>
+                <h1 className="font-display text-[2.6rem] sm:text-5xl md:text-6xl leading-none">{m.hello}{name ? "," : ""} <em className="gold-text">{name || ""}{name ? "." : ""}</em></h1>
                 <div className="flex flex-wrap gap-3 mt-6">
                   <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(37_40%_90%/0.25)] px-4 py-2 font-body text-[11px] tracking-wide-2 uppercase"><Crown className="h-3.5 w-3.5 text-gold" /> {m.plan}: {planChosen ? PLAN_NAMES[slug] : m.free}</span>
                   <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 font-body text-[11px] tracking-wide-2 uppercase ${active ? "bg-[hsl(140_45%_40%/0.25)] text-[hsl(140_60%_80%)]" : "bg-vermilion/20 text-[hsl(6_90%_80%)]"}`}>
@@ -124,30 +124,30 @@ const Account = () => {
                   </span>
                 </div>
               </div>
-              <div className="flex gap-3">
-                {!active && <Button onClick={() => setUpgradeOpen(true)} className="btn-shine rounded-full h-11 px-6 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[10px] tracking-luxe uppercase"><Sparkles className="mr-2 h-4 w-4" /> {m.upgrade}</Button>}
-                {active && <Button asChild className="rounded-full h-11 px-6 bg-[hsl(37_40%_90%)] text-primary hover:bg-[hsl(37_40%_95%)] font-body text-[10px] tracking-luxe uppercase"><a href={pdf} download><Download className="mr-2 h-4 w-4" /> {m.download}</a></Button>}
-                <Button onClick={() => signOut()} variant="outline" className="rounded-full h-11 px-5 bg-transparent border-[hsl(37_40%_90%/0.35)] text-[hsl(37_40%_90%)] hover:text-gold font-body text-[10px] tracking-luxe uppercase"><LogOut className="mr-2 h-4 w-4" /> {m.logout}</Button>
+              <div className="flex flex-wrap gap-3 w-full sm:w-auto">
+                {!active && <Button onClick={() => setUpgradeOpen(true)} className="btn-shine flex-1 sm:flex-none rounded-full h-11 px-6 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[10px] tracking-luxe uppercase"><Sparkles className="mr-2 h-4 w-4" /> {m.upgrade}</Button>}
+                {active && <Button asChild className="flex-1 sm:flex-none rounded-full h-11 px-6 bg-[hsl(37_40%_90%)] text-primary hover:bg-[hsl(37_40%_95%)] font-body text-[10px] tracking-luxe uppercase"><a href={pdf} download><Download className="mr-2 h-4 w-4" /> {m.download}</a></Button>}
+                <Button onClick={() => signOut()} variant="outline" className="rounded-full h-11 px-5 shrink-0 bg-transparent border-[hsl(37_40%_90%/0.35)] text-[hsl(37_40%_90%)] hover:text-gold font-body text-[10px] tracking-luxe uppercase"><LogOut className="mr-2 h-4 w-4" /> {m.logout}</Button>
               </div>
             </div>
           </section>
 
-          <main className="container mx-auto py-10 md:py-14 space-y-6">
+          <main className="container mx-auto py-8 md:py-14 space-y-5 md:space-y-6">
             {!active && !planChosen && (
               <section className={`${card} border-vermilion/40 flex flex-wrap items-center justify-between gap-6`}>
                 <div className="max-w-xl">
                   <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-2">{m.free}</div>
-                  <h2 className="font-display text-4xl mb-3">{m.upgradeTitle}</h2>
+                  <h2 className="font-display text-3xl sm:text-4xl mb-3">{m.upgradeTitle}</h2>
                   <p className="font-body text-sm text-muted-foreground leading-relaxed">{m.noPlanText}</p>
                 </div>
-                <Button onClick={() => setUpgradeOpen(true)} className="btn-shine rounded-full h-12 px-8 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[11px] tracking-luxe uppercase"><Sparkles className="mr-2 h-4 w-4" /> {m.upgrade}</Button>
+                <Button onClick={() => setUpgradeOpen(true)} className="btn-shine w-full sm:w-auto rounded-full h-12 px-8 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[11px] tracking-luxe uppercase"><Sparkles className="mr-2 h-4 w-4" /> {m.upgrade}</Button>
               </section>
             )}
 
             {!active && planChosen && (
               <section className={`${card} border-vermilion/40`}>
                 <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-2">{m.status}</div>
-                <h2 className="font-display text-4xl mb-5">{m.payTitle}</h2>
+                <h2 className="font-display text-3xl sm:text-4xl mb-5">{m.payTitle}</h2>
                 <ol className="grid sm:grid-cols-3 gap-3 mb-6">
                   {m.paySteps.map((s, i) => {
                     const done = i === 0 || (i === 1 && reported);
@@ -161,8 +161,8 @@ const Account = () => {
                 </ol>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-2xl mb-6">{reported ? m.paidThanks : m.payText}</p>
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild className="rounded-full h-12 px-7 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[11px] tracking-luxe uppercase"><a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> {m.payDetails}</a></Button>
-                  {!reported && <Button onClick={reportPaid} variant="outline" className="rounded-full h-12 px-7 bg-transparent font-body text-[11px] tracking-luxe uppercase"><Check className="mr-2 h-4 w-4" /> {m.paid}</Button>}
+                  <Button asChild className="w-full sm:w-auto rounded-full h-12 px-7 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[11px] tracking-luxe uppercase"><a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> {m.payDetails}</a></Button>
+                  {!reported && <Button onClick={reportPaid} variant="outline" className="flex-1 sm:flex-none rounded-full h-12 px-7 bg-transparent font-body text-[11px] tracking-luxe uppercase"><Check className="mr-2 h-4 w-4" /> {m.paid}</Button>}
                   <Button onClick={() => setUpgradeOpen(true)} variant="ghost" className="rounded-full h-12 px-5 font-body text-[11px] tracking-luxe uppercase">{m.changePlan}</Button>
                 </div>
               </section>
@@ -174,7 +174,7 @@ const Account = () => {
                   <span className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-3 font-body text-[11px] tracking-luxe uppercase shadow-soft"><Lock className="h-4 w-4" /> {m.locked}</span>
                 </div>
               )}
-              <div className={`grid lg:grid-cols-3 gap-6 ${active ? "" : "pointer-events-none"}`} aria-hidden={!active}>
+              <div className={`grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6 ${active ? "" : "pointer-events-none"}`} aria-hidden={!active}>
                 {/* products */}
                 <section className={`${card} lg:col-span-1`}>
                   <SectionLabel>{m.products}</SectionLabel>
@@ -200,19 +200,19 @@ const Account = () => {
                 <section className={`${card} lg:col-span-2`}>
                   <div className="flex flex-wrap items-end justify-between gap-3 mb-5">
                     <div><SectionLabel>{m.training}</SectionLabel></div>
-                    <div className="flex gap-1.5">
+                    <div className="flex gap-1.5 w-full sm:w-auto">
                       {[0, 1, 2, 3].map((w) => (
-                        <button key={w} onClick={() => setWeek(w)} className={`rounded-full px-4 py-2 font-body text-[10px] tracking-luxe uppercase border ${w === week ? "bg-primary text-primary-foreground border-primary" : "border-border"}`}>{m.week} {w + 1}</button>
+                        <button key={w} onClick={() => setWeek(w)} className={`flex-1 min-w-0 sm:flex-none whitespace-nowrap rounded-full px-2 sm:px-4 py-2 font-body text-[10px] tracking-wide-2 sm:tracking-luxe uppercase border ${w === week ? "bg-primary text-primary-foreground border-primary" : "border-border"}`}><span className="hidden sm:inline">{m.week} </span><span className="sm:hidden">{m.week.slice(0, 3)}. </span>{w + 1}</button>
                       ))}
                     </div>
                   </div>
-                  <div className="grid grid-cols-7 gap-1.5 md:gap-2">
+                  <div className="no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-7 gap-2 overflow-x-auto snap-x">
                     {data.calendar[week].map((c, d) => {
                       const isW = c.type === "w" || c.type === "m";
                       const today = week === weekNow && d === dayNow;
                       return (
                         <button key={d} disabled={!isW} onClick={() => setOpen(c.label)}
-                          className={`rounded-2xl p-2 md:p-3 min-h-[92px] text-left flex flex-col justify-between transition-transform ${isW ? "hover:-translate-y-0.5" : ""} ${c.type === "m" ? "bg-vermilion text-white" : c.type === "w" ? "bg-primary text-primary-foreground" : c.type === "k" ? "border border-primary" : "bg-secondary text-muted-foreground"} ${open === c.label && isW ? "ring-2 ring-offset-2 ring-[hsl(var(--vermilion))] ring-offset-background" : ""}`}>
+                          className={`shrink-0 w-[30%] min-w-[96px] sm:w-auto sm:min-w-0 snap-start rounded-2xl p-3 min-h-[96px] text-left flex flex-col justify-between transition-transform ${isW ? "hover:-translate-y-0.5" : ""} ${c.type === "m" ? "bg-vermilion text-white" : c.type === "w" ? "bg-primary text-primary-foreground" : c.type === "k" ? "border border-primary" : "bg-secondary text-muted-foreground"} ${open === c.label && isW ? "ring-2 ring-offset-2 ring-[hsl(var(--vermilion))] ring-offset-background" : ""}`}>
                           <span className="font-body text-[9px] tracking-wide-2 uppercase opacity-80">{DAYS[lang][d]}{today ? ` · ${m.today}` : ""}</span>
                           <span className={`leading-tight ${isW ? "font-display text-base md:text-lg" : "font-body text-[10px] md:text-[11px]"}`}>{c.label}</span>
                         </button>
@@ -233,16 +233,16 @@ const Account = () => {
                           <span className="font-body text-[10px] tracking-luxe uppercase text-gold">{w.level} · {w.kind}</span>
                         </div>
                         <p className="font-body text-xs text-muted-foreground px-5 pt-3 leading-relaxed">{w.rules}</p>
-                        <div className="overflow-x-auto px-5 py-4">
-                          <table className="w-full min-w-[420px] border-collapse">
+                        <div className="overflow-x-auto px-3 sm:px-5 py-4">
+                          <table className="w-full border-collapse">
                             <thead><tr className="bg-primary text-primary-foreground">
                               <th className="text-left font-body text-[10px] tracking-wide-2 uppercase font-normal px-3 py-2"><Dumbbell className="inline h-3.5 w-3.5 mr-1" /></th>
                               {w.cols.map((c) => <th key={c} className="font-body text-[10px] tracking-wide-2 uppercase font-normal px-2 py-2">{c}</th>)}
                             </tr></thead>
                             <tbody>{w.items.map(([ex, reps]) => (
                               <tr key={ex} className="border-b border-border">
-                                <td className="font-body text-sm font-medium px-3 py-2">{ex}</td>
-                                {reps.map((r, k) => <td key={k} className="font-body text-sm text-center px-2 py-2">{r}</td>)}
+                                <td className="font-body text-[13px] sm:text-sm font-medium px-2 sm:px-3 py-2">{ex}</td>
+                                {reps.map((r, k) => <td key={k} className="font-body text-[13px] sm:text-sm text-center px-1 sm:px-2 py-2 whitespace-nowrap">{r}</td>)}
                               </tr>
                             ))}</tbody>
                           </table>
@@ -270,7 +270,7 @@ const Account = () => {
                   </div>
                   <div className="overflow-x-auto mt-5">
                     {entries.length === 0 ? <p className="font-body text-sm text-muted-foreground">{m.noEntries}</p> : (
-                      <table className="w-full min-w-[520px] border-collapse font-body text-sm">
+                      <table className="w-full min-w-[480px] border-collapse font-body text-[13px] sm:text-sm">
                         <thead><tr className="text-left text-[10px] tracking-wide-2 uppercase text-gold">
                           {[m.date, m.weight, m.waist, m.squat, m.pushup, m.situp, m.plank].map((h) => <th key={h} className="font-normal py-2 pr-3">{h}</th>)}
                         </tr></thead>

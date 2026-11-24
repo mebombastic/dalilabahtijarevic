@@ -34,10 +34,10 @@ const Plans = () => {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SiteHeader onAuth={openAuth} />
 
-      <section className="pt-32 md:pt-40 pb-12 text-center">
+      <section className="pt-28 md:pt-40 pb-10 text-center">
         <div className="container mx-auto" key={lang}>
           <div className="animate-blur-up"><SectionLabel>{t.plans.label}</SectionLabel></div>
-          <h1 className="words-in font-display text-6xl md:text-7xl leading-[0.95]">
+          <h1 className="words-in font-display text-5xl sm:text-6xl md:text-7xl leading-[0.95]">
             <Words text={t.plans.h1a} start={0.1} /> <em className="font-normal"><Words text={t.plans.h1b} className="gold-text" start={0.25} /></em>
           </h1>
           <p className="animate-blur-up font-body text-muted-foreground max-w-xl mx-auto mt-6 leading-relaxed" style={{ animationDelay: "0.5s" }}>{t.plans.intro}</p>

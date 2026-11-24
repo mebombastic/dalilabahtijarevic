@@ -95,7 +95,7 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SiteHeader onAuth={() => setAuthOpen(true)} />
-      <main className="container mx-auto pt-28 md:pt-32 pb-20">
+      <main className="container mx-auto pt-24 md:pt-32 pb-16 md:pb-20">
         {loading ? (
           <div className="py-24 flex justify-center text-muted-foreground"><Loader2 className="h-5 w-5 animate-spin" /></div>
         ) : !user || !admin ? (
@@ -111,7 +111,7 @@ const Admin = () => {
             <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
               <div>
                 <SectionLabel>{a.nav}</SectionLabel>
-                <h1 className="font-display text-5xl md:text-6xl leading-none">{a.title}</h1>
+                <h1 className="font-display text-[2.6rem] sm:text-5xl md:text-6xl leading-none">{a.title}</h1>
                 <p className="font-body text-sm text-muted-foreground mt-3 max-w-xl">{a.sub}</p>
               </div>
               <Button onClick={load} disabled={busy} variant="outline" className="rounded-full h-11 px-5 bg-transparent font-body text-[10px] tracking-luxe uppercase">
