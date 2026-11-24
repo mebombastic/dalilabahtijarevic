@@ -4,7 +4,7 @@ import { Globe, Menu, MessageCircle, Moon, Sun, X, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LANGS, LANG_LABEL, useLang } from "@/i18n";
 import { IG_DM, IG_PROFILE } from "@/data/catalog";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth, isAdmin } from "@/hooks/use-auth";
 
 export const Monogram = ({ className = "" }: { className?: string }) => (
   <span className={`font-display font-bold inline-flex items-center ${className}`}>
@@ -122,6 +122,11 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
           <button type="button" onClick={toggle} aria-label={t.nav.theme} className="inline-flex items-center justify-center h-8 w-8 border border-border hover:border-gold/60 transition-colors">
             {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
           </button>
+          {user && isAdmin(user) && (
+            <Button asChild size="sm" variant="outline" className="hidden sm:inline-flex rounded-2xl font-body text-[10px] tracking-luxe uppercase bg-transparent border-vermilion/50 text-[hsl(var(--vermilion))]">
+              <Link to="/admin">{t.admin.nav}</Link>
+            </Button>
+          )}
           {user ? (
             <Button asChild size="sm" className="hidden sm:inline-flex btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-2xl font-body text-[10px] tracking-luxe uppercase">
               <Link to="/account">{t.member.account}</Link>
@@ -150,7 +155,7 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
       <div className={`md:hidden grid transition-[grid-template-rows,opacity] duration-500 ease-luxe ${menuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none"}`}>
         <nav className="overflow-hidden">
           <div className="container mx-auto pb-6 pt-2 flex flex-col">
-            {[{ to: "/", label: t.nav.home }, ...links].map((l) => (
+            {[{ to: "/", label: t.nav.home }, ...links, ...(user && isAdmin(user) ? [{ to: "/admin", label: t.admin.nav }] : [])].map((l) => (
               <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)} className={`py-3.5 border-b border-border/60 font-display text-2xl hover:text-gold transition-colors ${isActive(l.to) ? "text-gold" : ""}`}>
                 {l.label}
               </Link>

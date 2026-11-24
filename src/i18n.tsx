@@ -62,6 +62,14 @@ const en = {
     note: "After you sign up, I send you the price and payment details. Your plan unlocks as soon as your payment is confirmed.",
     stepsTitle: "How joining works", steps: ["Create your account and choose a plan", "Pay for your month", "I confirm — your plan unlocks"],
   },
+  admin: {
+    nav: "Admin", title: "Members", sub: "Everyone who has an account — activate memberships, change plans and see progress.",
+    notAdmin: "This page is only for the admin.", setupNeeded: "Admin access isn't set up yet in Supabase.",
+    search: "Search name or email", all: "All", waiting: "Waiting for payment", paid: "Says paid", active: "Active", free: "Free account", inactive: "Inactive",
+    total: "Accounts", joined: "Joined", lastLogin: "Last login", never: "never", plan: "Plan", noPlan: "No plan", status: "Status",
+    activate: "Activate", deactivate: "Deactivate", start: "Start date", progress: "Progress", noProgress: "No progress logged yet.",
+    paidOn: "Says paid on", refresh: "Refresh", empty: "No accounts match.", saved: "Saved", error: "Something went wrong — try again.",
+  },
   member: {
     free: "Free account", upgrade: "Upgrade", upgradeTitle: "Unlock your plan", choose: "Choose", later: "Maybe later",
     upgradeSub: "Choose your plan and get your whole month — training, products and progress — plus support from me.",
@@ -149,6 +157,14 @@ const de: Dict = {
     note: "Nach der Anmeldung schicke ich dir Preis und Zahlungsdetails. Dein Plan wird freigeschaltet, sobald deine Zahlung bestätigt ist.",
     stepsTitle: "So funktioniert die Anmeldung", steps: ["Konto erstellen und Plan wählen", "Deinen Monat bezahlen", "Ich bestätige — dein Plan wird freigeschaltet"],
   },
+  admin: {
+    nav: "Admin", title: "Mitglieder", sub: "Alle mit einem Konto — Mitgliedschaften freischalten, Pläne ändern und Fortschritt sehen.",
+    notAdmin: "Diese Seite ist nur für den Admin.", setupNeeded: "Der Admin-Zugang ist in Supabase noch nicht eingerichtet.",
+    search: "Name oder E-Mail suchen", all: "Alle", waiting: "Wartet auf Zahlung", paid: "Sagt bezahlt", active: "Aktiv", free: "Kostenloses Konto", inactive: "Inaktiv",
+    total: "Konten", joined: "Seit", lastLogin: "Letzte Anmeldung", never: "nie", plan: "Plan", noPlan: "Kein Plan", status: "Status",
+    activate: "Freischalten", deactivate: "Deaktivieren", start: "Startdatum", progress: "Fortschritt", noProgress: "Noch kein Fortschritt eingetragen.",
+    paidOn: "Sagt bezahlt am", refresh: "Aktualisieren", empty: "Keine passenden Konten.", saved: "Gespeichert", error: "Etwas ist schiefgelaufen — bitte erneut versuchen.",
+  },
   member: {
     free: "Kostenloses Konto", upgrade: "Upgrade", upgradeTitle: "Schalte deinen Plan frei", choose: "Wählen", later: "Vielleicht später",
     upgradeSub: "Wähle deinen Plan und bekomm deinen ganzen Monat — Training, Produkte und Fortschritt — plus Begleitung von mir.",
@@ -233,6 +249,14 @@ const sr: Dict = {
     vip: ["Sve iz Strong & Toned", "5 treninga nedeljno, prilagođeno tvojim rezultatima", "Proizvodi izabrani lično za tebe", "Video poziv svake nedelje", "Plan se ažurira svake nedelje", "Prioritet, odgovor isti dan"],
     note: "Posle registracije šaljem ti cenu i detalje za plaćanje. Tvoj plan se otključava čim se uplata potvrdi.",
     stepsTitle: "Kako se učlanjuješ", steps: ["Napravi nalog i izaberi plan", "Plati svoj mesec", "Ja potvrdim — tvoj plan se otključava"],
+  },
+  admin: {
+    nav: "Admin", title: "Članice", sub: "Sve koje imaju nalog — aktiviraj članstva, menjaj planove i prati napredak.",
+    notAdmin: "Ova stranica je samo za admina.", setupNeeded: "Admin pristup još nije podešen u Supabase-u.",
+    search: "Traži ime ili email", all: "Sve", waiting: "Čeka uplatu", paid: "Kaže da je platila", active: "Aktivne", free: "Besplatan nalog", inactive: "Neaktivno",
+    total: "Naloga", joined: "Registrovana", lastLogin: "Poslednja prijava", never: "nikad", plan: "Plan", noPlan: "Bez plana", status: "Status",
+    activate: "Aktiviraj", deactivate: "Deaktiviraj", start: "Datum početka", progress: "Napredak", noProgress: "Još nema upisanog napretka.",
+    paidOn: "Platila (kaže) dana", refresh: "Osveži", empty: "Nema naloga.", saved: "Sačuvano", error: "Nešto nije u redu — pokušaj ponovo.",
   },
   member: {
     free: "Besplatan nalog", upgrade: "Nadogradi", upgradeTitle: "Otključaj svoj plan", choose: "Izaberi", later: "Možda kasnije",
