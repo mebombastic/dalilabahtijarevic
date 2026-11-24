@@ -1,0 +1,37 @@
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import type { Session, User } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+
+export type PlanId = "Strong-and-Toned" | "VIP-1-1";
+export const PLAN_NAMES: Record<PlanId, string> = { "Strong-and-Toned": "Strong & Toned", "VIP-1-1": "VIP 1:1" };
+
+type Ctx = { user: User | null; session: Session | null; loading: boolean; signOut: () => Promise<void>; refresh: () => Promise<void> };
+const AuthContext = createContext<Ctx>({ user: null, session: null, loading: true, signOut: async () => {}, refresh: async () => {} });
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
+    supabase.auth.getSession().then(({ data }) => { setSession(data.session); setLoading(false); });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  const refresh = async () => {
+    const { data } = await supabase.auth.refreshSession();
+    if (data.session) setSession(data.session);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user: session?.user ?? null, session, loading, signOut: async () => { await supabase.auth.signOut(); }, refresh }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => useContext(AuthContext);
+
+/** Membership is active only when set on the server (app_metadata), which clients cannot change. */
+export const isActive = (u: User | null) => u?.app_metadata?.membership === "active";
+export const userPlan = (u: User | null): PlanId => (u?.user_metadata?.plan === "VIP-1-1" ? "VIP-1-1" : "Strong-and-Toned");

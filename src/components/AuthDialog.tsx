@@ -1,18 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import type { PlanId } from "@/hooks/use-auth";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail, Lock, Eye, EyeOff, X, Globe, User, Check, ArrowRight } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, X, Globe, User, Check, ArrowRight, Loader2 } from "lucide-react";
 import heroImg from "@/assets/hero-coach-light.jpg";
 import heroImgDark from "@/assets/hero-coach-dark.jpg";
 
 type Lang = "en" | "de" | "sr";
-type Role = "client" | "coach";
 type Mode = "register" | "login";
 
 const t = {
   en: {
+    planLabel: "Your plan",
+    strongDesc: "4 workouts a week",
+    vipDesc: "1:1 with Dalila",
+    checkEmail: "Almost done! Check your email and click the link to confirm your account, then sign in.",
+    resetSent: "We sent you an email with a link to set a new password.",
+    resetNeedEmail: "Type your email above first.",
+    errLogin: "Wrong email or password.",
+    errShort: "Password must have at least 6 characters.",
+    errExists: "An account with this email already exists — please sign in.",
+    errConfirm: "Please confirm your email first — check your inbox.",
+    errGeneric: "Something went wrong. Please try again.",
     welcome: "Welcome",
     tagline: "Your transformation begins here",
     subline: "One decision. One discipline. One you.",
@@ -39,6 +52,17 @@ const t = {
     or: "or",
   },
   de: {
+    planLabel: "Dein Plan",
+    strongDesc: "4 Workouts pro Woche",
+    vipDesc: "1:1 mit Dalila",
+    checkEmail: "Fast geschafft! Prüfe deine E-Mails und bestätige dein Konto über den Link, dann melde dich an.",
+    resetSent: "Wir haben dir eine E-Mail mit einem Link zum Zurücksetzen des Passworts geschickt.",
+    resetNeedEmail: "Gib zuerst oben deine E-Mail ein.",
+    errLogin: "E-Mail oder Passwort ist falsch.",
+    errShort: "Das Passwort muss mindestens 6 Zeichen haben.",
+    errExists: "Mit dieser E-Mail gibt es schon ein Konto — bitte melde dich an.",
+    errConfirm: "Bitte bestätige zuerst deine E-Mail — schau in dein Postfach.",
+    errGeneric: "Etwas ist schiefgelaufen. Bitte versuche es noch einmal.",
     welcome: "Willkommen",
     tagline: "Hier beginnt deine Transformation",
     subline: "Eine Entscheidung. Eine Disziplin. Ein Du.",
@@ -65,6 +89,17 @@ const t = {
     or: "oder",
   },
   sr: {
+    planLabel: "Tvoj plan",
+    strongDesc: "4 treninga nedeljno",
+    vipDesc: "1:1 sa Dalilom",
+    checkEmail: "Skoro gotovo! Proveri email i klikni na link da potvrdiš nalog, pa se prijavi.",
+    resetSent: "Poslali smo ti email sa linkom za novu lozinku.",
+    resetNeedEmail: "Prvo upiši svoj email iznad.",
+    errLogin: "Pogrešan email ili lozinka.",
+    errShort: "Lozinka mora imati bar 6 karaktera.",
+    errExists: "Nalog sa ovim emailom već postoji — prijavi se.",
+    errConfirm: "Prvo potvrdi email — proveri inbox.",
+    errGeneric: "Nešto nije u redu. Pokušaj ponovo.",
     welcome: "Dobrodošla",
     tagline: "Tvoja transformacija počinje ovde",
     subline: "Jedna odluka. Jedna disciplina. Jedna ti.",
@@ -98,17 +133,61 @@ interface AuthDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   defaultMode?: Mode;
+  defaultPlan?: PlanId;
   lang: Lang;
   onLangChange: (l: Lang) => void;
 }
 
-export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang, onLangChange }: AuthDialogProps) => {
+export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", defaultPlan = "Strong-and-Toned", lang, onLangChange }: AuthDialogProps) => {
   const [mode, setMode] = useState<Mode>(defaultMode);
-  const [role, setRole] = useState<Role>("client");
+  const [plan, setPlan] = useState<PlanId>(defaultPlan);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => { if (open) { setMode(defaultMode); setPlan(defaultPlan); setError(""); setInfo(""); } }, [open, defaultMode, defaultPlan]);
   const [showPw, setShowPw] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const c = t[lang];
   const isRegister = mode === "register";
+  const redirectTo = `${window.location.origin}${import.meta.env.BASE_URL}account`;
+
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(""); setInfo("");
+    if (password.length < 6) { setError(c.errShort); return; }
+    setBusy(true);
+    try {
+      if (isRegister) {
+        const { data, error: err } = await supabase.auth.signUp({
+          email: email.trim(), password,
+          options: { emailRedirectTo: redirectTo, data: { name: name.trim(), plan, lang } },
+        });
+        if (err) { setError(/registered|exists/i.test(err.message) ? c.errExists : c.errGeneric); return; }
+        if (data.user && data.user.identities && data.user.identities.length === 0) { setError(c.errExists); return; }
+        if (!data.session) { setInfo(c.checkEmail); return; }
+      } else {
+        const { error: err } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+        if (err) { setError(/confirm/i.test(err.message) ? c.errConfirm : /invalid/i.test(err.message) ? c.errLogin : c.errGeneric); return; }
+      }
+      onOpenChange(false);
+      navigate("/account");
+    } catch {
+      setError(c.errGeneric);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const forgot = async () => {
+    setError(""); setInfo("");
+    if (!email.trim()) { setError(c.resetNeedEmail); return; }
+    const { error: err } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo });
+    if (err) setError(c.errGeneric); else setInfo(c.resetSent);
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -197,13 +276,13 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
             {isRegister && <p className="font-script text-lg text-gold mt-2">{c.subline}</p>}
           </div>
 
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+          <form onSubmit={submit} className="space-y-5">
             {isRegister && (
               <div className="space-y-1.5">
                 <Label className="font-body text-[10px] tracking-luxe uppercase text-foreground/70">{c.firstName}</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input type="text" placeholder={c.firstNamePh}
+                  <Input type="text" required value={name} onChange={(e) => setName(e.target.value)} autoComplete="given-name" placeholder={c.firstNamePh}
                     className="pl-10 h-12 rounded-2xl bg-secondary/40 border-border focus-visible:border-gold focus-visible:ring-0 font-body" />
                 </div>
               </div>
@@ -213,7 +292,7 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
               <Label className="font-body text-[10px] tracking-luxe uppercase text-foreground/70">{c.email}</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input type="email" placeholder={c.emailPh}
+                <Input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" placeholder={c.emailPh}
                   className="pl-10 h-12 rounded-2xl bg-secondary/40 border-border focus-visible:border-gold focus-visible:ring-0 font-body" />
               </div>
             </div>
@@ -222,14 +301,14 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
               <div className="flex items-center justify-between">
                 <Label className="font-body text-[10px] tracking-luxe uppercase text-foreground/70">{c.password}</Label>
                 {!isRegister && (
-                  <button type="button" className="font-body text-[10px] tracking-wide text-gold hover:underline underline-offset-4">
+                  <button type="button" onClick={forgot} className="font-body text-[10px] tracking-wide text-gold hover:underline underline-offset-4">
                     {c.forgot}
                   </button>
                 )}
               </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input type={showPw ? "text" : "password"} placeholder="••••••••"
+                <Input type={showPw ? "text" : "password"} required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete={isRegister ? "new-password" : "current-password"} placeholder="••••••••"
                   className="pl-10 pr-10 h-12 rounded-2xl bg-secondary/40 border-border focus-visible:border-gold focus-visible:ring-0 font-body" />
                 <button type="button" onClick={() => setShowPw((v) => !v)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-gold transition-colors">
@@ -240,25 +319,25 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
 
             {isRegister && (
               <div className="space-y-2 pt-1">
-                <Label className="font-body text-[10px] tracking-luxe uppercase text-foreground/70">{c.joinAs}</Label>
+                <Label className="font-body text-[10px] tracking-luxe uppercase text-foreground/70">{c.planLabel}</Label>
                 <div className="grid grid-cols-2 gap-3">
                   {([
-                    { id: "client" as Role, label: c.client, desc: c.clientDesc },
-                    { id: "coach" as Role, label: c.coach, desc: c.coachDesc },
+                    { id: "Strong-and-Toned" as PlanId, label: "Strong & Toned", desc: c.strongDesc },
+                    { id: "VIP-1-1" as PlanId, label: "VIP 1:1", desc: c.vipDesc },
                   ]).map((r) => (
-                    <button key={r.id} type="button" onClick={() => setRole(r.id)}
+                    <button key={r.id} type="button" onClick={() => setPlan(r.id)}
                       className={`relative p-4 text-left border transition-all ${
-                        role === r.id
+                        plan === r.id
                           ? "border-gold bg-gold/10"
                           : "border-border hover:border-gold/40 bg-secondary/20"
                       }`}>
-                      <div className={`font-display text-base ${role === r.id ? "text-gold" : "text-foreground"}`}>
+                      <div className={`font-display text-base ${plan === r.id ? "text-gold" : "text-foreground"}`}>
                         {r.label}
                       </div>
                       <div className="font-body text-[10px] tracking-wide-2 uppercase text-muted-foreground mt-1">
                         {r.desc}
                       </div>
-                      {role === r.id && (
+                      {plan === r.id && (
                         <Check className="absolute top-2 right-2 h-3.5 w-3.5 text-gold" strokeWidth={3} />
                       )}
                     </button>
@@ -267,8 +346,12 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
               </div>
             )}
 
-            <Button type="submit"
+            {error && <p role="alert" className="font-body text-sm text-destructive bg-destructive/10 rounded-xl px-4 py-3">{error}</p>}
+            {info && <p role="status" className="font-body text-sm text-foreground bg-gold/10 border border-gold/30 rounded-xl px-4 py-3">{info}</p>}
+
+            <Button type="submit" disabled={busy}
               className="group w-full h-13 py-4 mt-2 bg-foreground text-background hover:bg-gold hover:text-primary-foreground rounded-2xl font-body text-xs tracking-luxe uppercase transition-all">
+              {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               <span>{isRegister ? c.create : c.signIn}</span>
               <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
             </Button>

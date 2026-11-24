@@ -4,6 +4,7 @@ import { Globe, Menu, MessageCircle, Moon, Sun, X, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LANGS, LANG_LABEL, useLang } from "@/i18n";
 import { IG_DM, IG_PROFILE } from "@/data/catalog";
+import { useAuth } from "@/hooks/use-auth";
 
 export const Monogram = ({ className = "" }: { className?: string }) => (
   <span className={`font-display font-bold inline-flex items-center ${className}`}>
@@ -95,11 +96,12 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
   const { theme, toggle } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
+  const { user } = useAuth();
   const links = [
     { to: "/#coach", label: t.nav.coach },
     { to: "/#why", label: t.nav.why },
     { to: "/products", label: t.nav.products },
-    { to: "/#ritual", label: t.nav.ritual },
+    { to: "/plans", label: t.plans.nav },
   ];
   const isActive = (to: string) => to === pathname;
 
@@ -120,12 +122,18 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
           <button type="button" onClick={toggle} aria-label={t.nav.theme} className="inline-flex items-center justify-center h-8 w-8 border border-border hover:border-gold/60 transition-colors">
             {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
           </button>
+          {user ? (
+            <Button asChild size="sm" className="hidden sm:inline-flex btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-2xl font-body text-[10px] tracking-luxe uppercase">
+              <Link to="/account">{t.member.account}</Link>
+            </Button>
+          ) : (<>
           <Button size="sm" onClick={() => onAuth("login")} variant="outline" className="hidden lg:inline-flex border-foreground/30 hover:border-gold hover:text-gold rounded-2xl font-body text-[10px] tracking-luxe uppercase bg-transparent">
             {t.nav.signIn}
           </Button>
           <Button size="sm" onClick={() => onAuth("register")} className="hidden sm:inline-flex btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-2xl font-body text-[10px] tracking-luxe uppercase">
             {t.nav.createAccount}
           </Button>
+          </>)}
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
@@ -142,7 +150,7 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
       <div className={`md:hidden grid transition-[grid-template-rows,opacity] duration-500 ease-luxe ${menuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none"}`}>
         <nav className="overflow-hidden">
           <div className="container mx-auto pb-6 pt-2 flex flex-col">
-            {[{ to: "/", label: t.nav.home }, ...links.slice(0, 3), { to: "/#ritual", label: t.nav.dailyRitual }].map((l) => (
+            {[{ to: "/", label: t.nav.home }, ...links].map((l) => (
               <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)} className={`py-3.5 border-b border-border/60 font-display text-2xl hover:text-gold transition-colors ${isActive(l.to) ? "text-gold" : ""}`}>
                 {l.label}
               </Link>
@@ -159,6 +167,11 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
                 </button>
               ))}
             </div>
+            {user ? (
+              <Button asChild className="btn-shine mt-4 h-12 rounded-full bg-gold text-primary-foreground hover:bg-gold/90 font-body text-[11px] tracking-luxe uppercase shadow-gold">
+                <Link to="/account" onClick={() => setMenuOpen(false)}>{t.member.account}</Link>
+              </Button>
+            ) : (<>
             <Button onClick={() => { setMenuOpen(false); onAuth("register"); }} className="btn-shine mt-4 h-12 rounded-full bg-gold text-primary-foreground hover:bg-gold/90 font-body text-[11px] tracking-luxe uppercase shadow-gold">
               {t.nav.createAccount}
             </Button>
@@ -170,6 +183,7 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
                 <a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> {t.nav.textMe}</a>
               </Button>
             </div>
+            </>)}
           </div>
         </nav>
       </div>
