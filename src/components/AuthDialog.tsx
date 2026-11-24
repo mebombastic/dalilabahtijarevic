@@ -138,9 +138,8 @@ interface AuthDialogProps {
   onLangChange: (l: Lang) => void;
 }
 
-export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", defaultPlan = "Strong-and-Toned", lang, onLangChange }: AuthDialogProps) => {
+export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang, onLangChange }: AuthDialogProps) => {
   const [mode, setMode] = useState<Mode>(defaultMode);
-  const [plan, setPlan] = useState<PlanId>(defaultPlan);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -148,7 +147,7 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", defau
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
   const navigate = useNavigate();
-  useEffect(() => { if (open) { setMode(defaultMode); setPlan(defaultPlan); setError(""); setInfo(""); } }, [open, defaultMode, defaultPlan]);
+  useEffect(() => { if (open) { setMode(defaultMode); setError(""); setInfo(""); } }, [open, defaultMode]);
   const [showPw, setShowPw] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const c = t[lang];
@@ -164,7 +163,7 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", defau
       if (isRegister) {
         const { data, error: err } = await supabase.auth.signUp({
           email: email.trim(), password,
-          options: { emailRedirectTo: redirectTo, data: { name: name.trim(), plan, lang } },
+          options: { emailRedirectTo: redirectTo, data: { name: name.trim(), lang } },
         });
         if (err) { setError(/registered|exists/i.test(err.message) ? c.errExists : c.errGeneric); return; }
         if (data.user && data.user.identities && data.user.identities.length === 0) { setError(c.errExists); return; }
@@ -316,35 +315,6 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", defau
                 </button>
               </div>
             </div>
-
-            {isRegister && (
-              <div className="space-y-2 pt-1">
-                <Label className="font-body text-[10px] tracking-luxe uppercase text-foreground/70">{c.planLabel}</Label>
-                <div className="grid grid-cols-2 gap-3">
-                  {([
-                    { id: "Strong-and-Toned" as PlanId, label: "Strong & Toned", desc: c.strongDesc },
-                    { id: "VIP-1-1" as PlanId, label: "VIP 1:1", desc: c.vipDesc },
-                  ]).map((r) => (
-                    <button key={r.id} type="button" onClick={() => setPlan(r.id)}
-                      className={`relative p-4 text-left border transition-all ${
-                        plan === r.id
-                          ? "border-gold bg-gold/10"
-                          : "border-border hover:border-gold/40 bg-secondary/20"
-                      }`}>
-                      <div className={`font-display text-base ${plan === r.id ? "text-gold" : "text-foreground"}`}>
-                        {r.label}
-                      </div>
-                      <div className="font-body text-[10px] tracking-wide-2 uppercase text-muted-foreground mt-1">
-                        {r.desc}
-                      </div>
-                      {plan === r.id && (
-                        <Check className="absolute top-2 right-2 h-3.5 w-3.5 text-gold" strokeWidth={3} />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {error && <p role="alert" className="font-body text-sm text-destructive bg-destructive/10 rounded-xl px-4 py-3">{error}</p>}
             {info && <p role="status" className="font-body text-sm text-foreground bg-gold/10 border border-gold/30 rounded-xl px-4 py-3">{info}</p>}

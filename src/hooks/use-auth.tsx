@@ -34,4 +34,5 @@ export const useAuth = () => useContext(AuthContext);
 
 /** Membership is active only when set on the server (app_metadata), which clients cannot change. */
 export const isActive = (u: User | null) => u?.app_metadata?.membership === "active";
+export const hasPlan = (u: User | null) => u?.user_metadata?.plan === "VIP-1-1" || u?.user_metadata?.plan === "Strong-and-Toned";
 export const userPlan = (u: User | null): PlanId => (u?.user_metadata?.plan === "VIP-1-1" ? "VIP-1-1" : "Strong-and-Toned");

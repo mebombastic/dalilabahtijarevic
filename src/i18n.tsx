@@ -63,6 +63,9 @@ const en = {
     stepsTitle: "How joining works", steps: ["Create your account and choose a plan", "Pay for your month", "I confirm — your plan unlocks"],
   },
   member: {
+    free: "Free account", upgrade: "Upgrade", upgradeTitle: "Unlock your plan", choose: "Choose", later: "Maybe later",
+    upgradeSub: "Choose your plan and get your whole month — training, products and progress — plus support from me.",
+    noPlanText: "Choose a plan to unlock your training month, product routine, workouts and progress tracker.",
     account: "My account", hello: "Hi", title: "My plan", status: "Membership", active: "Active", pending: "Waiting for payment",
     signInNeeded: "Sign in to see your plan.", signIn: "Sign in", create: "Create account", loading: "Loading…",
     payTitle: "Complete your membership", paySteps: ["Account created", "Payment", "Activation"],
@@ -147,6 +150,9 @@ const de: Dict = {
     stepsTitle: "So funktioniert die Anmeldung", steps: ["Konto erstellen und Plan wählen", "Deinen Monat bezahlen", "Ich bestätige — dein Plan wird freigeschaltet"],
   },
   member: {
+    free: "Kostenloses Konto", upgrade: "Upgrade", upgradeTitle: "Schalte deinen Plan frei", choose: "Wählen", later: "Vielleicht später",
+    upgradeSub: "Wähle deinen Plan und bekomm deinen ganzen Monat — Training, Produkte und Fortschritt — plus Begleitung von mir.",
+    noPlanText: "Wähle einen Plan, um deinen Trainingsmonat, deine Produkt-Routine, Workouts und den Fortschritts-Tracker freizuschalten.",
     account: "Mein Konto", hello: "Hi", title: "Mein Plan", status: "Mitgliedschaft", active: "Aktiv", pending: "Wartet auf Zahlung",
     signInNeeded: "Melde dich an, um deinen Plan zu sehen.", signIn: "Anmelden", create: "Konto erstellen", loading: "Lädt…",
     payTitle: "Schließe deine Mitgliedschaft ab", paySteps: ["Konto erstellt", "Zahlung", "Freischaltung"],
@@ -229,6 +235,9 @@ const sr: Dict = {
     stepsTitle: "Kako se učlanjuješ", steps: ["Napravi nalog i izaberi plan", "Plati svoj mesec", "Ja potvrdim — tvoj plan se otključava"],
   },
   member: {
+    free: "Besplatan nalog", upgrade: "Nadogradi", upgradeTitle: "Otključaj svoj plan", choose: "Izaberi", later: "Možda kasnije",
+    upgradeSub: "Izaberi plan i dobij ceo svoj mesec — trening, proizvode i napredak — uz moju podršku.",
+    noPlanText: "Izaberi plan da otključaš mesec treninga, rutinu proizvoda, treninge i praćenje napretka.",
     account: "Moj nalog", hello: "Zdravo", title: "Moj plan", status: "Članstvo", active: "Aktivno", pending: "Čeka uplatu",
     signInNeeded: "Prijavi se da vidiš svoj plan.", signIn: "Prijava", create: "Napravi nalog", loading: "Učitava se…",
     payTitle: "Završi svoje članstvo", paySteps: ["Nalog napravljen", "Uplata", "Aktivacija"],

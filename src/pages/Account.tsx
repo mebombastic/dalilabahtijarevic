@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Check, Crown, Download, Lock, LogOut, MessageCircle, Clock, Dumbbell, TrendingUp, Loader2, Trophy } from "lucide-react";
+import { Check, Crown, Sparkles, Download, Lock, LogOut, MessageCircle, Clock, Dumbbell, TrendingUp, Loader2, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AuthDialog } from "@/components/AuthDialog";
 import { SectionLabel, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { useLang } from "@/i18n";
-import { useAuth, isActive, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
+import { useAuth, isActive, hasPlan, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import pKit from "@/assets/p-kit.webp";
 import { supabase } from "@/integrations/supabase/client";
 import { MEMBER_PLANS } from "@/data/memberPlans";
 import { IG_DM } from "@/data/catalog";
@@ -44,6 +46,21 @@ const Account = () => {
   }, [user, params, setParams, refresh]);
 
   const active = isActive(user);
+  const planChosen = hasPlan(user);
+  const [upgradeOpen, setUpgradeOpen] = useState(false);
+  const [choosing, setChoosing] = useState<PlanId | null>(null);
+  useEffect(() => {
+    if (!user || active || planChosen) return;
+    let seen = false;
+    try { seen = sessionStorage.getItem("upgrade-seen") === "1"; } catch { /* ignore */ }
+    if (!seen) { setUpgradeOpen(true); try { sessionStorage.setItem("upgrade-seen", "1"); } catch { /* ignore */ } }
+  }, [user, active, planChosen]);
+  const choosePlan = async (p: PlanId) => {
+    setChoosing(p);
+    await supabase.auth.updateUser({ data: { plan: p } });
+    await refresh();
+    setChoosing(null); setUpgradeOpen(false);
+  };
   const slug: PlanId = userPlan(user);
   const data = MEMBER_PLANS[slug][lang];
   const name = (user?.user_metadata?.name as string) || "";
@@ -101,13 +118,14 @@ const Account = () => {
                 <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-3">{m.account}</div>
                 <h1 className="font-display text-5xl md:text-6xl leading-none">{m.hello}{name ? "," : ""} <em className="gold-text">{name || ""}{name ? "." : ""}</em></h1>
                 <div className="flex flex-wrap gap-3 mt-6">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(37_40%_90%/0.25)] px-4 py-2 font-body text-[11px] tracking-wide-2 uppercase"><Crown className="h-3.5 w-3.5 text-gold" /> {m.plan}: {PLAN_NAMES[slug]}</span>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(37_40%_90%/0.25)] px-4 py-2 font-body text-[11px] tracking-wide-2 uppercase"><Crown className="h-3.5 w-3.5 text-gold" /> {m.plan}: {planChosen ? PLAN_NAMES[slug] : m.free}</span>
                   <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 font-body text-[11px] tracking-wide-2 uppercase ${active ? "bg-[hsl(140_45%_40%/0.25)] text-[hsl(140_60%_80%)]" : "bg-vermilion/20 text-[hsl(6_90%_80%)]"}`}>
-                    {active ? <Check className="h-3.5 w-3.5" /> : <Clock className="h-3.5 w-3.5" />} {m.status}: {active ? m.active : m.pending}
+                    {active ? <Check className="h-3.5 w-3.5" /> : <Clock className="h-3.5 w-3.5" />} {m.status}: {active ? m.active : planChosen ? m.pending : m.free}
                   </span>
                 </div>
               </div>
               <div className="flex gap-3">
+                {!active && <Button onClick={() => setUpgradeOpen(true)} className="btn-shine rounded-full h-11 px-6 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[10px] tracking-luxe uppercase"><Sparkles className="mr-2 h-4 w-4" /> {m.upgrade}</Button>}
                 {active && <Button asChild className="rounded-full h-11 px-6 bg-[hsl(37_40%_90%)] text-primary hover:bg-[hsl(37_40%_95%)] font-body text-[10px] tracking-luxe uppercase"><a href={pdf} download><Download className="mr-2 h-4 w-4" /> {m.download}</a></Button>}
                 <Button onClick={() => signOut()} variant="outline" className="rounded-full h-11 px-5 bg-transparent border-[hsl(37_40%_90%/0.35)] text-[hsl(37_40%_90%)] hover:text-gold font-body text-[10px] tracking-luxe uppercase"><LogOut className="mr-2 h-4 w-4" /> {m.logout}</Button>
               </div>
@@ -115,7 +133,18 @@ const Account = () => {
           </section>
 
           <main className="container mx-auto py-10 md:py-14 space-y-6">
-            {!active && (
+            {!active && !planChosen && (
+              <section className={`${card} border-vermilion/40 flex flex-wrap items-center justify-between gap-6`}>
+                <div className="max-w-xl">
+                  <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-2">{m.free}</div>
+                  <h2 className="font-display text-4xl mb-3">{m.upgradeTitle}</h2>
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed">{m.noPlanText}</p>
+                </div>
+                <Button onClick={() => setUpgradeOpen(true)} className="btn-shine rounded-full h-12 px-8 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[11px] tracking-luxe uppercase"><Sparkles className="mr-2 h-4 w-4" /> {m.upgrade}</Button>
+              </section>
+            )}
+
+            {!active && planChosen && (
               <section className={`${card} border-vermilion/40`}>
                 <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-2">{m.status}</div>
                 <h2 className="font-display text-4xl mb-5">{m.payTitle}</h2>
@@ -134,7 +163,7 @@ const Account = () => {
                 <div className="flex flex-wrap gap-3">
                   <Button asChild className="rounded-full h-12 px-7 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[11px] tracking-luxe uppercase"><a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> {m.payDetails}</a></Button>
                   {!reported && <Button onClick={reportPaid} variant="outline" className="rounded-full h-12 px-7 bg-transparent font-body text-[11px] tracking-luxe uppercase"><Check className="mr-2 h-4 w-4" /> {m.paid}</Button>}
-                  <Button asChild variant="ghost" className="rounded-full h-12 px-5 font-body text-[11px] tracking-luxe uppercase"><Link to="/plans">{m.changePlan}</Link></Button>
+                  <Button onClick={() => setUpgradeOpen(true)} variant="ghost" className="rounded-full h-12 px-5 font-body text-[11px] tracking-luxe uppercase">{m.changePlan}</Button>
                 </div>
               </section>
             )}
@@ -265,6 +294,41 @@ const Account = () => {
           </main>
         </>
       )}
+
+      <Dialog open={upgradeOpen} onOpenChange={setUpgradeOpen}>
+        <DialogContent className="w-[calc(100%-1.5rem)] max-w-3xl max-h-[calc(100dvh-1.5rem)] overflow-y-auto p-0 gap-0 rounded-3xl border-gold/30 bg-background">
+          <div className="bg-stage text-[hsl(37_40%_90%)] px-6 md:px-10 pt-8 pb-7 text-center">
+            <div className="font-body text-[10px] tracking-luxe uppercase text-gold mb-2 inline-flex items-center gap-2"><Sparkles className="h-3.5 w-3.5" /> {m.upgrade}</div>
+            <DialogTitle className="font-display text-4xl md:text-5xl font-normal">{m.upgradeTitle}</DialogTitle>
+            <DialogDescription className="font-body text-sm text-[hsl(37_40%_90%/0.75)] max-w-md mx-auto mt-3">{m.upgradeSub}</DialogDescription>
+          </div>
+          <div className="grid md:grid-cols-2 gap-4 p-5 md:p-8">
+            {([
+              { id: "Strong-and-Toned" as PlanId, name: "Strong & Toned", tag: t.plans.strongTag, feats: t.plans.strong, imgs: [pShaker, f1Chocolate], dark: false },
+              { id: "VIP-1-1" as PlanId, name: "VIP 1:1", tag: t.plans.vipTag, feats: t.plans.vip, imgs: [pKit], dark: true },
+            ]).map((c) => (
+              <div key={c.id} className={`rounded-3xl p-6 flex flex-col border ${c.dark ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border"} ${planChosen && slug === c.id ? "ring-2 ring-[hsl(var(--vermilion))]" : ""}`}>
+                <div className="h-24 flex items-end justify-center gap-1 mb-4">
+                  {c.imgs.map((src, k) => <img key={k} src={src} alt="" className="h-full w-auto object-contain drop-shadow-[0_10px_12px_rgba(0,0,0,0.3)]" />)}
+                </div>
+                <div className={`font-body text-[10px] tracking-luxe uppercase mb-1 ${c.dark ? "text-[hsl(var(--vermilion))]" : "text-gold"}`}>{c.tag}</div>
+                <h3 className="font-display text-3xl mb-4">{c.name}</h3>
+                <ul className="space-y-2 mb-6">
+                  {c.feats.map((f) => <li key={f} className="flex gap-2.5 font-body text-[13px] leading-snug"><Check className="h-4 w-4 shrink-0 mt-0.5 text-[hsl(var(--vermilion))]" /> {f}</li>)}
+                </ul>
+                <Button onClick={() => choosePlan(c.id)} disabled={choosing !== null}
+                  className={`mt-auto h-11 rounded-full font-body text-[10px] tracking-luxe uppercase ${c.dark ? "bg-vermilion text-white hover:bg-vermilion/90" : "bg-primary text-primary-foreground"}`}>
+                  {choosing === c.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <>{m.choose} {c.name}</>}
+                </Button>
+              </div>
+            ))}
+          </div>
+          <div className="px-6 pb-6 text-center">
+            <p className="font-body text-xs text-muted-foreground mb-3">{t.plans.note}</p>
+            <button onClick={() => setUpgradeOpen(false)} className="font-body text-[10px] tracking-luxe uppercase text-muted-foreground hover:text-gold">{m.later}</button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <SiteFooter onAuth={openAuth} />
       <AuthDialog open={authOpen} onOpenChange={setAuthOpen} defaultMode={authMode} lang={lang} onLangChange={setLang} />
