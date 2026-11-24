@@ -26,6 +26,7 @@ const t = {
     errExists: "An account with this email already exists — please sign in.",
     errConfirm: "Please confirm your email first — check your inbox.",
     errGeneric: "Something went wrong. Please try again.",
+    errMail: "We couldn't send the confirmation email right now. Please try again in an hour, or text Dalila on Instagram.",
     welcome: "Welcome",
     tagline: "Your transformation begins here",
     subline: "One decision. One discipline. One you.",
@@ -63,6 +64,7 @@ const t = {
     errExists: "Mit dieser E-Mail gibt es schon ein Konto — bitte melde dich an.",
     errConfirm: "Bitte bestätige zuerst deine E-Mail — schau in dein Postfach.",
     errGeneric: "Etwas ist schiefgelaufen. Bitte versuche es noch einmal.",
+    errMail: "Die Bestätigungs-E-Mail konnte gerade nicht gesendet werden. Versuche es in einer Stunde noch einmal oder schreib Dalila auf Instagram.",
     welcome: "Willkommen",
     tagline: "Hier beginnt deine Transformation",
     subline: "Eine Entscheidung. Eine Disziplin. Ein Du.",
@@ -100,6 +102,7 @@ const t = {
     errExists: "Nalog sa ovim emailom već postoji — prijavi se.",
     errConfirm: "Prvo potvrdi email — proveri inbox.",
     errGeneric: "Nešto nije u redu. Pokušaj ponovo.",
+    errMail: "Trenutno ne možemo da pošaljemo email za potvrdu. Pokušaj ponovo za sat vremena ili piši Dalili na Instagramu.",
     welcome: "Dobrodošla",
     tagline: "Tvoja transformacija počinje ovde",
     subline: "Jedna odluka. Jedna disciplina. Jedna ti.",
@@ -165,7 +168,7 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
           email: email.trim(), password,
           options: { emailRedirectTo: redirectTo, data: { name: name.trim(), lang } },
         });
-        if (err) { setError(/registered|exists/i.test(err.message) ? c.errExists : c.errGeneric); return; }
+        if (err) { console.error("sign-up", err.status, err.message); setError(/registered|exists/i.test(err.message) ? c.errExists : /email|rate limit/i.test(err.message) || err.status === 429 ? c.errMail : c.errGeneric); return; }
         if (data.user && data.user.identities && data.user.identities.length === 0) { setError(c.errExists); return; }
         if (!data.session) { setInfo(c.checkEmail); return; }
       } else {
