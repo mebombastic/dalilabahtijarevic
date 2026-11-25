@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Check, Crown, Sparkles, Download, Lock, LogOut, MessageCircle, Clock, Dumbbell, TrendingUp, Loader2, Trophy, Utensils } from "lucide-react";
+import { Check, Crown, Sparkles, Download, Lock, LogOut, MessageCircle, Clock, TrendingUp, Loader2, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AuthDialog } from "@/components/AuthDialog";
@@ -13,7 +13,7 @@ import { PersonalPlan } from "@/components/PersonalPlan";
 import { QUIZ } from "@/data/quizText";
 import { clearLocal, isAnswers, loadLocal, nutrition as calcNutrition, type Answers } from "@/lib/plan";
 import { useNavigate } from "react-router-dom";
-import { ExerciseGuide, ExerciseName, ExerciseStrip, guideHint } from "@/components/ExerciseGuide";
+import { ExerciseGuide } from "@/components/ExerciseGuide";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import pKit from "@/assets/p-kit.webp";
 import { supabase } from "@/integrations/supabase/client";
@@ -84,15 +84,7 @@ const Account = () => {
   const name = (user?.user_metadata?.name as string) || "";
   const reported = Boolean(user?.user_metadata?.payment_reported);
 
-  const startDate = new Date((user?.app_metadata?.activated_at as string) || user?.created_at || Date.now());
-  const weekNow = Math.min(3, Math.max(0, Math.floor((Date.now() - startDate.getTime()) / (7 * 864e5))));
-  const dayNow = (new Date().getDay() + 6) % 7;
-  const [week, setWeek] = useState(weekNow);
-  useEffect(() => setWeek(weekNow), [weekNow]);
-  const firstWorkoutToday = data.calendar[week][dayNow];
-  const [open, setOpen] = useState<string | null>(null);
   const [exKey, setExKey] = useState<string | null>(null);
-  useEffect(() => { setOpen(firstWorkoutToday.type === "w" || firstWorkoutToday.type === "m" ? firstWorkoutToday.label : null); }, [week, lang]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const entries: Entry[] = useMemo(() => ((user?.user_metadata?.progress as Entry[]) || []).slice().reverse(), [user]);
   const [form, setForm] = useState<Entry>({ d: new Date().toISOString().slice(0, 10) });
@@ -231,65 +223,6 @@ const Account = () => {
                   <p className="font-body text-[11px] text-muted-foreground mt-4">{data.need}</p>
                 </section>
 
-                {/* training month */}
-                <section className={`${card} lg:col-span-2`}>
-                  <div className="flex flex-wrap items-end justify-between gap-3 mb-5">
-                    <div><SectionLabel>{m.training}</SectionLabel></div>
-                    <div className="flex gap-1.5 w-full sm:w-auto">
-                      {[0, 1, 2, 3].map((w) => (
-                        <button key={w} onClick={() => setWeek(w)} className={`flex-1 min-w-0 sm:flex-none whitespace-nowrap rounded-full px-2 sm:px-4 py-2 font-body text-[10px] tracking-wide-2 sm:tracking-luxe uppercase border ${w === week ? "bg-primary text-primary-foreground border-primary" : "border-border"}`}><span className="hidden sm:inline">{m.week} </span><span className="sm:hidden">{m.week.slice(0, 3)}. </span>{w + 1}</button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-7 gap-2 overflow-x-auto snap-x">
-                    {data.calendar[week].map((c, d) => {
-                      const isW = c.type === "w" || c.type === "m";
-                      const today = week === weekNow && d === dayNow;
-                      return (
-                        <button key={d} disabled={!isW} onClick={() => setOpen(c.label)}
-                          className={`shrink-0 w-[30%] min-w-[96px] sm:w-auto sm:min-w-0 snap-start rounded-2xl p-3 min-h-[96px] text-left flex flex-col justify-between transition-transform ${isW ? "hover:-translate-y-0.5" : ""} ${c.type === "m" ? "bg-vermilion text-white" : c.type === "w" ? "bg-primary text-primary-foreground" : c.type === "k" ? "border border-primary" : "bg-secondary text-muted-foreground"} ${open === c.label && isW ? "ring-2 ring-offset-2 ring-[hsl(var(--vermilion))] ring-offset-background" : ""}`}>
-                          <span className="font-body text-[9px] tracking-wide-2 uppercase opacity-80">{DAYS[lang][d]}{today ? ` · ${m.today}` : ""}</span>
-                          <span className={`leading-tight ${isW ? "font-display text-base md:text-lg" : "font-body text-[10px] md:text-[11px]"}`}>{c.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <div className="mt-4 flex items-start gap-3 rounded-2xl bg-secondary/60 p-4">
-                    <Trophy className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                    <div><div className="font-body text-[10px] tracking-luxe uppercase text-gold">{m.challenge}</div><div className="font-body text-sm">{data.challenges[week]}</div></div>
-                  </div>
-
-                  {open && data.workouts[open as keyof typeof data.workouts] ? (() => {
-                    const w = data.workouts[open as keyof typeof data.workouts];
-                    return (
-                      <div className="mt-5 rounded-2xl border border-border overflow-hidden">
-                        <div className="flex flex-wrap items-baseline justify-between gap-2 px-5 py-4 border-b-2 border-primary">
-                          <h3 className="font-display text-3xl">{open}</h3>
-                          <span className="font-body text-[10px] tracking-luxe uppercase text-gold">{w.level} · {w.kind}</span>
-                        </div>
-                        <p className="font-body text-xs text-muted-foreground px-5 pt-3 leading-relaxed">{w.rules}</p>
-                        <p className="font-body text-xs text-gold px-5 pt-2">👉 {guideHint(lang)}</p>
-                        <div className="overflow-x-auto px-3 sm:px-5 py-4">
-                          <table className="w-full border-collapse">
-                            <thead><tr className="bg-primary text-primary-foreground">
-                              <th className="text-left font-body text-[10px] tracking-wide-2 uppercase font-normal px-3 py-2"><Dumbbell className="inline h-3.5 w-3.5 mr-1" /></th>
-                              {w.cols.map((c) => <th key={c} className="font-body text-[10px] tracking-wide-2 uppercase font-normal px-2 py-2">{c}</th>)}
-                            </tr></thead>
-                            <tbody>{w.items.map(([ex, reps]) => (
-                              <tr key={ex} className="border-b border-border">
-                                <td className="font-body text-[13px] sm:text-sm font-medium px-2 sm:px-3 py-2"><ExerciseName name={ex} onOpen={setExKey} /></td>
-                                {reps.map((r, k) => <td key={k} className="font-body text-[13px] sm:text-sm text-center px-1 sm:px-2 py-2 whitespace-nowrap">{r}</td>)}
-                              </tr>
-                            ))}</tbody>
-                          </table>
-                        </div>
-                        <div className="px-5 pb-4 font-body text-xs text-muted-foreground inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {m.typical}: <b className="text-gold font-medium">{w.time}</b></div>
-                        <ExerciseStrip names={(w.items as readonly (readonly [string, readonly string[]])[]).map((it) => it[0])} lang={lang} onOpen={setExKey} />
-                      </div>
-                    );
-                  })() : <p className="font-body text-xs text-muted-foreground mt-4">{m.tapWorkout}</p>}
-                </section>
-
                 {/* progress */}
                 <section className={`${card} lg:col-span-2`}>
                   <SectionLabel>{m.progress}</SectionLabel>
@@ -320,11 +253,11 @@ const Account = () => {
                 </section>
 
                 {/* coach */}
-                <section className={`${card} flex flex-col items-start`}>
+                <section className={`${card} lg:col-span-3 flex flex-col lg:flex-row items-start lg:items-center gap-x-6`}>
                   <img src={coachBubble} alt="Dalila" className="h-16 w-16 rounded-full object-cover ring-2 ring-gold mb-4" />
                   <div className="font-script text-3xl text-gold leading-none mb-2">Dalila</div>
-                  <p className="font-body text-sm text-muted-foreground mb-6">{m.coach}</p>
-                  <Button asChild className="mt-auto rounded-full h-12 px-7 bg-primary text-primary-foreground font-body text-[11px] tracking-luxe uppercase"><a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> Instagram</a></Button>
+                  <p className="font-body text-sm text-muted-foreground mb-6 lg:mb-0 lg:flex-1">{m.coach}</p>
+                  <Button asChild className="mt-auto lg:mt-0 rounded-full h-12 px-7 bg-primary text-primary-foreground font-body text-[11px] tracking-luxe uppercase"><a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> Instagram</a></Button>
                 </section>
 
                 {/* food calculator (VIP) */}
