@@ -8,6 +8,7 @@ import { SectionLabel, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { useLang } from "@/i18n";
 import { useAuth, isActive, hasPlan, hasVip, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
 import { FoodCalculator } from "@/components/FoodCalculator";
+import { ExerciseGuide, ExerciseName, guideHint } from "@/components/ExerciseGuide";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import pKit from "@/assets/p-kit.webp";
 import { supabase } from "@/integrations/supabase/client";
@@ -74,6 +75,7 @@ const Account = () => {
   useEffect(() => setWeek(weekNow), [weekNow]);
   const firstWorkoutToday = data.calendar[week][dayNow];
   const [open, setOpen] = useState<string | null>(null);
+  const [exKey, setExKey] = useState<string | null>(null);
   useEffect(() => { setOpen(firstWorkoutToday.type === "w" || firstWorkoutToday.type === "m" ? firstWorkoutToday.label : null); }, [week, lang]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const entries: Entry[] = useMemo(() => ((user?.user_metadata?.progress as Entry[]) || []).slice().reverse(), [user]);
@@ -234,6 +236,7 @@ const Account = () => {
                           <span className="font-body text-[10px] tracking-luxe uppercase text-gold">{w.level} · {w.kind}</span>
                         </div>
                         <p className="font-body text-xs text-muted-foreground px-5 pt-3 leading-relaxed">{w.rules}</p>
+                        <p className="font-body text-xs text-gold px-5 pt-2">👉 {guideHint(lang)}</p>
                         <div className="overflow-x-auto px-3 sm:px-5 py-4">
                           <table className="w-full border-collapse">
                             <thead><tr className="bg-primary text-primary-foreground">
@@ -242,7 +245,7 @@ const Account = () => {
                             </tr></thead>
                             <tbody>{w.items.map(([ex, reps]) => (
                               <tr key={ex} className="border-b border-border">
-                                <td className="font-body text-[13px] sm:text-sm font-medium px-2 sm:px-3 py-2">{ex}</td>
+                                <td className="font-body text-[13px] sm:text-sm font-medium px-2 sm:px-3 py-2"><ExerciseName name={ex} onOpen={setExKey} /></td>
                                 {reps.map((r, k) => <td key={k} className="font-body text-[13px] sm:text-sm text-center px-1 sm:px-2 py-2 whitespace-nowrap">{r}</td>)}
                               </tr>
                             ))}</tbody>
@@ -343,6 +346,7 @@ const Account = () => {
         </DialogContent>
       </Dialog>
 
+      <ExerciseGuide exKey={exKey} lang={lang} onClose={() => setExKey(null)} />
       <SiteFooter onAuth={openAuth} />
       <AuthDialog open={authOpen} onOpenChange={setAuthOpen} defaultMode={authMode} lang={lang} onLangChange={setLang} />
     </div>
