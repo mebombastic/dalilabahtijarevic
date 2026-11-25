@@ -13,9 +13,19 @@ const en = {
     chip2: "Protein-packed breakfast",
     yourCoach: "Your coach",
     h1a: "Prove", h1b: "Yourself", h1c: "Right.",
-    text: "Join a community dedicated to growth, discipline, and results. Your transformation starts with a single decision.",
+    text: "For women who want to lose weight, tone up and get their energy back. Short workouts, simple food and a coach by your side.",
+    start: "Start your transformation", free: "Free personal plan · no obligation",
     explore: "Explore Products",
     certified: "Certified Coach · Real Results",
+  },
+  how: {
+    label: "How it works", h2a: "Three steps", h2b: "to your new routine.",
+    steps: [
+      { t: "Create your account", d: "Takes a minute. Name, email and a password, nothing else." },
+      { t: "Get your free personal plan", d: "Answer a few questions about your height, weight and goal. You instantly get your daily calories, protein and water." },
+      { t: "Start with me", d: "Choose Strong & Toned or VIP 1:1 and get your full plan: 4 weeks of workouts, meals, your Herbalife routine and my support." },
+    ],
+    free: "Your account and your calorie plan are free. No obligation.",
   },
   quote: { a: "Strong Body.", b: "Strong Mind.", c: "Better Life." },
   coach: {
@@ -109,9 +119,19 @@ const de: Dict = {
     chip2: "Proteinreiches Frühstück",
     yourCoach: "Dein Coach",
     h1a: "Beweise es", h1b: "dir", h1c: "selbst.",
-    text: "Werde Teil einer Community für Wachstum, Disziplin und Ergebnisse. Deine Veränderung beginnt mit einer einzigen Entscheidung.",
+    text: "Für Frauen, die abnehmen, straffer werden und wieder Energie haben wollen. Kurze Trainings, einfaches Essen und eine Trainerin an deiner Seite.",
+    start: "Starte deine Transformation", free: "Gratis persönlicher Plan · ohne Verpflichtung",
     explore: "Produkte entdecken",
     certified: "Zertifizierter Coach · Echte Ergebnisse",
+  },
+  how: {
+    label: "So funktioniert's", h2a: "Drei Schritte", h2b: "zu deiner neuen Routine.",
+    steps: [
+      { t: "Konto erstellen", d: "Dauert eine Minute. Name, E-Mail und Passwort, mehr nicht." },
+      { t: "Gratis persönlichen Plan bekommen", d: "Beantworte ein paar Fragen zu Größe, Gewicht und Ziel. Du bekommst sofort deine Kalorien, dein Eiweiß und deine Wassermenge pro Tag." },
+      { t: "Mit mir starten", d: "Wähle Strong & Toned oder VIP 1:1 und bekomme deinen ganzen Plan: 4 Wochen Training, Mahlzeiten, deine Herbalife-Routine und meine Unterstützung." },
+    ],
+    free: "Dein Konto und dein Kalorienplan sind kostenlos. Ohne Verpflichtung.",
   },
   quote: { a: "Starker Körper.", b: "Starker Geist.", c: "Besseres Leben." },
   coach: {
@@ -203,9 +223,19 @@ const sr: Dict = {
     chip2: "Doručak pun proteina",
     yourCoach: "Tvoj trener",
     h1a: "Dokaži", h1b: "sebi", h1c: "da možeš.",
-    text: "Pridruži se zajednici posvećenoj rastu, disciplini i rezultatima. Tvoja transformacija počinje jednom odlukom.",
+    text: "Za žene koje žele da smršaju, zategnu se i vrate energiju. Kratki treninzi, jednostavna ishrana i trener uz tebe.",
+    start: "Počni svoju transformaciju", free: "Besplatan lični plan · bez obaveze",
     explore: "Pogledaj proizvode",
     certified: "Sertifikovani trener · Pravi rezultati",
+  },
+  how: {
+    label: "Kako funkcioniše", h2a: "Tri koraka", h2b: "do tvoje nove rutine.",
+    steps: [
+      { t: "Napravi nalog", d: "Traje minut. Ime, email i lozinka, ništa više." },
+      { t: "Dobij besplatan lični plan", d: "Odgovoriš na par pitanja o visini, težini i cilju i odmah dobiješ svoje dnevne kalorije, proteine i vodu." },
+      { t: "Kreni sa mnom", d: "Izaberi Strong & Toned ili VIP 1:1 i dobij ceo plan: treninge za 4 nedelje, obroke, Herbalife rutinu i moju podršku." },
+    ],
+    free: "Nalog i plan kalorija su besplatni. Bez obaveze.",
   },
   quote: { a: "Jako telo.", b: "Jak um.", c: "Bolji život." },
   coach: {

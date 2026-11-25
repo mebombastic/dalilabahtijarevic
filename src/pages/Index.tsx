@@ -2,7 +2,7 @@ import { useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Check, Trophy, Heart, Sparkles, ArrowRight, Camera, Dumbbell, ShieldCheck } from "lucide-react";
+import { Check, Trophy, Heart, Sparkles, ArrowRight, Camera, Dumbbell, ShieldCheck, UserPlus, ClipboardCheck } from "lucide-react";
 import methodImg from "@/assets/method-products.webp";
 import coachPhoto from "@/assets/coach-dalila.webp";
 import coachBubble from "@/assets/coach-bubble.webp";
@@ -91,14 +91,14 @@ const Index = () => {
           </p>
           <div className="animate-blur-up flex flex-wrap gap-4 justify-center" style={{ animationDelay: "2.15s" }}>
             <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
-              {t.nav.createAccount}
+              {t.hero.start}
             </Button>
             <Button asChild size="lg" variant="outline" className="border-[hsl(37_40%_90%/0.35)] text-[hsl(37_40%_90%)] hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 bg-transparent">
               <Link to="/products">{t.hero.explore} <ArrowRight className="ml-2 h-3 w-3" /></Link>
             </Button>
           </div>
           <div className="animate-fade-up mt-10 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(37_40%_90%/0.55)]" style={{ animationDelay: "2.5s" }}>
-            <ShieldCheck className="h-3 w-3 text-gold" /> {t.hero.certified}
+            <ShieldCheck className="h-3 w-3 text-gold" /> {t.hero.free}
           </div>
         </div>
       </section>
@@ -109,6 +109,37 @@ const Index = () => {
           <p className="font-body text-xs md:text-sm tracking-luxe uppercase text-muted-foreground">
             {t.quote.a} <span className="text-foreground">{t.quote.b}</span> <span className="text-gold">{t.quote.c}</span>
           </p>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section id="how" className="py-20 md:py-28 bg-background scroll-mt-20">
+        <div className="container mx-auto">
+          <div className="text-center mb-12 md:mb-16" data-reveal="words" key={lang}>
+            <SectionLabel>{t.how.label}</SectionLabel>
+            <h2 className="font-display text-[2.6rem] leading-[1.05] sm:text-5xl md:text-6xl"><Words text={t.how.h2a} /> <br /><em className="font-normal"><Words text={t.how.h2b} className="gold-text" start={0.2} /></em></h2>
+          </div>
+          <ol className="grid md:grid-cols-3 gap-5 md:gap-6 max-w-5xl mx-auto">
+            {t.how.steps.map((st, i) => {
+              const Icon = [UserPlus, ClipboardCheck, Dumbbell][i];
+              return (
+                <li key={i} data-reveal data-reveal-delay={String(i + 1)} className="relative rounded-3xl border border-border bg-card p-7 md:p-8">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-display text-2xl">{i + 1}</span>
+                    <Icon className="h-6 w-6 text-gold" strokeWidth={1.4} />
+                  </div>
+                  <h3 className="font-display text-2xl md:text-3xl leading-tight mb-3">{st.t}</h3>
+                  <p className="font-body text-sm text-muted-foreground leading-relaxed">{st.d}</p>
+                </li>
+              );
+            })}
+          </ol>
+          <div className="text-center mt-10 md:mt-12" data-reveal>
+            <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-vermilion text-white hover:bg-vermilion/90 rounded-full font-body text-xs tracking-wide-2 sm:tracking-luxe uppercase h-auto min-h-14 py-4 px-7 sm:px-10 whitespace-normal max-w-full">
+              {t.hero.start} <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <p className="font-body text-xs text-muted-foreground mt-4">{t.how.free}</p>
+          </div>
         </div>
       </section>
 
@@ -279,7 +310,7 @@ const Index = () => {
           <p className="font-body text-muted-foreground max-w-xl mx-auto mb-10">{t.cta.p}</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-2xl font-body text-xs tracking-luxe uppercase h-14 px-10 shadow-gold">
-              {t.nav.createAccount}
+              {t.hero.start}
             </Button>
             <Button size="lg" onClick={() => openAuth("login")} variant="outline" className="border-foreground/30 hover:border-gold hover:text-gold rounded-2xl font-body text-xs tracking-luxe uppercase h-14 px-10 bg-transparent">
               {t.nav.signIn}
