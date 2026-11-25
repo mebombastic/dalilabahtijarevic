@@ -10,6 +10,7 @@ import { useAuth, isActive, isAdmin, hasPlan, hasVip, userPlan, PLAN_NAMES, type
 import { FoodCalculator } from "@/components/FoodCalculator";
 import { openInstagramApp } from "@/lib/instagram";
 import { PersonalPlan } from "@/components/PersonalPlan";
+import { DeleteAccount } from "@/components/DeleteAccount";
 import { QUIZ } from "@/data/quizText";
 import { clearLocal, isAnswers, loadLocal, nutrition as calcNutrition, type Answers } from "@/lib/plan";
 import { useNavigate } from "react-router-dom";
@@ -279,6 +280,7 @@ const Account = () => {
                 </section>
               </div>
             </div>
+            {!isAdmin(user) && <DeleteAccount lang={lang} />}
           </main>
         </>
       )}
