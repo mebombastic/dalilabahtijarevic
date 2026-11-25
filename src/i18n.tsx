@@ -22,10 +22,10 @@ const en = {
     label: "How it works", h2a: "Three steps", h2b: "to your new routine.",
     steps: [
       { t: "Create your account", d: "Takes a minute. Name, email and a password, nothing else." },
-      { t: "Get your free personal plan", d: "Answer a few questions about your height, weight and goal. You instantly get your daily calories, protein and water." },
-      { t: "Start with me", d: "Choose Strong & Toned or VIP 1:1 and get your full plan: 4 weeks of workouts, meals, your Herbalife routine and my support." },
+      { t: "Tell me about you", d: "Answer a few questions about your height, weight and goal and see right away how many calories and how much protein you need." },
+      { t: "Choose your plan and start", d: "Choose Strong & Toned or VIP 1:1 and get your full plan: 4 weeks of workouts, meals, your Herbalife routine and my support." },
     ],
-    free: "Your account and your calorie plan are free. No obligation.",
+    free: "You only pay when you choose a plan.",
   },
   quote: { a: "Strong Body.", b: "Strong Mind.", c: "Better Life." },
   coach: {
@@ -128,10 +128,10 @@ const de: Dict = {
     label: "So funktioniert's", h2a: "Drei Schritte", h2b: "zu deiner neuen Routine.",
     steps: [
       { t: "Konto erstellen", d: "Dauert eine Minute. Name, E-Mail und Passwort, mehr nicht." },
-      { t: "Gratis persönlichen Plan bekommen", d: "Beantworte ein paar Fragen zu Größe, Gewicht und Ziel. Du bekommst sofort deine Kalorien, dein Eiweiß und deine Wassermenge pro Tag." },
-      { t: "Mit mir starten", d: "Wähle Strong & Toned oder VIP 1:1 und bekomme deinen ganzen Plan: 4 Wochen Training, Mahlzeiten, deine Herbalife-Routine und meine Unterstützung." },
+      { t: "Erzähl mir von dir", d: "Beantworte ein paar Fragen zu Größe, Gewicht und Ziel und sieh sofort, wie viele Kalorien und wie viel Eiweiß du brauchst." },
+      { t: "Plan wählen und starten", d: "Wähle Strong & Toned oder VIP 1:1 und bekomme deinen ganzen Plan: 4 Wochen Training, Mahlzeiten, deine Herbalife-Routine und meine Unterstützung." },
     ],
-    free: "Dein Konto und dein Kalorienplan sind kostenlos. Ohne Verpflichtung.",
+    free: "Du zahlst erst, wenn du einen Plan wählst.",
   },
   quote: { a: "Starker Körper.", b: "Starker Geist.", c: "Besseres Leben." },
   coach: {
@@ -232,10 +232,10 @@ const sr: Dict = {
     label: "Kako funkcioniše", h2a: "Tri koraka", h2b: "do tvoje nove rutine.",
     steps: [
       { t: "Napravi nalog", d: "Traje minut. Ime, email i lozinka, ništa više." },
-      { t: "Dobij besplatan lični plan", d: "Odgovoriš na par pitanja o visini, težini i cilju i odmah dobiješ svoje dnevne kalorije, proteine i vodu." },
-      { t: "Kreni sa mnom", d: "Izaberi Strong & Toned ili VIP 1:1 i dobij ceo plan: treninge za 4 nedelje, obroke, Herbalife rutinu i moju podršku." },
+      { t: "Reci mi nešto o sebi", d: "Odgovoriš na par pitanja o visini, težini i cilju i odmah vidiš koliko kalorija i proteina ti treba." },
+      { t: "Izaberi plan i kreni sa mnom", d: "Izaberi Strong & Toned ili VIP 1:1 i dobij ceo plan: treninge za 4 nedelje, obroke, Herbalife rutinu i moju podršku." },
     ],
-    free: "Nalog i plan kalorija su besplatni. Bez obaveze.",
+    free: "Plaćaš tek kad izabereš plan.",
   },
   quote: { a: "Jako telo.", b: "Jak um.", c: "Bolji život." },
   coach: {

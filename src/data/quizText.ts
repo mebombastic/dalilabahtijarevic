@@ -24,7 +24,7 @@ const en = {
     workouts: "Workouts a week", min: "min", perWeek: "per week",
     lose: "Steady weight loss of about {x} kg a week.", gain: "Slow, lean muscle gain.", keep: "Keep your weight and get stronger and fitter.",
     eta: "Goal weight in about {x} weeks.",
-    save: "Create a free account to save it", open: "Open my plan", redo: "Change my answers",
+    save: "Create an account", open: "Open my plan", redo: "Change my answers",
     note: "These numbers are a starting point, not medical advice. If you are pregnant, breastfeeding or have a health condition, check with your doctor first.",
   },
   plan: {
@@ -68,7 +68,7 @@ const de: T = {
     workouts: "Trainings pro Woche", min: "Min", perWeek: "pro Woche",
     lose: "Gleichmäßig etwa {x} kg pro Woche abnehmen.", gain: "Langsamer, sauberer Muskelaufbau.", keep: "Gewicht halten und stärker und fitter werden.",
     eta: "Zielgewicht in etwa {x} Wochen.",
-    save: "Gratis-Konto erstellen und speichern", open: "Meinen Plan öffnen", redo: "Antworten ändern",
+    save: "Konto erstellen", open: "Meinen Plan öffnen", redo: "Antworten ändern",
     note: "Diese Zahlen sind ein Startpunkt, keine medizinische Beratung. Wenn du schwanger bist, stillst oder eine Erkrankung hast, sprich zuerst mit deinem Arzt.",
   },
   plan: {
@@ -111,7 +111,7 @@ const sr: T = {
     workouts: "Treninga nedeljno", min: "min", perWeek: "nedeljno",
     lose: "Postepeno mršavljenje, oko {x} kg nedeljno.", gain: "Polako, čisto dobijanje mišića.", keep: "Zadrži kilažu, a budi jača i u boljoj formi.",
     eta: "Željena kilaža za oko {x} nedelja.",
-    save: "Napravi besplatan nalog i sačuvaj", open: "Otvori moj plan", redo: "Promeni odgovore",
+    save: "Napravi nalog", open: "Otvori moj plan", redo: "Promeni odgovore",
     note: "Ovi brojevi su početna tačka, ne medicinski savet. Ako si trudna, dojiš ili imaš zdravstveni problem, prvo se posavetuj sa lekarom.",
   },
   plan: {

@@ -98,7 +98,7 @@ const Index = () => {
             </Button>
           </div>
           <div className="animate-fade-up mt-10 inline-flex items-center gap-2 font-body text-[10px] tracking-luxe uppercase text-[hsl(37_40%_90%/0.55)]" style={{ animationDelay: "2.5s" }}>
-            <ShieldCheck className="h-3 w-3 text-gold" /> {t.hero.free}
+            <ShieldCheck className="h-3 w-3 text-gold" /> {t.hero.certified}
           </div>
         </div>
       </section>
