@@ -166,7 +166,7 @@ const Calculator = ({ c, lang, userId }: { c: typeof T.en; lang: Lang3; userId: 
     const mine = custom.filter((x) => norm(x.n).includes(s)).map((x) => ({ key: "c-" + x.id, n: x.n, k: x.k, p: x.p, c: x.c, f: x.f, u: undefined as Food["u"], hl: false, mine: true }));
     const base = FOODS.filter((f) => norm(foodName(f, lang)).includes(s) || norm(f.n.en).includes(s))
       .map((f) => ({ key: f.id, n: foodName(f, lang), k: f.k, p: f.p, c: f.c, f: f.f, u: f.u, hl: !!f.herbalife, mine: false }));
-    return [...mine, ...base].slice(0, 8);
+    return [...mine, ...base].slice(0, 12);
   }, [q, custom, lang]);
 
   const gNum = (v: string) => Math.max(0, parseFloat(v.replace(",", ".")) || 0);
