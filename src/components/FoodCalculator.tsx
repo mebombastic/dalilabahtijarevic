@@ -6,7 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { FOODS, foodName, type Food, type Lang3 } from "@/data/foods";
 
 /** One logged food. Nutrition is stored per 100 g so the totals can be recalculated. */
-export type FoodItem = { n: string; g: number; m: number; k: number; p: number; c: number; f: number };
+export type FoodItem = { n: string; g: number; m: number; k: number; p: number; c: number; f: number; pl?: string };
+type PlateRow = { key: string; n: string; k: number; p: number; c: number; f: number; u?: Food["u"]; hl?: boolean; g: string };
 type Custom = { id: string; n: string; k: number; p: number; c: number; f: number };
 type Goal = { k?: number; p?: number };
 
@@ -22,9 +23,10 @@ const T = {
     own: "Your food", name: "Name", kcal: "kcal", protein: "Protein", carbs: "Carbs", fat: "Fat", saveFood: "Save food",
     goal: "Daily goal", setGoal: "Set goal", empty: "Nothing logged yet — add your first food above.",
     total: "Total", left: "left", over: "over", setup: "The food calculator is almost ready — Dalila is finishing the setup.",
-    lockedTitle: "Food calculator is a VIP feature", lockedText: "Log every meal by grams and see your calories, protein, carbs and fat for each day — with goals set together with me.",
+    lockedTitle: "Smart Plate Calculator is a VIP tool", lockedText: "Log every meal by grams and see your calories, protein, carbs and fat for each day — with goals set together with me.",
     upgrade: "Upgrade to VIP 1:1", lockedPending: "Unlocks as soon as your VIP membership is active.", saving: "Saving…", error: "Couldn't save — check your connection.",
     approx: "Herbalife values are approximate.",
+    plate: "Your plate", plateFor: "for", plateHint: "Build your plate: add as many foods as you like — e.g. chicken + rice + salad + olive oil — then save the whole plate.", addPlate: "Add plate to", clear: "Clear", plateN: "Plate", addMore: "Add another food…", foods: "foods",
   },
   de: {
     label: "Kalorienrechner", vip: "VIP", sub: "Lebensmittel suchen, Gramm eingeben — Kalorien, Eiweiß, Kohlenhydrate und Fett werden automatisch berechnet.",
@@ -33,9 +35,10 @@ const T = {
     own: "Dein Lebensmittel", name: "Name", kcal: "kcal", protein: "Eiweiß", carbs: "KH", fat: "Fett", saveFood: "Speichern",
     goal: "Tagesziel", setGoal: "Ziel setzen", empty: "Noch nichts eingetragen — füge oben dein erstes Lebensmittel hinzu.",
     total: "Gesamt", left: "übrig", over: "drüber", setup: "Der Kalorienrechner ist fast fertig — Dalila schließt gerade die Einrichtung ab.",
-    lockedTitle: "Der Kalorienrechner ist ein VIP-Feature", lockedText: "Trag jede Mahlzeit in Gramm ein und sieh Kalorien, Eiweiß, Kohlenhydrate und Fett für jeden Tag — mit Zielen, die wir gemeinsam festlegen.",
+    lockedTitle: "Der Smart-Plate-Rechner ist ein VIP-Tool", lockedText: "Trag jede Mahlzeit in Gramm ein und sieh Kalorien, Eiweiß, Kohlenhydrate und Fett für jeden Tag — mit Zielen, die wir gemeinsam festlegen.",
     upgrade: "Upgrade auf VIP 1:1", lockedPending: "Wird freigeschaltet, sobald deine VIP-Mitgliedschaft aktiv ist.", saving: "Speichert…", error: "Speichern fehlgeschlagen — prüfe deine Verbindung.",
     approx: "Herbalife-Werte sind ungefähre Angaben.",
+    plate: "Dein Teller", plateFor: "für", plateHint: "Stell deinen Teller zusammen: so viele Lebensmittel wie du willst — z. B. Hähnchen + Reis + Salat + Olivenöl — und speichere dann den ganzen Teller.", addPlate: "Teller speichern:", clear: "Leeren", plateN: "Teller", addMore: "Weiteres Lebensmittel…", foods: "Lebensmittel",
   },
   sr: {
     label: "Kalkulator hrane", vip: "VIP", sub: "Pronađi namirnicu, upiši grame i kalkulator sabira kalorije, proteine, ugljene hidrate i masti.",
@@ -44,9 +47,10 @@ const T = {
     own: "Tvoja namirnica", name: "Naziv", kcal: "kcal", protein: "Proteini", carbs: "UH", fat: "Masti", saveFood: "Sačuvaj",
     goal: "Dnevni cilj", setGoal: "Postavi cilj", empty: "Još ništa nije upisano — dodaj prvu namirnicu gore.",
     total: "Ukupno", left: "preostalo", over: "preko", setup: "Kalkulator hrane je skoro spreman — Dalila završava podešavanje.",
-    lockedTitle: "Kalkulator hrane je VIP opcija", lockedText: "Upiši svaki obrok u gramima i prati kalorije, proteine, ugljene hidrate i masti za svaki dan — sa ciljevima koje postavimo zajedno.",
+    lockedTitle: "Smart Plate kalkulator je VIP alat", lockedText: "Upiši svaki obrok u gramima i prati kalorije, proteine, ugljene hidrate i masti za svaki dan — sa ciljevima koje postavimo zajedno.",
     upgrade: "Pređi na VIP 1:1", lockedPending: "Otključava se čim tvoje VIP članstvo bude aktivno.", saving: "Čuvam…", error: "Čuvanje nije uspelo — proveri internet.",
     approx: "Herbalife vrednosti su približne.",
+    plate: "Tvoj tanjir", plateFor: "za", plateHint: "Složi svoj tanjir: dodaj koliko god namirnica želiš — npr. piletina + pirinač + salata + maslinovo ulje — pa sačuvaj ceo tanjir.", addPlate: "Dodaj tanjir u", clear: "Obriši", plateN: "Tanjir", addMore: "Dodaj još namirnica…", foods: "namirnica",
   },
 };
 
@@ -114,13 +118,12 @@ const Calculator = ({ c, lang, userId }: { c: typeof T.en; lang: Lang3; userId: 
 
   const [meal, setMeal] = useState(() => { const h = new Date().getHours(); return h < 11 ? 0 : h < 16 ? 1 : h < 21 ? 2 : 3; });
   const [q, setQ] = useState("");
-  const [picked, setPicked] = useState<{ n: string; k: number; p: number; c: number; f: number; u?: Food["u"]; hl?: boolean } | null>(null);
-  const [grams, setGrams] = useState("");
+  const [plate, setPlate] = useState<PlateRow[]>([]);
   const [ownOpen, setOwnOpen] = useState(false);
   const [own, setOwn] = useState({ n: "", k: "", p: "", c: "", f: "" });
   const [goalOpen, setGoalOpen] = useState(false);
   const [goalForm, setGoalForm] = useState({ k: "", p: "" });
-  const gramsRef = useRef<HTMLInputElement>(null);
+  const plateRef = useRef<HTMLDivElement>(null);
 
   const missing = (e: { code?: string; message?: string } | null) => !!e && (e.code === "42P01" || e.code === "PGRST205" || /does not exist|schema cache/i.test(e.message || ""));
 
@@ -166,17 +169,23 @@ const Calculator = ({ c, lang, userId }: { c: typeof T.en; lang: Lang3; userId: 
     return [...mine, ...base].slice(0, 8);
   }, [q, custom, lang]);
 
+  const gNum = (v: string) => Math.max(0, parseFloat(v.replace(",", ".")) || 0);
   const pick = (r: (typeof results)[number]) => {
-    setPicked({ n: r.n, k: r.k, p: r.p, c: r.c, f: r.f, u: r.u, hl: r.hl });
-    setGrams(String(r.u?.g ?? 100));
+    setPlate((pl) => pl.some((x) => x.key === r.key) ? pl : [...pl, { key: r.key, n: r.n, k: r.k, p: r.p, c: r.c, f: r.f, u: r.u, hl: r.hl, g: String(r.u?.g ?? 100) }]);
     setQ("");
-    setTimeout(() => gramsRef.current?.select(), 30);
+    setTimeout(() => {
+      const inputs = plateRef.current?.querySelectorAll<HTMLInputElement>("input[data-grams]");
+      const el = inputs?.[inputs.length - 1]; el?.focus(); el?.select();
+    }, 40);
   };
-  const g = Math.max(0, parseFloat(grams.replace(",", ".")) || 0);
-  const addPicked = () => {
-    if (!picked || g <= 0) return;
-    saveItems([...items, { n: picked.n, g, m: meal, k: picked.k, p: picked.p, c: picked.c, f: picked.f }]);
-    setPicked(null); setGrams("");
+  const setRow = (key: string, g: string) => setPlate((pl) => pl.map((x) => (x.key === key ? { ...x, g } : x)));
+  const plateItems: FoodItem[] = plate.filter((x) => gNum(x.g) > 0).map((x) => ({ n: x.n, g: gNum(x.g), m: meal, k: x.k, p: x.p, c: x.c, f: x.f }));
+  const plateTot = sumItems(plateItems);
+  const addPlate = () => {
+    if (!plateItems.length) return;
+    const pl = Date.now().toString(36);
+    saveItems([...items, ...plateItems.map((x) => ({ ...x, pl }))]);
+    setPlate([]);
   };
   const num = (v: string) => Math.max(0, parseFloat(v.replace(",", ".")) || 0);
   const saveOwn = () => {
@@ -184,7 +193,7 @@ const Calculator = ({ c, lang, userId }: { c: typeof T.en; lang: Lang3; userId: 
     const x: Custom = { id: Date.now().toString(36), n: own.n.trim(), k: num(own.k), p: num(own.p), c: num(own.c), f: num(own.f) };
     const next = [x, ...custom.filter((y) => y.n.toLowerCase() !== x.n.toLowerCase())].slice(0, 40);
     setCustom(next); saveSettings({ custom: next });
-    setPicked({ n: x.n, k: x.k, p: x.p, c: x.c, f: x.f }); setGrams("100");
+    setPlate((pl) => [...pl, { key: "c-" + x.id, n: x.n, k: x.k, p: x.p, c: x.c, f: x.f, g: "100" }]);
     setOwn({ n: "", k: "", p: "", c: "", f: "" }); setOwnOpen(false);
   };
   const saveGoal = () => {
@@ -249,64 +258,76 @@ const Calculator = ({ c, lang, userId }: { c: typeof T.en; lang: Lang3; userId: 
           ))}
         </div>
 
-        {!picked ? (
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={c.search} className="h-12 pl-11 rounded-xl bg-background" />
-            {q.trim() && (
-              <div className="absolute z-20 left-0 right-0 mt-2 rounded-2xl border border-border bg-background shadow-soft overflow-hidden">
-                {results.map((r) => (
-                  <button key={r.key} onClick={() => pick(r)} className="w-full text-left px-4 py-3 border-b border-border last:border-0 hover:bg-secondary/60 flex items-center gap-3">
-                    <span className="flex-1 min-w-0">
-                      <span className="block font-body text-sm truncate">{r.hl && <Sparkles className="inline h-3 w-3 text-gold mr-1 -mt-0.5" />}{r.n}</span>
-                      <span className="block font-body text-[11px] text-muted-foreground">{r0(r.k)} kcal · P {r1(r.p)} · {c.carbs} {r1(r.c)} · {c.fat} {r1(r.f)} — {c.per100}</span>
-                    </span>
-                    <Plus className="h-4 w-4 text-gold shrink-0" />
-                  </button>
-                ))}
-                <button onClick={() => { setOwn({ ...own, n: q.trim() }); setOwnOpen(true); setQ(""); }} className="w-full text-left px-4 py-3 bg-secondary/40 hover:bg-secondary font-body text-xs">
-                  {results.length === 0 && <span className="text-muted-foreground mr-1">{c.noResults}</span>}<b className="text-gold font-medium">+ {c.addOwn}</b>
+        <div className="relative">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={plate.length ? c.addMore : c.search} className="h-12 pl-11 rounded-xl bg-background" />
+          {q.trim() && (
+            <div className="absolute z-20 left-0 right-0 mt-2 rounded-2xl border border-border bg-background shadow-soft overflow-hidden">
+              {results.map((r) => (
+                <button key={r.key} onClick={() => pick(r)} className="w-full text-left px-4 py-3 border-b border-border last:border-0 hover:bg-secondary/60 flex items-center gap-3">
+                  <span className="flex-1 min-w-0">
+                    <span className="block font-body text-sm truncate">{r.hl && <Sparkles className="inline h-3 w-3 text-gold mr-1 -mt-0.5" />}{r.n}</span>
+                    <span className="block font-body text-[11px] text-muted-foreground">{r0(r.k)} kcal · P {r1(r.p)} · {c.carbs} {r1(r.c)} · {c.fat} {r1(r.f)} — {c.per100}</span>
+                  </span>
+                  {plate.some((x) => x.key === r.key) ? <Check className="h-4 w-4 text-gold shrink-0" /> : <Plus className="h-4 w-4 text-gold shrink-0" />}
                 </button>
-              </div>
-            )}
-          </div>
+              ))}
+              <button onClick={() => { setOwn({ ...own, n: q.trim() }); setOwnOpen(true); setQ(""); }} className="w-full text-left px-4 py-3 bg-secondary/40 hover:bg-secondary font-body text-xs">
+                {results.length === 0 && <span className="text-muted-foreground mr-1">{c.noResults}</span>}<b className="text-gold font-medium">+ {c.addOwn}</b>
+              </button>
+            </div>
+          )}
+        </div>
+
+        {plate.length === 0 ? (
+          <p className="font-body text-[12px] text-muted-foreground leading-relaxed">{c.plateHint}</p>
         ) : (
-          <div className="rounded-xl bg-background border border-gold/40 p-4">
-            <div className="flex items-start gap-3 mb-3">
-              <div className="flex-1 min-w-0">
-                <div className="font-body text-sm font-medium">{picked.n}</div>
-                <div className="font-body text-[11px] text-muted-foreground">{r0(picked.k)} kcal · P {r1(picked.p)} g {c.per100}{picked.hl ? ` · ${c.approx}` : ""}</div>
-              </div>
-              <button onClick={() => setPicked(null)} aria-label="Cancel" className="h-8 w-8 shrink-0 rounded-full inline-flex items-center justify-center hover:bg-secondary"><X className="h-4 w-4" /></button>
+          <div ref={plateRef} className="rounded-xl bg-background border border-gold/40 overflow-hidden">
+            <div className="flex items-center justify-between gap-2 px-4 pt-3 pb-2">
+              <span className="font-body text-[10px] tracking-luxe uppercase text-gold">🍽 {c.plate} · {c.plateFor} {c.meals[meal]}</span>
+              <button onClick={() => setPlate([])} className="font-body text-[10px] tracking-wide-2 uppercase text-muted-foreground hover:text-destructive">{c.clear}</button>
             </div>
-            <div className="flex flex-wrap items-end gap-3">
-              <label className="block w-28">
-                <span className="block font-body text-[9px] tracking-luxe uppercase text-muted-foreground mb-1">{c.grams}</span>
-                <Input ref={gramsRef} inputMode="decimal" value={grams} onChange={(e) => setGrams(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addPicked()} className="h-11 rounded-xl bg-secondary/40 text-base" />
-              </label>
-              {picked.u && (
-                <div className="flex gap-1.5 pb-0.5">
-                  {[1, 2].map((x) => (
-                    <button key={x} onClick={() => setGrams(String(picked.u!.g * x))} className="rounded-full border border-border px-3 h-9 font-body text-[11px] hover:border-gold">
-                      {x === 1 ? picked.u!.l[lang] : `×2`} <span className="text-muted-foreground">({picked.u!.g * x} g)</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <ul>
+              {plate.map((x) => {
+                const gg = gNum(x.g);
+                return (
+                  <li key={x.key} className="px-4 py-3 border-t border-border">
+                    <div className="flex items-start gap-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="font-body text-[13px] leading-snug">{x.hl && <Sparkles className="inline h-3 w-3 text-gold mr-1 -mt-0.5" />}{x.n}</div>
+                        <div className="font-body text-[11px] text-muted-foreground">{r0((x.k * gg) / 100)} kcal · P {r1((x.p * gg) / 100)} · {c.carbs} {r1((x.c * gg) / 100)} · {c.fat} {r1((x.f * gg) / 100)}</div>
+                      </div>
+                      <button onClick={() => setPlate((pl) => pl.filter((y) => y.key !== x.key))} aria-label="Remove" className="h-8 w-8 shrink-0 -mt-1 -mr-2 rounded-full inline-flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-secondary"><X className="h-4 w-4" /></button>
+                    </div>
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      <div className="relative w-24">
+                        <Input data-grams inputMode="decimal" value={x.g} onChange={(e) => setRow(x.key, e.target.value)} onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()} className="h-10 pr-7 rounded-xl bg-secondary/40 text-base" />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 font-body text-xs text-muted-foreground">g</span>
+                      </div>
+                      {x.u && (
+                        <button onClick={() => setRow(x.key, String(gg + x.u!.g))}
+                          className="rounded-full border border-border px-3 h-9 font-body text-[11px] hover:border-gold">
+                          + {x.u.l[lang]} <span className="text-muted-foreground">({x.u.g} g)</span>
+                        </button>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="px-4 py-3 border-t border-border bg-secondary/30 flex flex-wrap items-center justify-between gap-3">
               <div className="font-body text-sm">
-                <b className="font-display text-2xl font-normal mr-1">{r0((picked.k * g) / 100)}</b> kcal
-                <span className="text-muted-foreground"> · P {r1((picked.p * g) / 100)} · {c.carbs} {r1((picked.c * g) / 100)} · {c.fat} {r1((picked.f * g) / 100)} g</span>
+                <b className="font-display text-2xl font-normal mr-1">{r0(plateTot.k)}</b> kcal
+                <span className="text-muted-foreground"> · P {r1(plateTot.p)} · {c.carbs} {r1(plateTot.c)} · {c.fat} {r1(plateTot.f)} g</span>
               </div>
-              <Button onClick={addPicked} disabled={g <= 0} className="w-full sm:w-auto rounded-full h-11 px-6 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[10px] tracking-luxe uppercase">
-                <Plus className="mr-1 h-4 w-4" /> {c.add} · {c.meals[meal]}
+              <Button onClick={addPlate} disabled={!plateItems.length} className="w-full sm:w-auto rounded-full h-11 px-6 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[10px] tracking-luxe uppercase">
+                <Check className="mr-1 h-4 w-4" /> {c.addPlate} {c.meals[meal]} ({plateItems.length})
               </Button>
             </div>
           </div>
         )}
 
-        {!picked && !q && !ownOpen && (
+        {!q && !ownOpen && (
           <button onClick={() => setOwnOpen(true)} className="font-body text-[11px] text-muted-foreground hover:text-gold">+ {c.addOwn}</button>
         )}
 
@@ -346,17 +367,42 @@ const Calculator = ({ c, lang, userId }: { c: typeof T.en; lang: Lang3; userId: 
                   <span className="font-body text-[10px] tracking-luxe uppercase text-gold">{mm}</span>
                   <span className="font-body text-xs text-muted-foreground whitespace-nowrap"><b className="text-foreground font-medium">{r0(s.k)} kcal</b> · P {r0(s.p)} g</span>
                 </div>
-                <ul>
-                  {list.map(({ it, idx }) => (
-                    <li key={idx} className="flex items-center gap-2 py-2 border-t border-border first:border-0">
-                      <span className="flex-1 min-w-0">
-                        <span className="block font-body text-[13px] leading-snug">{it.n}</span>
-                        <span className="block font-body text-[11px] text-muted-foreground">{r1(it.g)} g · {r0((it.k * it.g) / 100)} kcal · P {r1((it.p * it.g) / 100)} · {c.carbs} {r1((it.c * it.g) / 100)} · {c.fat} {r1((it.f * it.g) / 100)}</span>
-                      </span>
-                      <button onClick={() => saveItems(items.filter((_, j) => j !== idx))} aria-label="Remove" className="h-8 w-8 shrink-0 rounded-full inline-flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-secondary"><Trash2 className="h-3.5 w-3.5" /></button>
-                    </li>
-                  ))}
-                </ul>
+                {(() => {
+                  const groups: { key: string; rows: typeof list }[] = [];
+                  list.forEach((x) => {
+                    const k = x.it.pl ?? "i" + x.idx;
+                    const last = groups[groups.length - 1];
+                    if (last && last.key === k) last.rows.push(x); else groups.push({ key: k, rows: [x] });
+                  });
+                  let plateNo = 0;
+                  return groups.map((gr) => {
+                    const isPlate = gr.rows.length > 1;
+                    if (isPlate) plateNo += 1;
+                    const gs = sumItems(gr.rows.map((x) => x.it));
+                    const ids = new Set(gr.rows.map((x) => x.idx));
+                    return (
+                      <div key={gr.key} className={isPlate ? "rounded-xl bg-secondary/40 px-3 py-1 my-2" : ""}>
+                        {isPlate && (
+                          <div className="flex items-center justify-between gap-2 pt-1.5">
+                            <span className="font-body text-[9px] tracking-luxe uppercase text-muted-foreground">🍽 {c.plateN} {plateNo} · {gr.rows.length} {c.foods} · <b className="text-foreground font-medium">{r0(gs.k)} kcal</b></span>
+                            <button onClick={() => saveItems(items.filter((_, j) => !ids.has(j)))} aria-label="Remove plate" className="h-7 w-7 shrink-0 rounded-full inline-flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-secondary"><Trash2 className="h-3.5 w-3.5" /></button>
+                          </div>
+                        )}
+                        <ul>
+                          {gr.rows.map(({ it, idx }) => (
+                            <li key={idx} className="flex items-center gap-2 py-2 border-t border-border first:border-0">
+                              <span className="flex-1 min-w-0">
+                                <span className="block font-body text-[13px] leading-snug">{it.n}</span>
+                                <span className="block font-body text-[11px] text-muted-foreground">{r1(it.g)} g · {r0((it.k * it.g) / 100)} kcal · P {r1((it.p * it.g) / 100)} · {c.carbs} {r1((it.c * it.g) / 100)} · {c.fat} {r1((it.f * it.g) / 100)}</span>
+                              </span>
+                              <button onClick={() => saveItems(items.filter((_, j) => j !== idx))} aria-label="Remove" className="h-8 w-8 shrink-0 rounded-full inline-flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-secondary"><Trash2 className="h-3.5 w-3.5" /></button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    );
+                  });
+                })()}
               </div>
             );
           })}

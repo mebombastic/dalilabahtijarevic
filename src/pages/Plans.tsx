@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Check, Crown, Dumbbell, ArrowRight } from "lucide-react";
+import { Check, Crown, Dumbbell, ArrowRight, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AuthDialog } from "@/components/AuthDialog";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -67,6 +67,22 @@ const Plans = () => {
                       <li key={f} className="flex gap-3 font-body text-sm leading-snug"><Check className="h-4 w-4 shrink-0 mt-0.5 text-[hsl(var(--vermilion))]" /> {f}</li>
                     ))}
                   </ul>
+                  {c.dark && (
+                    <div className="relative mb-8 rounded-2xl border border-[hsl(var(--vermilion)/0.5)] bg-[hsl(37_40%_90%/0.06)] p-5 overflow-hidden">
+                      <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-[radial-gradient(closest-side,hsl(var(--vermilion)/0.35),transparent)]" />
+                      <div className="relative flex items-center gap-3 mb-3">
+                        <span className="h-10 w-10 shrink-0 rounded-xl bg-vermilion text-white flex items-center justify-center"><Calculator className="h-5 w-5" /></span>
+                        <div>
+                          <div className="font-body text-[9px] tracking-luxe uppercase text-[hsl(var(--vermilion))]">{t.plans.tool.tag}</div>
+                          <div className="font-display text-2xl leading-tight">{t.plans.tool.name}</div>
+                        </div>
+                      </div>
+                      <p className="relative font-body text-[13px] leading-relaxed text-[hsl(37_40%_90%/0.8)] mb-3">{t.plans.tool.text}</p>
+                      <div className="relative flex flex-wrap gap-1.5">
+                        {t.plans.tool.chips.map((x) => <span key={x} className="rounded-full border border-[hsl(37_40%_90%/0.25)] px-2.5 py-1 font-body text-[9px] tracking-wide-2 uppercase">{x}</span>)}
+                      </div>
+                    </div>
+                  )}
                   <div className="mt-auto">
                     {isMine ? (
                       <Button asChild className="w-full h-12 rounded-full bg-vermilion text-white hover:bg-vermilion/90 font-body text-[11px] tracking-luxe uppercase">
