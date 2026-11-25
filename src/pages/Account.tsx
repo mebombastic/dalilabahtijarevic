@@ -14,6 +14,8 @@ import { DeleteAccount } from "@/components/DeleteAccount";
 import { QUIZ } from "@/data/quizText";
 import { clearLocal, isAnswers, loadLocal, nutrition as calcNutrition, type Answers, type Done } from "@/lib/plan";
 import { ProgressChart } from "@/components/ProgressChart";
+import { Habits, WeeklyCheckin } from "@/components/CoachTools";
+import { COACH } from "@/data/coachText";
 import { useNavigate } from "react-router-dom";
 import { ExerciseGuide } from "@/components/ExerciseGuide";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -211,6 +213,24 @@ const Account = () => {
                 </div>
               )}
               <div className={`grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6 ${active ? "" : "pointer-events-none"}`} aria-hidden={!active}>
+                {/* weekly check-in */}
+                <section className={`${card} lg:col-span-2`}>
+                  <SectionLabel>{COACH[lang].ci.label}</SectionLabel>
+                  <p className="font-body text-xs text-muted-foreground -mt-2 mb-5">{COACH[lang].ci.sub}</p>
+                  {active || isAdmin(user) ? <WeeklyCheckin lang={lang} userId={user.id} onSaved={async (w, wa) => {
+                    const prev = ((user.user_metadata?.progress as Entry[]) || []).slice(-40);
+                    await supabase.auth.updateUser({ data: { progress: [...prev, { d: new Date().toISOString().slice(0, 10), ...(w ? { w: String(w) } : {}), ...(wa ? { wa: String(wa) } : {}) }] } });
+                    await refresh();
+                  }} /> : null}
+                </section>
+
+                {/* daily habits */}
+                <section className={card}>
+                  <SectionLabel>{COACH[lang].hb.label}</SectionLabel>
+                  <p className="font-body text-xs text-muted-foreground -mt-2 mb-5">{COACH[lang].hb.sub}</p>
+                  {active || isAdmin(user) ? <Habits lang={lang} userId={user.id} /> : null}
+                </section>
+
                 {/* products */}
                 <section className={`${card} lg:col-span-1`}>
                   <SectionLabel>{m.products}</SectionLabel>

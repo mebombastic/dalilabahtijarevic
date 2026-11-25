@@ -9,6 +9,8 @@ import { useLang } from "@/i18n";
 import { useAuth, isAdmin, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminFoodSummary } from "@/components/FoodCalculator";
+import { AdminCoach, useUnanswered } from "@/components/CoachTools";
+import { COACH } from "@/data/coachText";
 
 type Entry = { d: string; w?: string; wa?: string; sq?: string; pu?: string; su?: string; pl?: string };
 type Member = {
@@ -36,6 +38,7 @@ const Admin = () => {
   const [filter, setFilter] = useState<Filter>("all");
   const [openId, setOpenId] = useState<string | null>(null);
   const [startDates, setStartDates] = useState<Record<string, string>>({});
+  const unanswered = useUnanswered();
   const [savingId, setSavingId] = useState<string | null>(null);
   const admin = isAdmin(user);
 
@@ -123,6 +126,11 @@ const Admin = () => {
             {setupMissing && <p className="rounded-2xl border border-vermilion/40 bg-vermilion/10 p-4 font-body text-sm mb-6">{a.setupNeeded}</p>}
             {error && <p role="alert" className="rounded-2xl bg-destructive/10 text-destructive p-4 font-body text-sm mb-6">{error}</p>}
 
+            {unanswered.ids.size > 0 && (
+              <p className="rounded-2xl border border-[hsl(var(--vermilion)/0.4)] bg-[hsl(var(--vermilion)/0.08)] p-4 font-body text-sm mb-6 inline-flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-[hsl(var(--vermilion))] animate-pulse" /> <b className="font-medium">{unanswered.ids.size}</b> {COACH[lang].ad.checkins} {COACH[lang].ad.unanswered}
+              </p>
+            )}
             {/* stats + filters */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
               {([["all", a.total, Users], ["paid", a.paid, Check], ["waiting", a.waiting, Clock], ["active", a.active, Crown], ["free", a.free, Users]] as const).map(([k, label, Icon]) => (
@@ -152,7 +160,7 @@ const Admin = () => {
                       </span>
                       <span className="hidden md:block font-body text-sm">{mb.user_meta.plan ? PLAN_NAMES[mb.user_meta.plan] : <span className="text-muted-foreground">{a.noPlan}</span>}</span>
                       <span className="hidden md:block font-body text-xs text-muted-foreground">{a.joined} {fmt(mb.created_at)}</span>
-                      {badge(st)}
+                      <span className="inline-flex items-center gap-1.5">{unanswered.ids.has(mb.id) && <span title={COACH[lang].ad.unanswered} className="h-2.5 w-2.5 rounded-full bg-[hsl(var(--vermilion))] animate-pulse" />}{badge(st)}</span>
                       <ChevronDown className={`hidden md:block h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
                     </button>
                     {isOpen && (
@@ -208,6 +216,7 @@ const Admin = () => {
                             );
                           })()}
                         </div>
+                        <AdminCoach userId={mb.id} lang={lang} onAnswered={unanswered.reload} />
                         <AdminFoodSummary userId={mb.id} lang={lang} />
                       </div>
                     )}
