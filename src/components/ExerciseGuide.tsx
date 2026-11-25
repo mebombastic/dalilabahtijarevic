@@ -4,9 +4,9 @@ import { EXERCISES, EXERCISE_BY_NAME } from "@/data/exercises";
 
 type Lang = "en" | "de" | "sr";
 const T = {
-  en: { how: "How to do it", tap: "Tap an exercise to see how it's done." },
-  de: { how: "So geht's", tap: "Tippe auf eine Übung, um zu sehen, wie sie geht." },
-  sr: { how: "Kako se radi", tap: "Dodirni vežbu da vidiš kako se radi." },
+  en: { how: "How to do it", tap: "Tap an exercise to see how it's done.", strip: "How each exercise is done", open: "See how" },
+  de: { how: "So geht's", tap: "Tippe auf eine Übung, um zu sehen, wie sie geht.", strip: "So geht jede Übung", open: "Ansehen" },
+  sr: { how: "Kako se radi", tap: "Dodirni vežbu da vidiš kako se radi.", strip: "Kako se radi svaka vežba", open: "Pogledaj" },
 };
 
 export const exerciseKey = (name: string) => EXERCISE_BY_NAME[name.toLowerCase()];
@@ -61,5 +61,30 @@ export const ExerciseGuide = ({ exKey, lang, onClose }: { exKey: string | null; 
         )}
       </DialogContent>
     </Dialog>
+  );
+};
+
+/** Always-visible row of exercise cards (picture + name) under a workout. */
+export const ExerciseStrip = ({ names, lang, onOpen }: { names: string[]; lang: Lang; onOpen: (key: string) => void }) => {
+  const keys = names.map(exerciseKey).filter((k, i, a): k is string => !!k && a.indexOf(k) === i);
+  if (!keys.length) return null;
+  return (
+    <div className="px-3 sm:px-5 pb-4">
+      <div className="font-body text-[10px] tracking-luxe uppercase text-[hsl(var(--vermilion))] mb-2 px-1">{T[lang].strip}</div>
+      <div className="no-scrollbar flex gap-2.5 overflow-x-auto snap-x pb-1">
+        {keys.map((k) => {
+          const ex = EXERCISES[k];
+          const f = ex.frames[Math.min(1, ex.frames.length - 1)];
+          return (
+            <button key={k} type="button" onClick={() => onOpen(k)}
+              className="snap-start shrink-0 w-[132px] rounded-2xl border border-border bg-secondary/40 p-2.5 text-left hover:border-gold active:scale-[0.98] transition">
+              <div className="rounded-xl bg-background p-1 [&>svg]:w-full [&>svg]:h-auto" dangerouslySetInnerHTML={{ __html: f.svg }} />
+              <div className="font-body text-[12px] font-medium leading-tight mt-2 min-h-[2lh]">{ex[lang].title}</div>
+              <div className="font-body text-[9px] tracking-luxe uppercase text-gold mt-1 inline-flex items-center gap-1"><Info className="h-3 w-3" /> {T[lang].open}</div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 };

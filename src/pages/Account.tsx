@@ -8,7 +8,7 @@ import { SectionLabel, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { useLang } from "@/i18n";
 import { useAuth, isActive, hasPlan, hasVip, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
 import { FoodCalculator } from "@/components/FoodCalculator";
-import { ExerciseGuide, ExerciseName, guideHint } from "@/components/ExerciseGuide";
+import { ExerciseGuide, ExerciseName, ExerciseStrip, guideHint } from "@/components/ExerciseGuide";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import pKit from "@/assets/p-kit.webp";
 import { supabase } from "@/integrations/supabase/client";
@@ -252,6 +252,7 @@ const Account = () => {
                           </table>
                         </div>
                         <div className="px-5 pb-4 font-body text-xs text-muted-foreground inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {m.typical}: <b className="text-gold font-medium">{w.time}</b></div>
+                        <ExerciseStrip names={(w.items as readonly (readonly [string, readonly string[]])[]).map((it) => it[0])} lang={lang} onOpen={setExKey} />
                       </div>
                     );
                   })() : <p className="font-body text-xs text-muted-foreground mt-4">{m.tapWorkout}</p>}
