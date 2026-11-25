@@ -42,6 +42,8 @@ export const NutritionTiles = ({ n, lang, dark = false }: { n: Nutrition; lang: 
 
 const itemText = (s: Session, it: Session["items"][number], lang: Lang) => {
   const p = QUIZ[lang].plan;
+  if (it.ladder) return it.dist ? `${it.dist} m` : it.ladder.join(" · ");
+  if (s.kind === "max") return it.secs ? `${p.maxReps} · ${it.secs >= 60 && it.secs % 60 === 0 ? `${it.secs / 60} min` : `${it.secs} ${p.secs}`}` : p.hold;
   if (s.kind === "hiit") return `${s.work}${p.secs} ${p.work} / ${s.rest}${p.secs} ${p.restS}`;
   if (it.secs) return it.secs >= 120 ? `${Math.round(it.secs / 60)} min` : `${it.secs} ${p.secs}`;
   return `${it.reps} ${p.reps}${it.side ? ` ${p.each}` : ""}`;
@@ -49,7 +51,7 @@ const itemText = (s: Session, it: Session["items"][number], lang: Lang) => {
 
 export const SessionCard = ({ s, lang, onExercise }: { s: Session; lang: Lang; onExercise: (k: string) => void }) => {
   const q = QUIZ[lang];
-  const roundsLabel = s.kind === "strength" ? `${s.rounds} ${q.plan.sets}` : s.kind === "cardio" || s.kind === "mobility" ? "" : `${s.rounds} ${q.plan.rounds}`;
+  const roundsLabel = s.kind === "strength" ? `${s.rounds} ${q.plan.sets}` : s.kind === "cardio" || s.kind === "mobility" || s.kind === "max" ? "" : `${s.rounds} ${q.plan.rounds}`;
   return (
     <div className="rounded-2xl border border-border overflow-hidden">
       <div className="flex flex-wrap items-baseline justify-between gap-2 px-5 py-4 border-b-2 border-primary">

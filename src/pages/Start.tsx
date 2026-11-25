@@ -115,7 +115,7 @@ const Start = () => {
               {step === "equip" && <>
                 <h1 className="font-display text-4xl md:text-5xl mb-2">{q.equip.q}</h1>
                 <p className="font-body text-sm text-muted-foreground mb-6">{q.equip.hint}</p>
-                <div className="space-y-3">{(["body", "db", "run"] as Equip[]).map((e) =>
+                <div className="space-y-3">{(["body", "db", "run", "bar"] as Equip[]).map((e) =>
                   <Opt key={e} active={d.equip.includes(e)} onClick={() => set({ equip: toggle(d.equip, e) })} title={q.equip[e]} sub={q.equip[`${e}Sub` as "bodySub"]} />)}</div>
               </>}
               {step === "height" && <>

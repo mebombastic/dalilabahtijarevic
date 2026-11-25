@@ -2,7 +2,7 @@
 import { FOODS, type Food } from "@/data/foods";
 
 export type Goal = "lose" | "muscle" | "tone" | "fit" | "eat" | "energy";
-export type Equip = "body" | "db" | "run";
+export type Equip = "body" | "db" | "run" | "bar";
 export type Answers = {
   sex: "f" | "m";
   goals: Goal[];          // up to 3, in order of importance
@@ -56,9 +56,9 @@ export function nutrition(a: Answers): Nutrition {
 }
 
 /* ---------------- training ---------------- */
-export type Item = { ex: string; reps?: number; secs?: number; side?: boolean };
+export type Item = { ex: string; reps?: number; secs?: number; side?: boolean; ladder?: number[]; dist?: number };
 export type Session = {
-  kind: "circuit" | "strength" | "hiit" | "cardio" | "mobility";
+  kind: "circuit" | "strength" | "hiit" | "cardio" | "mobility" | "fortime" | "max";
   title: string;              // key into SESSION_NAMES
   rounds: number;             // circuit/hiit rounds or strength sets
   work?: number; rest?: number; // hiit seconds
@@ -71,16 +71,16 @@ const PATTERN: Record<number, number[]> = { 2: [0, 3], 3: [0, 2, 4], 4: [0, 1, 3
 
 function sessionOrder(a: Answers): Session["title"][] {
   const by: Record<Goal, string[]> = {
-    lose: ["fatburn", "fullbody", "cardio"],
-    muscle: ["lower", "upper", "fullbody"],
-    tone: ["glutes", "upper", "fatburn"],
-    fit: ["hiit", "fullbody", "cardio"],
-    eat: ["fullbody", "cardio", "core"],
-    energy: ["fullbody", "cardio", "core"],
+    lose: ["fatburn", "countdown", "cardio", "engine"],
+    muscle: a.equip.includes("bar") ? ["lower", "pullday", "pushday", "upper"] : ["lower", "pushday", "upper", "countdown"],
+    tone: ["glutes", "countdown", "upper", "pushday"],
+    fit: ["engine", "sprint", "cardio", "hiit"],
+    eat: ["fullbody", "cardio", "core", "countdown"],
+    energy: ["fullbody", "cardio", "core", "sprint"],
   };
   const out: string[] = [];
   const lists = a.goals.length ? a.goals.map((g) => by[g]) : [by.fit];
-  for (let i = 0; i < 3; i++) for (const l of lists) if (!out.includes(l[i])) out.push(l[i]);
+  for (let i = 0; i < 4; i++) for (const l of lists) if (!out.includes(l[i])) out.push(l[i]);
   return out;
 }
 
@@ -93,6 +93,7 @@ export function training(a: Answers): Day[][] {
   const baseReps = [8, 10, 12, 15][lvl];
   const rounds = { 15: [2, 2, 3, 3], 30: [3, 3, 4, 4], 45: [4, 4, 5, 5] }[a.minutes][lvl];
   const push = lvl === 0 ? "kneepush" : "push";
+  const FT = [0.3, 0.45, 0.65, 0.9];   // share of the full "for time" volume per level
   const weeks: Day[][] = [];
   for (let w = 0; w < 4; w++) {
     const grow = 1 + 0.1 * w;                    // +10% reps each week
@@ -105,7 +106,7 @@ export function training(a: Answers): Day[][] {
           : [{ ex: lvl >= 2 ? "sqjump" : "squat", reps: R(baseReps + 4) }, { ex: "lunge", reps: R(baseReps), side: true }, { ex: "bridge", reps: R(baseReps + 6) }, { ex: "wall", secs: S(20 + 10 * lvl) }, { ex: "plank", secs: S(20 + 10 * lvl) }] };
         case "upper": return { kind: "strength", title, rounds: rounds, minutes: a.minutes, items: db
           ? [{ ex: "dbchest", reps: R(baseReps) }, { ex: "dbrow", reps: R(baseReps), side: true }, { ex: "dbpress", reps: R(baseReps) }, { ex: push, reps: R(baseReps * 0.8) }, { ex: "situp", reps: R(baseReps + 4) }]
-          : [{ ex: push, reps: R(baseReps) }, { ex: lvl >= 2 ? "pike" : push, reps: R(baseReps * 0.7) }, { ex: "plank", secs: S(25 + 10 * lvl) }, { ex: "situp", reps: R(baseReps + 4) }, { ex: "legraise", reps: R(baseReps) }] };
+          : [{ ex: push, reps: R(baseReps) }, { ex: lvl >= 2 ? "pike" : "climber", reps: R(lvl >= 2 ? baseReps * 0.7 : baseReps * 1.5) }, { ex: "plank", secs: S(25 + 10 * lvl) }, { ex: "situp", reps: R(baseReps + 4) }, { ex: "legraise", reps: R(baseReps) }] };
         case "glutes": return { kind: "circuit", title, rounds, minutes: a.minutes, items: [
           { ex: db ? "dbthrust" : "bridge", reps: R(baseReps + 6) }, { ex: "sumo", reps: R(baseReps + 4) }, { ex: db ? "dblunge" : "lunge", reps: R(baseReps), side: true },
           { ex: db ? "dbrdl" : "squat", reps: R(baseReps + 2) }, { ex: "wall", secs: S(20 + 10 * lvl) }] };
@@ -121,14 +122,54 @@ export function training(a: Answers): Day[][] {
           return { kind: "hiit", title, rounds: hr, work: S(work), rest, minutes: a.minutes, items: [
             { ex: "jack" }, { ex: lvl >= 2 ? "sqjump" : "squat" }, { ex: "climber" }, { ex: lvl >= 2 ? "burpee" : push }, { ex: "plank" }] };
         }
-        case "cardio": return { kind: "cardio", title, rounds: 1, minutes: a.minutes + (lvl >= 2 ? 10 : 0),
-          items: [{ ex: run ? (lvl === 0 ? "walkrun" : lvl === 1 ? "run" : w % 2 ? "intervals" : "run") : "walk", secs: (a.minutes + (lvl >= 2 ? 10 : 0)) * 60 }] };
+        case "cardio": { const m = Math.min(50, a.minutes + (lvl >= 2 ? 10 : 0));
+          return { kind: "cardio", title, rounds: 1, minutes: m,
+            items: [{ ex: run ? (lvl === 0 ? "walkrun" : lvl === 1 ? "run" : w % 2 ? "intervals" : "run") : "walk", secs: m * 60 }] }; }
+        case "countdown": { // descending rounds, for time
+          const f = FT[lvl] * grow, top = a.minutes === 15 ? 3 : a.minutes === 30 ? 4 : 5;
+          const lad = Array.from({ length: top }, (_, k) => Math.max(3, Math.round(((top - k) * 10 * f) / 1)));
+          return { kind: "fortime", title, rounds: top, minutes: a.minutes, items: [
+            { ex: lvl >= 1 ? "burpee" : "jack", ladder: lad.map((x) => Math.max(2, Math.round(x * (lvl >= 1 ? 1 : 2)))) }, { ex: "squat", ladder: lad }, { ex: "situp", ladder: lad }] };
+        }
+        case "engine": { // jacks, burpees, leg raises, situps
+          const f = FT[lvl] * grow, n = a.minutes === 15 ? 2 : 3;
+          const q = (x: number) => Math.max(3, Math.round(x * f));
+          return { kind: "fortime", title, rounds: n, minutes: a.minutes, items: [
+            { ex: "jack", reps: q(75) }, { ex: lvl >= 1 ? "burpee" : "squat", reps: q(25) }, { ex: "legraise", reps: q(50) },
+            { ex: "jack", reps: q(75) }, { ex: "situp", reps: q(50) }, { ex: lvl >= 1 ? "burpee" : "climber", reps: q(25) }] };
+        }
+        case "sprint": { // short and fast: 10 / 25 / 10
+          const f = Math.max(0.4, FT[lvl]) * grow;
+          const lad = [10, 25, 10].map((x) => Math.max(3, Math.round(x * f)));
+          return { kind: "fortime", title, rounds: 3, minutes: 15, items: [
+            { ex: lvl >= 1 ? "burpee" : "squat", ladder: lad }, { ex: "climber", ladder: lad.map((x) => x * 2) }, { ex: lvl >= 2 ? "highjump" : "jack", ladder: lad }] };
+        }
+        case "pushday": { // push-ups, jackknives, deep squats
+          const f = FT[lvl] * grow, n = a.minutes === 15 ? 2 : a.minutes === 30 ? 3 : 4;
+          const q = (x: number) => Math.max(3, Math.round(x * f));
+          return { kind: "fortime", title, rounds: n, minutes: a.minutes, items: [
+            { ex: lvl >= 3 ? "hspush" : push, reps: lvl >= 3 ? 5 : q(50) }, { ex: lvl >= 2 ? "jackknife" : "legraise", reps: q(20) }, { ex: lvl >= 1 ? "deepsquat" : "squat", reps: q(50) }] };
+        }
+        case "pullday": { // pull-ups and push-ups, 20 / 15 / 10 / 5
+          const f = Math.max(0.25, FT[lvl]) * grow;
+          const lad = [20, 15, 10, 5].map((x) => Math.max(1, Math.round(x * f)));
+          const items: Item[] = [{ ex: "pullup", ladder: lad }, { ex: push, ladder: lad }];
+          if (run) items.push({ ex: "sprint", dist: 80, ladder: [1, 1, 1, 1] });
+          return { kind: "fortime", title, rounds: 4, minutes: a.minutes, items };
+        }
         case "core": default: return { kind: "circuit", title: "core", rounds, minutes: a.minutes, items: [
           { ex: "plank", secs: S(20 + 10 * lvl) }, { ex: "situp", reps: R(baseReps + 2) }, { ex: "legraise", reps: R(baseReps) }, { ex: "bridge", reps: R(baseReps + 4) }, { ex: "climber", reps: R(baseReps) }] };
       }
     };
     const week: Day[] = Array.from({ length: 7 }, () => ({ type: "rest" as const }));
     PATTERN[days].forEach((d, i) => { week[d] = { type: "train", session: make(order[(i + w) % order.length]) }; });
+    // MAX tests: first workout of week 1 and last workout of week 4 (to see progress)
+    if (w === 0 || w === 3) {
+      const d = w === 0 ? PATTERN[days][0] : PATTERN[days][PATTERN[days].length - 1];
+      const t = [60, 90, 120, 120][lvl];
+      week[d] = { type: "train", session: { kind: "max", title: "maxtest", rounds: 1, minutes: 15 + Math.round(t / 60) * 4, items: [
+        { ex: "squat", secs: t }, { ex: push, secs: Math.round(t * 0.8 / 10) * 10 }, { ex: "situp", secs: t }, { ex: a.equip.includes("bar") ? "pullup" : "plank", secs: a.equip.includes("bar") ? 60 : 0 }] } };
+    }
     // one easy active day on a rest day
     const free = week.findIndex((d, i) => d.type === "rest" && i !== 6);
     if (free >= 0) week[free] = { type: "active", session: { kind: "mobility", title: "recovery", rounds: 1, minutes: 20, items: [{ ex: "walk", secs: 1200 }, { ex: "stretch", secs: 600 }] } };

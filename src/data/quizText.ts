@@ -8,7 +8,7 @@ const en = {
   goals: { q: "What do you want most?", hint: "Pick up to three, most important first.",
     lose: "Lose weight", muscle: "Build muscle and strength", tone: "Tone and shape", fit: "Get fitter", eat: "Eat healthier", energy: "More energy, less stress" },
   equip: { q: "How do you like to train?", hint: "Pick everything you can use.",
-    body: "At home, no equipment", bodySub: "Just your body and a mat", db: "Dumbbells", dbSub: "At home or in the gym", run: "Running or walking", runSub: "Outside or on a treadmill" },
+    body: "At home, no equipment", bodySub: "Just your body and a mat", db: "Dumbbells", dbSub: "At home or in the gym", run: "Running or walking", runSub: "Outside or on a treadmill" , bar: "Pull-up bar", barSub: "At home, in a park or in the gym" },
   height: { q: "How tall are you?", unit: "cm", err: "Enter a height between 130 and 220 cm." },
   weight: { q: "What do you weigh now?", unit: "kg", target: "Goal weight (optional)", err: "Enter a weight between 35 and 250 kg." },
   year: { q: "What year were you born?", hint: "Calories change with age.", err: "You need to be at least 16." },
@@ -35,9 +35,10 @@ const en = {
     mealNames: { breakfast: "Breakfast", lunch: "Lunch", dinner: "Dinner", snack: "Snack", snack2: "Snack" },
     locked: "Your full training and meal plan unlocks with a membership.", upgrade: "See the plans",
     goalSet: "Smart Plate goal set to your plan",
+    maxReps: "max reps", hold: "hold as long as you can", round: "R",
   },
-  sessions: { lower: "Legs and glutes", upper: "Upper body and core", glutes: "Glutes and legs", fatburn: "Fat burn circuit", fullbody: "Full body", hiit: "Intervals", cardio: "Cardio", core: "Core", recovery: "Walk and stretch" },
-  kinds: { circuit: "Circuit: do every exercise, then repeat", strength: "Sets: do each exercise for all sets, rest 60–90 s", hiit: "Intervals: work, rest, next exercise", cardio: "Steady cardio", mobility: "Easy movement for recovery" },
+  sessions: { lower: "Legs and glutes", upper: "Upper body and core", glutes: "Glutes and legs", fatburn: "Fat burn circuit", fullbody: "Full body", hiit: "Intervals", cardio: "Cardio", core: "Core", recovery: "Walk and stretch" , countdown: "Countdown", engine: "Engine", sprint: "Fast and short", pushday: "Push and core", pullday: "Pull and push", maxtest: "MAX test" },
+  kinds: { circuit: "Circuit: do every exercise, then repeat", strength: "Sets: do each exercise for all sets, rest 60–90 s", hiit: "Intervals: work, rest, next exercise", cardio: "Steady cardio", mobility: "Easy movement for recovery" , fortime: "For time: do the rounds in order as fast as you can with good form. Rest only when you really need to. Write down your time.", max: "MAX test: as many good reps as you can in the time. Rest 3 min between exercises. Write the numbers in your progress." },
 };
 type T = typeof en;
 
@@ -50,7 +51,7 @@ const de: T = {
   goals: { q: "Was willst du am meisten?", hint: "Bis zu drei, das Wichtigste zuerst.",
     lose: "Abnehmen", muscle: "Muskeln und Kraft aufbauen", tone: "Straffen und formen", fit: "Fitter werden", eat: "Gesünder essen", energy: "Mehr Energie, weniger Stress" },
   equip: { q: "Wie trainierst du am liebsten?", hint: "Wähle alles, was du nutzen kannst.",
-    body: "Zuhause, ohne Geräte", bodySub: "Nur dein Körper und eine Matte", db: "Kurzhanteln", dbSub: "Zuhause oder im Studio", run: "Laufen oder Gehen", runSub: "Draußen oder auf dem Laufband" },
+    body: "Zuhause, ohne Geräte", bodySub: "Nur dein Körper und eine Matte", db: "Kurzhanteln", dbSub: "Zuhause oder im Studio", run: "Laufen oder Gehen", runSub: "Draußen oder auf dem Laufband" , bar: "Klimmzugstange", barSub: "Zuhause, im Park oder im Studio" },
   height: { q: "Wie groß bist du?", unit: "cm", err: "Gib eine Größe zwischen 130 und 220 cm ein." },
   weight: { q: "Wie viel wiegst du jetzt?", unit: "kg", target: "Zielgewicht (optional)", err: "Gib ein Gewicht zwischen 35 und 250 kg ein." },
   year: { q: "In welchem Jahr bist du geboren?", hint: "Der Kalorienbedarf ändert sich mit dem Alter.", err: "Du musst mindestens 16 sein." },
@@ -77,9 +78,10 @@ const de: T = {
     mealNames: { breakfast: "Frühstück", lunch: "Mittagessen", dinner: "Abendessen", snack: "Snack", snack2: "Snack" },
     locked: "Dein ganzer Trainings- und Ernährungsplan wird mit einer Mitgliedschaft freigeschaltet.", upgrade: "Pläne ansehen",
     goalSet: "Smart-Plate-Ziel auf deinen Plan gesetzt",
+    maxReps: "max. Wdh.", hold: "so lange wie möglich halten", round: "R",
   },
-  sessions: { lower: "Beine und Po", upper: "Oberkörper und Bauch", glutes: "Po und Beine", fatburn: "Fatburn-Zirkel", fullbody: "Ganzkörper", hiit: "Intervalle", cardio: "Ausdauer", core: "Rumpf", recovery: "Gehen und Dehnen" },
-  kinds: { circuit: "Zirkel: jede Übung einmal, dann wiederholen", strength: "Sätze: jede Übung alle Sätze, 60–90 s Pause", hiit: "Intervalle: Arbeit, Pause, nächste Übung", cardio: "Gleichmäßige Ausdauer", mobility: "Lockere Bewegung zur Erholung" },
+  sessions: { lower: "Beine und Po", upper: "Oberkörper und Bauch", glutes: "Po und Beine", fatburn: "Fatburn-Zirkel", fullbody: "Ganzkörper", hiit: "Intervalle", cardio: "Ausdauer", core: "Rumpf", recovery: "Gehen und Dehnen" , countdown: "Countdown", engine: "Motor", sprint: "Kurz und schnell", pushday: "Drücken und Rumpf", pullday: "Ziehen und Drücken", maxtest: "MAX-Test" },
+  kinds: { circuit: "Zirkel: jede Übung einmal, dann wiederholen", strength: "Sätze: jede Übung alle Sätze, 60–90 s Pause", hiit: "Intervalle: Arbeit, Pause, nächste Übung", cardio: "Gleichmäßige Ausdauer", mobility: "Lockere Bewegung zur Erholung" , fortime: "Auf Zeit: Runden der Reihe nach, so schnell es mit sauberer Technik geht. Pause nur, wenn nötig. Zeit notieren.", max: "MAX-Test: so viele saubere Wiederholungen wie möglich in der Zeit. 3 Min. Pause zwischen den Übungen. Zahlen im Fortschritt eintragen." },
 };
 
 const sr: T = {
@@ -91,7 +93,7 @@ const sr: T = {
   goals: { q: "Šta najviše želiš?", hint: "Izaberi do tri, najvažnije prvo.",
     lose: "Da smršam", muscle: "Mišiće i snagu", tone: "Zategnutost i oblik", fit: "Bolju kondiciju", eat: "Zdraviju ishranu", energy: "Više energije, manje stresa" },
   equip: { q: "Kako voliš da treniraš?", hint: "Izaberi sve što možeš da koristiš.",
-    body: "Kod kuće, bez opreme", bodySub: "Samo telo i prostirka", db: "Bučice", dbSub: "Kod kuće ili u teretani", run: "Trčanje ili hodanje", runSub: "Napolju ili na traci" },
+    body: "Kod kuće, bez opreme", bodySub: "Samo telo i prostirka", db: "Bučice", dbSub: "Kod kuće ili u teretani", run: "Trčanje ili hodanje", runSub: "Napolju ili na traci" , bar: "Šipka za zgibove", barSub: "Kod kuće, u parku ili u teretani" },
   height: { q: "Koliko si visoka?", unit: "cm", err: "Upiši visinu između 130 i 220 cm." },
   weight: { q: "Koliko sada imaš kilograma?", unit: "kg", target: "Željena kilaža (nije obavezno)", err: "Upiši težinu između 35 i 250 kg." },
   year: { q: "Koje godine si rođena?", hint: "Potreba za kalorijama se menja sa godinama.", err: "Moraš imati najmanje 16 godina." },
@@ -118,9 +120,10 @@ const sr: T = {
     mealNames: { breakfast: "Doručak", lunch: "Ručak", dinner: "Večera", snack: "Užina", snack2: "Užina" },
     locked: "Ceo plan treninga i ishrane se otključava članstvom.", upgrade: "Pogledaj planove",
     goalSet: "Smart Plate cilj podešen prema tvom planu",
+    maxReps: "max ponav.", hold: "drži koliko možeš", round: "K",
   },
-  sessions: { lower: "Noge i zadnjica", upper: "Gornji deo i stomak", glutes: "Zadnjica i noge", fatburn: "Kružni za topljenje masti", fullbody: "Celo telo", hiit: "Intervali", cardio: "Kardio", core: "Stomak i leđa", recovery: "Šetnja i istezanje" },
-  kinds: { circuit: "Krug: uradi svaku vežbu, pa ponovi", strength: "Serije: svaka vežba sve serije, pauza 60–90 s", hiit: "Intervali: rad, pauza, sledeća vežba", cardio: "Ravnomeran kardio", mobility: "Lagano kretanje za oporavak" },
+  sessions: { lower: "Noge i zadnjica", upper: "Gornji deo i stomak", glutes: "Zadnjica i noge", fatburn: "Kružni za topljenje masti", fullbody: "Celo telo", hiit: "Intervali", cardio: "Kardio", core: "Stomak i leđa", recovery: "Šetnja i istezanje" , countdown: "Odbrojavanje", engine: "Motor", sprint: "Kratko i brzo", pushday: "Potisak i stomak", pullday: "Vučenje i potisak", maxtest: "MAX test" },
+  kinds: { circuit: "Krug: uradi svaku vežbu, pa ponovi", strength: "Serije: svaka vežba sve serije, pauza 60–90 s", hiit: "Intervali: rad, pauza, sledeća vežba", cardio: "Ravnomeran kardio", mobility: "Lagano kretanje za oporavak" , fortime: "Na vreme: krugove redom, što brže možeš uz dobru formu. Odmaraj samo kad baš moraš. Zapiši vreme.", max: "MAX test: što više dobrih ponavljanja u zadatom vremenu. Pauza 3 min između vežbi. Upiši brojeve u napredak." },
 };
 
 export const QUIZ = { en, de, sr };
