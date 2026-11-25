@@ -8,6 +8,7 @@ import { SectionLabel, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { useLang } from "@/i18n";
 import { useAuth, isActive, hasPlan, hasVip, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
 import { FoodCalculator } from "@/components/FoodCalculator";
+import { openInstagramApp } from "@/lib/instagram";
 import { ExerciseGuide, ExerciseName, ExerciseStrip, guideHint } from "@/components/ExerciseGuide";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import pKit from "@/assets/p-kit.webp";
@@ -304,7 +305,7 @@ const Account = () => {
                   <p className="font-body text-xs text-muted-foreground -mt-2 mb-5 inline-flex items-start gap-1.5"><Utensils className="h-3.5 w-3.5 shrink-0 mt-px text-gold" />{lang === "de" ? "Stell jeden Teller grammgenau zusammen — Kalorien, Eiweiß, Kohlenhydrate und Fett werden sofort berechnet." : lang === "sr" ? "Složi svaki tanjir na gram — kalorije, proteini, ugljeni hidrati i masti se računaju odmah." : "Build every plate to the gram — calories, protein, carbs and fat are calculated instantly."}</p>
                   <FoodCalculator lang={lang} userId={user.id} unlocked={hasVip(user)}
                     pending={!active && slug === "VIP-1-1"}
-                    onUpgrade={() => (active ? window.open(IG_DM, "_blank", "noopener") : setUpgradeOpen(true))} />
+                    onUpgrade={() => (active ? (openInstagramApp() || window.open(IG_DM, "_blank", "noopener")) : setUpgradeOpen(true))} />
                 </section>
               </div>
             </div>

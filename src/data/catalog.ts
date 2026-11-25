@@ -17,7 +17,7 @@ import pSkin from "@/assets/p-skin.webp";
 import pBioniq from "@/assets/p-bioniq.webp";
 
 export const IG_PROFILE = "https://www.instagram.com/dalilafitlife";
-export const IG_DM = "https://ig.me/m/dalilafitlife";
+export const IG_DM = "https://www.instagram.com/dalilafitlife/"; // goes straight to the profile (opens the app on phones)
 
 const flavour = {
   chocolate: { en: "Smooth Chocolate", de: "Zarte Schokolade", sr: "Čokolada" },
