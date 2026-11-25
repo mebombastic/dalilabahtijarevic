@@ -176,7 +176,7 @@ export const AuthDialog = ({ open, onOpenChange, defaultMode = "register", lang,
         if (err) { setError(/confirm/i.test(err.message) ? c.errConfirm : /invalid/i.test(err.message) ? c.errLogin : c.errGeneric); return; }
       }
       onOpenChange(false);
-      navigate("/account");
+      navigate(isRegister ? "/start" : "/account");
     } catch {
       setError(c.errGeneric);
     } finally {

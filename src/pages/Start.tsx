@@ -31,7 +31,7 @@ const Opt = ({ active, onClick, title, sub, badge }: { active: boolean; onClick:
 const Start = () => {
   const { lang, setLang } = useLang();
   const q = QUIZ[lang];
-  const { user, refresh } = useAuth();
+  const { user, refresh, loading } = useAuth();
   const navigate = useNavigate();
   const prev = loadLocal() || (user?.user_metadata?.profile as Answers | undefined) || null;
   const [d, setD] = useState<Draft>(() => prev ? { ...prev } : { goals: [], equip: [], days: 3, minutes: 30, meals: 3, diet: "all" });
@@ -92,13 +92,25 @@ const Start = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader onAuth={() => setAuthOpen(true)} />
       <main className="container mx-auto max-w-xl pt-24 md:pt-32 pb-16">
-        {phase === "quiz" && (
+        {!loading && !user && (
+          <div className="min-h-[60vh] flex flex-col items-center justify-center text-center gap-6">
+            <p className="font-display text-3xl max-w-md">{q.needAccount}</p>
+            <Button onClick={() => setAuthOpen(true)} className="rounded-full h-12 px-8 bg-[hsl(var(--vermilion))] text-white hover:bg-[hsl(var(--vermilion)/0.9)] font-body text-[11px] tracking-luxe uppercase">{q.result.save}</Button>
+          </div>
+        )}
+        {user && phase === "quiz" && (
           <>
             <div className="flex items-center gap-3 mb-8">
-              <button onClick={() => (i ? setI(i - 1) : navigate(-1))} aria-label={q.back} className="h-10 w-10 shrink-0 rounded-full border border-border inline-flex items-center justify-center hover:border-gold"><ArrowLeft className="h-4 w-4" /></button>
+              <button onClick={() => (i ? setI(i - 1) : navigate("/account"))} aria-label={q.back} className="h-10 w-10 shrink-0 rounded-full border border-border inline-flex items-center justify-center hover:border-gold"><ArrowLeft className="h-4 w-4" /></button>
               <div className="flex-1 h-1.5 rounded-full bg-secondary overflow-hidden"><div className="h-full bg-[hsl(var(--vermilion))] transition-[width] duration-500" style={{ width: `${((i + 1) / STEPS.length) * 100}%` }} /></div>
               <span className="font-body text-xs text-muted-foreground w-10 text-right">{i + 1}/{STEPS.length}</span>
             </div>
+            {i === 0 && (
+              <div className="mb-8">
+                <p className="font-display text-2xl text-[hsl(var(--vermilion))]">{q.welcome}</p>
+                <p className="font-body text-sm text-muted-foreground mt-1">{q.welcomeSub}</p>
+              </div>
+            )}
 
             <div key={step} className="animate-blur-up" style={{ animationDuration: "0.45s" }}>
               {step === "sex" && <>
@@ -170,17 +182,19 @@ const Start = () => {
                 {i === STEPS.length - 1 ? q.finish : q.next} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             )}
+            <button onClick={() => { try { sessionStorage.setItem("quiz-skip", "1"); } catch { /* ignore */ } navigate("/account"); }}
+              className="mt-6 w-full text-center font-body text-[10px] tracking-luxe uppercase text-muted-foreground hover:text-gold">{q.skip}</button>
           </>
         )}
 
-        {phase === "building" && (
+        {user && phase === "building" && (
           <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
             <Loader2 className="h-8 w-8 animate-spin text-[hsl(var(--vermilion))] mb-5" />
             <p className="font-display text-3xl">{q.building}</p>
           </div>
         )}
 
-        {phase === "done" && n && (
+        {user && phase === "done" && n && (
           <div className="animate-blur-up">
             <div className="font-body text-[10px] tracking-luxe uppercase text-[hsl(var(--vermilion))] mb-2">{q.result.label}</div>
             <h1 className="font-display text-5xl leading-none mb-3">{q.result.title}{name ? <> <em className="text-[hsl(var(--vermilion))]">{name}.</em></> : null}</h1>

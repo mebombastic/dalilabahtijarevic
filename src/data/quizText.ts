@@ -1,5 +1,6 @@
 /** Text for the plan quiz (/start) and the personal plan in My account. */
 const en = {
+  welcome: "Welcome! Let's set up your plan.", welcomeSub: "A few quick questions so your calories, meals and workouts fit you.", skip: "Later", needAccount: "Create an account or sign in to get your personal plan.",
   nav: "Free plan",
   heroCta: "Get my free plan",
   step: "Step",
@@ -43,6 +44,7 @@ const en = {
 type T = typeof en;
 
 const de: T = {
+  welcome: "Willkommen! Lass uns deinen Plan erstellen.", welcomeSub: "Ein paar kurze Fragen, damit Kalorien, Mahlzeiten und Trainings zu dir passen.", skip: "Später", needAccount: "Erstelle ein Konto oder melde dich an, um deinen persönlichen Plan zu bekommen.",
   nav: "Gratis-Plan",
   heroCta: "Meinen Gratis-Plan holen",
   step: "Schritt",
@@ -85,6 +87,7 @@ const de: T = {
 };
 
 const sr: T = {
+  welcome: "Dobrodošla! Hajde da napravimo tvoj plan.", welcomeSub: "Par kratkih pitanja da kalorije, obroci i treninzi budu baš za tebe.", skip: "Kasnije", needAccount: "Napravi nalog ili se prijavi da dobiješ svoj lični plan.",
   nav: "Besplatan plan",
   heroCta: "Uzmi besplatan plan",
   step: "Korak",

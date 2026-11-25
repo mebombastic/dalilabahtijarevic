@@ -63,6 +63,11 @@ const Account = () => {
       supabase.auth.updateUser({ data: { profile: local } }).then(() => { clearLocal(); refresh(); });
     } else if (local) clearLocal();
   }, [user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (loading || !user || profile || isAdmin(user) || loadLocal()) return;
+    let skipped = false; try { skipped = sessionStorage.getItem("quiz-skip") === "1"; } catch { /* ignore */ }
+    if (!skipped) navigate("/start", { replace: true });
+  }, [loading, user?.id, !!profile]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (window.location.hash === "#plan") setTimeout(() => document.getElementById("plan")?.scrollIntoView({ behavior: "smooth" }), 400); }, []);
   const planChosen = hasPlan(user);
   const [upgradeOpen, setUpgradeOpen] = useState(false);

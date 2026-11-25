@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Globe, Menu, MessageCircle, Moon, Sun, X, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LANGS, LANG_LABEL, useLang } from "@/i18n";
-import { QUIZ } from "@/data/quizText";
 import { IG_DM, IG_PROFILE } from "@/data/catalog";
 import { useAuth, isAdmin } from "@/hooks/use-auth";
 
@@ -103,7 +102,6 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
     { to: "/#why", label: t.nav.why },
     { to: "/products", label: t.nav.products },
     { to: "/plans", label: t.plans.nav },
-    { to: "/start", label: QUIZ[lang].nav },
   ];
   const isActive = (to: string) => to === pathname;
 
