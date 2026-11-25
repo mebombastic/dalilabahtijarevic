@@ -63,12 +63,12 @@ export const sumItems = (items: FoodItem[]) => items.reduce(
 );
 const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "dj");
 
-type Props = { lang: Lang3; userId: string; unlocked: boolean; pending: boolean; onUpgrade: () => void };
+type Props = { lang: Lang3; userId: string; unlocked: boolean; pending: boolean; onUpgrade: () => void; defaultGoal?: Goal };
 
-export const FoodCalculator = ({ lang, userId, unlocked, pending, onUpgrade }: Props) => {
+export const FoodCalculator = ({ lang, userId, unlocked, pending, onUpgrade, defaultGoal }: Props) => {
   const c = T[lang];
   if (!unlocked) return <Locked c={c} pending={pending} onUpgrade={onUpgrade} />;
-  return <Calculator c={c} lang={lang} userId={userId} />;
+  return <Calculator c={c} lang={lang} userId={userId} defaultGoal={defaultGoal} />;
 };
 
 const Locked = ({ c, pending, onUpgrade }: { c: typeof T.en; pending: boolean; onUpgrade: () => void }) => (
@@ -106,12 +106,13 @@ const Bar = ({ value, goal, label, unit, tone }: { value: number; goal?: number;
   );
 };
 
-const Calculator = ({ c, lang, userId }: { c: typeof T.en; lang: Lang3; userId: string }) => {
+const Calculator = ({ c, lang, userId, defaultGoal }: { c: typeof T.en; lang: Lang3; userId: string; defaultGoal?: Goal }) => {
   const todayIso = iso(new Date());
   const [day, setDay] = useState(todayIso);
   const [items, setItems] = useState<FoodItem[]>([]);
   const [custom, setCustom] = useState<Custom[]>([]);
-  const [goal, setGoal] = useState<Goal>({});
+  const [goalSaved, setGoal] = useState<Goal>({});
+  const goal: Goal = goalSaved.k ? goalSaved : (defaultGoal ?? {});
   const [loading, setLoading] = useState(true);
   const [setupNeeded, setSetupNeeded] = useState(false);
   const [status, setStatus] = useState<"" | "saving" | "error">("");

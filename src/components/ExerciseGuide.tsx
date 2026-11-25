@@ -1,6 +1,7 @@
 import { Info } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { EXERCISES, EXERCISE_BY_NAME } from "@/data/exercises";
+import { EXERCISE_BY_NAME } from "@/data/exercises";
+import { ALL_EXERCISES as EXERCISES } from "@/data/exercisesExtra";
 
 type Lang = "en" | "de" | "sr";
 const T = {
@@ -37,14 +38,14 @@ export const ExerciseGuide = ({ exKey, lang, onClose }: { exKey: string | null; 
               <DialogTitle className="font-display text-4xl font-normal leading-none">{t.title}</DialogTitle>
               <DialogDescription className="sr-only">{t.steps.join(" ")}</DialogDescription>
             </div>
-            <div className="mx-6 my-4 grid gap-2 rounded-2xl bg-secondary/50 p-3" style={{ gridTemplateColumns: `repeat(${ex.frames.length}, minmax(0, 1fr))` }}>
+            {ex.frames.length > 0 ? <div className="mx-6 my-4 grid gap-2 rounded-2xl bg-secondary/50 p-3" style={{ gridTemplateColumns: `repeat(${ex.frames.length}, minmax(0, 1fr))` }}>
               {ex.frames.map((f, i) => (
                 <figure key={i} className="text-center">
                   <div className="[&>svg]:w-full [&>svg]:h-auto" dangerouslySetInnerHTML={{ __html: f.svg }} />
                   <figcaption className="font-body text-[9px] tracking-luxe uppercase text-muted-foreground mt-1">{i + 1}. {f.label[lang]}</figcaption>
                 </figure>
               ))}
-            </div>
+            </div> : <div className="h-4" />}
             <ol className="px-6 space-y-3">
               {t.steps.map((s, i) => (
                 <li key={i} className="flex gap-3 font-body text-sm leading-relaxed">
@@ -74,11 +75,12 @@ export const ExerciseStrip = ({ names, lang, onOpen }: { names: string[]; lang: 
       <div className="no-scrollbar flex gap-2.5 overflow-x-auto snap-x pb-1">
         {keys.map((k) => {
           const ex = EXERCISES[k];
-          const f = ex.frames[Math.min(1, ex.frames.length - 1)];
+          const f = ex.frames.length ? ex.frames[Math.min(1, ex.frames.length - 1)] : null;
           return (
             <button key={k} type="button" onClick={() => onOpen(k)}
               className="snap-start shrink-0 w-[132px] rounded-2xl border border-border bg-secondary/40 p-2.5 text-left hover:border-gold active:scale-[0.98] transition">
-              <div className="rounded-xl bg-background p-1 [&>svg]:w-full [&>svg]:h-auto" dangerouslySetInnerHTML={{ __html: f.svg }} />
+              {f ? <div className="rounded-xl bg-background p-1 [&>svg]:w-full [&>svg]:h-auto" dangerouslySetInnerHTML={{ __html: f.svg }} />
+                : <div className="rounded-xl bg-background aspect-[100/70] flex items-center justify-center font-display text-3xl text-gold">{ex[lang].title.charAt(0)}</div>}
               <div className="font-body text-[12px] font-medium leading-tight mt-2 min-h-[2lh]">{ex[lang].title}</div>
               <div className="font-body text-[9px] tracking-luxe uppercase text-gold mt-1 inline-flex items-center gap-1"><Info className="h-3 w-3" /> {T[lang].open}</div>
             </button>

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Globe, Menu, MessageCircle, Moon, Sun, X, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LANGS, LANG_LABEL, useLang } from "@/i18n";
+import { QUIZ } from "@/data/quizText";
 import { IG_DM, IG_PROFILE } from "@/data/catalog";
 import { useAuth, isAdmin } from "@/hooks/use-auth";
 
@@ -102,6 +103,7 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
     { to: "/#why", label: t.nav.why },
     { to: "/products", label: t.nav.products },
     { to: "/plans", label: t.plans.nav },
+    { to: "/start", label: QUIZ[lang].nav },
   ];
   const isActive = (to: string) => to === pathname;
 
@@ -110,9 +112,9 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
       <div className="container mx-auto flex items-center justify-between py-4">
         <Link to="/" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
           <Monogram className="text-2xl" />
-          <span className="hidden lg:block font-body text-[10px] tracking-luxe uppercase text-muted-foreground">Dalila Bahtijarevic · FitLife Coach</span>
+          <span className="hidden 2xl:block font-body text-[10px] tracking-luxe uppercase text-muted-foreground">Dalila Bahtijarevic · FitLife Coach</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-8 lg:gap-10 font-body text-xs tracking-wide-2 uppercase">
+        <nav className="hidden xl:flex items-center gap-7 2xl:gap-10 whitespace-nowrap font-body text-xs tracking-wide-2 uppercase">
           {links.map((l) => (
             <Link key={l.to} to={l.to} className={`hover:text-gold transition-colors ${isActive(l.to) ? "text-gold" : ""}`}>{l.label}</Link>
           ))}
@@ -144,7 +146,7 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
             aria-expanded={menuOpen}
-            className="md:hidden inline-flex items-center justify-center h-9 w-9 -mr-1 text-foreground/80 hover:text-gold transition-colors"
+            className="xl:hidden inline-flex items-center justify-center h-9 w-9 -mr-1 text-foreground/80 hover:text-gold transition-colors"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -152,7 +154,7 @@ export const SiteHeader = ({ onAuth }: { onAuth: (mode: "register" | "login") =>
       </div>
 
       {/* mobile menu */}
-      <div className={`md:hidden grid transition-[grid-template-rows,opacity] duration-500 ease-luxe ${menuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none"}`}>
+      <div className={`xl:hidden grid transition-[grid-template-rows,opacity] duration-500 ease-luxe ${menuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none"}`}>
         <nav className="overflow-hidden">
           <div className="container mx-auto pb-6 pt-2 flex flex-col">
             {[{ to: "/", label: t.nav.home }, ...links, ...(user && isAdmin(user) ? [{ to: "/admin", label: t.admin.nav }] : [])].map((l) => (

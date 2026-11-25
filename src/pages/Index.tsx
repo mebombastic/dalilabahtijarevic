@@ -16,6 +16,7 @@ import { useReveal } from "@/hooks/use-reveal";
 import { useParallax } from "@/hooks/use-parallax";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import { Words } from "@/components/Words";
+import { QUIZ } from "@/data/quizText";
 import { useLang } from "@/i18n";
 import { IG_DM, IG_PROFILE, getProducts, getRitual, heroLineup } from "@/data/catalog";
 
@@ -90,8 +91,8 @@ const Index = () => {
             {t.hero.text}
           </p>
           <div className="animate-blur-up flex flex-wrap gap-4 justify-center" style={{ animationDelay: "2.15s" }}>
-            <Button size="lg" onClick={() => openAuth("register")} className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
-              {t.nav.createAccount}
+            <Button asChild size="lg" className="btn-shine bg-gold text-primary-foreground hover:bg-gold/90 rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 shadow-gold">
+              <Link to="/start">{QUIZ[lang].heroCta}</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-[hsl(37_40%_90%/0.35)] text-[hsl(37_40%_90%)] hover:border-gold hover:text-gold rounded-full font-body text-xs tracking-luxe uppercase h-14 px-8 bg-transparent">
               <Link to="/products">{t.hero.explore} <ArrowRight className="ml-2 h-3 w-3" /></Link>

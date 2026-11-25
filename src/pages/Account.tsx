@@ -6,9 +6,13 @@ import { Input } from "@/components/ui/input";
 import { AuthDialog } from "@/components/AuthDialog";
 import { SectionLabel, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { useLang } from "@/i18n";
-import { useAuth, isActive, hasPlan, hasVip, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
+import { useAuth, isActive, isAdmin, hasPlan, hasVip, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
 import { FoodCalculator } from "@/components/FoodCalculator";
 import { openInstagramApp } from "@/lib/instagram";
+import { PersonalPlan } from "@/components/PersonalPlan";
+import { QUIZ } from "@/data/quizText";
+import { clearLocal, isAnswers, loadLocal, nutrition as calcNutrition, type Answers } from "@/lib/plan";
+import { useNavigate } from "react-router-dom";
 import { ExerciseGuide, ExerciseName, ExerciseStrip, guideHint } from "@/components/ExerciseGuide";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import pKit from "@/assets/p-kit.webp";
@@ -49,6 +53,17 @@ const Account = () => {
   }, [user, params, setParams, refresh]);
 
   const active = isActive(user);
+  const navigate = useNavigate();
+  const profile: Answers | null = isAnswers(user?.user_metadata?.profile) ? (user!.user_metadata.profile as Answers) : null;
+  // answers from the quiz taken before signing up -> save them to the account once
+  useEffect(() => {
+    if (!user) return;
+    const local = loadLocal();
+    if (local && JSON.stringify(local) !== JSON.stringify(user.user_metadata?.profile)) {
+      supabase.auth.updateUser({ data: { profile: local } }).then(() => { clearLocal(); refresh(); });
+    } else if (local) clearLocal();
+  }, [user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (window.location.hash === "#plan") setTimeout(() => document.getElementById("plan")?.scrollIntoView({ behavior: "smooth" }), 400); }, []);
   const planChosen = hasPlan(user);
   const [upgradeOpen, setUpgradeOpen] = useState(false);
   const [choosing, setChoosing] = useState<PlanId | null>(null);
@@ -137,6 +152,22 @@ const Account = () => {
           </section>
 
           <main className="container mx-auto py-8 md:py-14 space-y-5 md:space-y-6">
+            {/* personal plan from the quiz */}
+            <section id="plan" className={`${card} scroll-mt-24`}>
+              <SectionLabel>{QUIZ[lang].plan.title}</SectionLabel>
+              {profile ? (
+                <>
+                  <p className="font-body text-xs text-muted-foreground -mt-2 mb-5">{QUIZ[lang].plan.sub}</p>
+                  <PersonalPlan answers={profile} lang={lang} unlocked={active || isAdmin(user)} onExercise={setExKey} onRedo={() => navigate("/start")} />
+                </>
+              ) : (
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <p className="font-body text-sm text-muted-foreground max-w-md">{QUIZ[lang].plan.start}</p>
+                  <Button onClick={() => navigate("/start")} className="btn-shine rounded-full h-12 px-7 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[11px] tracking-luxe uppercase">{QUIZ[lang].plan.startBtn}</Button>
+                </div>
+              )}
+            </section>
+
             {!active && !planChosen && (
               <section className={`${card} border-vermilion/40 flex flex-wrap items-center justify-between gap-6`}>
                 <div className="max-w-xl">
@@ -304,6 +335,7 @@ const Account = () => {
                   </div>
                   <p className="font-body text-xs text-muted-foreground -mt-2 mb-5 inline-flex items-start gap-1.5"><Utensils className="h-3.5 w-3.5 shrink-0 mt-px text-gold" />{lang === "de" ? "Stell jeden Teller grammgenau zusammen — Kalorien, Eiweiß, Kohlenhydrate und Fett werden sofort berechnet." : lang === "sr" ? "Složi svaki tanjir na gram — kalorije, proteini, ugljeni hidrati i masti se računaju odmah." : "Build every plate to the gram — calories, protein, carbs and fat are calculated instantly."}</p>
                   <FoodCalculator lang={lang} userId={user.id} unlocked={hasVip(user)}
+                    defaultGoal={profile ? (() => { const nn = calcNutrition(profile); return { k: nn.kcal, p: nn.protein }; })() : undefined}
                     pending={!active && slug === "VIP-1-1"}
                     onUpgrade={() => (active ? (openInstagramApp() || window.open(IG_DM, "_blank", "noopener")) : setUpgradeOpen(true))} />
                 </section>
