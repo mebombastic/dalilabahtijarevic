@@ -745,7 +745,7 @@ export const MEMBER_PLANS = {
     "Schlag jeden Wert aus Woche 1."
    ],
    "workouts": {
-    "MAX tests": {
+    "MAX-Tests": {
      "level": "Test",
      "kind": "Woche 1 und 4",
      "rules": "So viele Wiederholungen wie möglich in der vorgegebenen Zeit — voller Bewegungsumfang, saubere Technik. 3 Minuten Pause zwischen den Tests. Trag jede Zahl ein.",
@@ -1303,7 +1303,7 @@ export const MEMBER_PLANS = {
     "Pobedi svaki broj iz nedelje 1."
    ],
    "workouts": {
-    "MAX tests": {
+    "MAX testovi": {
      "level": "Test",
      "kind": "Nedelja 1 i 4",
      "rules": "Što više ponavljanja u zadatom vremenu — pun pokret, dobra forma. 3 minuta odmora između testova. Upiši svaki broj.",
@@ -2439,7 +2439,7 @@ export const MEMBER_PLANS = {
     "Schlag jeden Wert aus Woche 1."
    ],
    "workouts": {
-    "MAX tests": {
+    "MAX-Tests": {
      "level": "Test",
      "kind": "Woche 1 und 4",
      "rules": "So viele Wiederholungen wie möglich in der vorgegebenen Zeit — voller Bewegungsumfang, saubere Technik. 3 Minuten Pause zwischen den Tests. Trag jede Zahl ein.",
@@ -3006,7 +3006,7 @@ export const MEMBER_PLANS = {
     "Pobedi svaki broj iz nedelje 1."
    ],
    "workouts": {
-    "MAX tests": {
+    "MAX testovi": {
      "level": "Test",
      "kind": "Nedelja 1 i 4",
      "rules": "Što više ponavljanja u zadatom vremenu — pun pokret, dobra forma. 3 minuta odmora između testova. Upiši svaki broj.",
