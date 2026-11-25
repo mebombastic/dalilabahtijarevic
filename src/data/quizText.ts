@@ -1,5 +1,6 @@
 /** Text for the plan quiz (/start) and the personal plan in My account. */
 const en = {
+  log: { mark: "Mark as done", done: "Done", undo: "Undo", result: "Your time or reps (optional)", resultPh: "e.g. 14:30 or 42", save: "Save", thisWeek: "This week", total: "Workouts done", streak: "weeks in a row", restLbl: "Rest", rest: { strength: "60–90 s between sets", circuit: "60 s after each round", hiit: "1 min between rounds", fortime: "only when you must, keep it short", max: "3 min between exercises" } },
   welcome: "Welcome! Let's set up your plan.", welcomeSub: "A few quick questions so your calories, meals and workouts fit you.", skip: "Later", needAccount: "Create an account or sign in to get your personal plan.",
   nav: "Free plan",
   heroCta: "Get my free plan",
@@ -44,6 +45,7 @@ const en = {
 type T = typeof en;
 
 const de: T = {
+  log: { mark: "Als erledigt markieren", done: "Erledigt", undo: "Rückgängig", result: "Deine Zeit oder Wiederholungen (optional)", resultPh: "z. B. 14:30 oder 42", save: "Speichern", thisWeek: "Diese Woche", total: "Trainings erledigt", streak: "Wochen am Stück", restLbl: "Pause", rest: { strength: "60–90 s zwischen den Sätzen", circuit: "60 s nach jeder Runde", hiit: "1 Min. zwischen den Runden", fortime: "nur wenn nötig, kurz halten", max: "3 Min. zwischen den Übungen" } },
   welcome: "Willkommen! Lass uns deinen Plan erstellen.", welcomeSub: "Ein paar kurze Fragen, damit Kalorien, Mahlzeiten und Trainings zu dir passen.", skip: "Später", needAccount: "Erstelle ein Konto oder melde dich an, um deinen persönlichen Plan zu bekommen.",
   nav: "Gratis-Plan",
   heroCta: "Meinen Gratis-Plan holen",
@@ -87,6 +89,7 @@ const de: T = {
 };
 
 const sr: T = {
+  log: { mark: "Označi kao urađeno", done: "Urađeno", undo: "Poništi", result: "Tvoje vreme ili ponavljanja (nije obavezno)", resultPh: "npr. 14:30 ili 42", save: "Sačuvaj", thisWeek: "Ove nedelje", total: "Urađenih treninga", streak: "nedelja zaredom", restLbl: "Pauza", rest: { strength: "60–90 s između serija", circuit: "60 s posle svakog kruga", hiit: "1 min između krugova", fortime: "samo kad moraš, što kraće", max: "3 min između vežbi" } },
   welcome: "Dobrodošla! Hajde da napravimo tvoj plan.", welcomeSub: "Par kratkih pitanja da kalorije, obroci i treninzi budu baš za tebe.", skip: "Kasnije", needAccount: "Napravi nalog ili se prijavi da dobiješ svoj lični plan.",
   nav: "Besplatan plan",
   heroCta: "Uzmi besplatan plan",

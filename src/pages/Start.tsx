@@ -64,6 +64,7 @@ const Start = () => {
   const next = () => {
     if (!valid) return;
     if (i < STEPS.length - 1) { setI(i + 1); window.scrollTo(0, 0); return; }
+    answers.started = answers.started || new Date().toISOString().slice(0, 10);
     saveLocal(answers);
     setPhase("building");
     setTimeout(() => setPhase("done"), 1800);

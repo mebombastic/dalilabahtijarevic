@@ -12,7 +12,8 @@ import { openInstagramApp } from "@/lib/instagram";
 import { PersonalPlan } from "@/components/PersonalPlan";
 import { DeleteAccount } from "@/components/DeleteAccount";
 import { QUIZ } from "@/data/quizText";
-import { clearLocal, isAnswers, loadLocal, nutrition as calcNutrition, type Answers } from "@/lib/plan";
+import { clearLocal, isAnswers, loadLocal, nutrition as calcNutrition, type Answers, type Done } from "@/lib/plan";
+import { ProgressChart } from "@/components/ProgressChart";
 import { useNavigate } from "react-router-dom";
 import { ExerciseGuide } from "@/components/ExerciseGuide";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -156,7 +157,9 @@ const Account = () => {
               {profile ? (
                 <>
                   <p className="font-body text-xs text-muted-foreground -mt-2 mb-5">{QUIZ[lang].plan.sub}</p>
-                  <PersonalPlan answers={profile} lang={lang} unlocked={active || isAdmin(user)} onExercise={setExKey} onRedo={() => navigate("/start")} />
+                  <PersonalPlan answers={profile} lang={lang} unlocked={active || isAdmin(user)} onExercise={setExKey} onRedo={() => navigate("/start")}
+                    startFallback={user.created_at} done={(user.user_metadata?.done as Done[]) || []}
+                    onDone={async (next) => { await supabase.auth.updateUser({ data: { done: next } }); await refresh(); }} />
                 </>
               ) : (
                 <div className="flex flex-wrap items-center justify-between gap-4">
@@ -233,6 +236,7 @@ const Account = () => {
                 <section className={`${card} lg:col-span-2`}>
                   <SectionLabel>{m.progress}</SectionLabel>
                   <p className="font-body text-xs text-muted-foreground -mt-2 mb-5">{m.progressSub}</p>
+                  <ProgressChart entries={entries} lang={lang} />
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {([["d", m.date, "date"], ["w", m.weight, "number"], ["wa", m.waist, "number"], ["sq", m.squat, "number"], ["pu", m.pushup, "number"], ["su", m.situp, "number"], ["pl", m.plank, "number"]] as const).map(([k, label, type]) => (
                       <label key={k} className="block">

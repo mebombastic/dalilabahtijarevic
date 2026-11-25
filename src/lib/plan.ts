@@ -17,9 +17,22 @@ export type Answers = {
   minutes: 15 | 30 | 45;
   diet: "all" | "veg" | "fish";
   meals: 3 | 4 | 5;
+  started?: string;       // YYYY-MM-DD, when the plan began
 };
 
 export const age = (a: Answers) => new Date().getFullYear() - a.year;
+
+/** Where the member is in the plan today: cycle (every 4 weeks a new round), week 0–3 and weekday 0–6. */
+export function planPosition(a: Answers, fallbackStart?: string) {
+  const start = new Date((a.started || fallbackStart || new Date().toISOString()).slice(0, 10) + "T00:00:00");
+  // align to the Monday of the start week
+  start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+  const days = Math.max(0, Math.floor((Date.now() - start.getTime()) / 864e5));
+  const weeks = Math.floor(days / 7);
+  return { cycle: Math.floor(weeks / 4), week: weeks % 4, day: (new Date().getDay() + 6) % 7 };
+}
+export type Done = { k: string; d: string; r?: string };
+export const doneKey = (cycle: number, week: number, day: number) => `c${cycle}w${week}d${day}`;
 
 /* ---------------- nutrition ---------------- */
 export type Nutrition = {

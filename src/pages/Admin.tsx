@@ -13,7 +13,7 @@ import { AdminFoodSummary } from "@/components/FoodCalculator";
 type Entry = { d: string; w?: string; wa?: string; sq?: string; pu?: string; su?: string; pl?: string };
 type Member = {
   id: string; email: string; created_at: string; last_sign_in_at: string | null;
-  user_meta: { name?: string; plan?: PlanId; payment_reported?: string; progress?: Entry[]; lang?: string };
+  user_meta: { name?: string; plan?: PlanId; payment_reported?: string; progress?: Entry[]; lang?: string; done?: { k: string; d: string; r?: string }[]; profile?: { weight?: number; height?: number; target?: number; goals?: string[] } };
   app_meta: { membership?: string; activated_at?: string; role?: string };
 };
 type Filter = "all" | "waiting" | "paid" | "active" | "free";
@@ -193,6 +193,20 @@ const Admin = () => {
                               <tbody>{prog.map((e, i) => <tr key={i} className="border-t border-border">{[e.d, e.w, e.wa, e.sq, e.pu, e.su, e.pl].map((v, k) => <td key={k} className="py-1.5 pr-2">{v || "—"}</td>)}</tr>)}</tbody>
                             </table></div>
                           )}
+                        </div>
+                        <div>
+                          <div className="font-body text-[9px] tracking-luxe uppercase text-gold mb-2">{{ en: "Workouts", de: "Trainings", sr: "Treninzi" }[lang]}</div>
+                          {(() => {
+                            const dn = (mb.user_meta.done || []).slice().sort((a, b) => b.d.localeCompare(a.d));
+                            const pf = mb.user_meta.profile;
+                            const wk = dn.filter((x) => Date.now() - new Date(x.d + "T12:00:00").getTime() < 7 * 864e5).length;
+                            return (
+                              <div className="font-body text-sm space-y-1">
+                                <p>{{ en: "Done in total", de: "Insgesamt erledigt", sr: "Ukupno urađeno" }[lang]}: <b className="font-medium">{dn.length}</b> · {{ en: "last 7 days", de: "letzte 7 Tage", sr: "poslednjih 7 dana" }[lang]}: <b className="font-medium">{wk}</b>{dn[0] ? <> · {{ en: "last", de: "zuletzt", sr: "poslednji" }[lang]}: {dn[0].d}{dn[0].r ? ` (${dn[0].r})` : ""}</> : null}</p>
+                                {pf && <p className="text-muted-foreground text-xs">{pf.height} cm · {pf.weight} kg{pf.target ? ` → ${pf.target} kg` : ""}{pf.goals?.length ? ` · ${pf.goals.join(", ")}` : ""}</p>}
+                              </div>
+                            );
+                          })()}
                         </div>
                         <AdminFoodSummary userId={mb.id} lang={lang} />
                       </div>
