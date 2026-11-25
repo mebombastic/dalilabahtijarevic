@@ -1688,7 +1688,7 @@ export const MEMBER_PLANS = {
     ],
     [
      "Weekly",
-     "video call"
+     "plate calculator"
     ],
     [
      "Weekly",
@@ -2255,7 +2255,7 @@ export const MEMBER_PLANS = {
     ],
     [
      "Wöchentlich",
-     "Videoanruf"
+     "Plate-Rechner"
     ],
     [
      "Wöchentlich",
@@ -2822,7 +2822,7 @@ export const MEMBER_PLANS = {
     ],
     [
      "Nedeljni",
-     "video poziv"
+     "Plate kalkulator"
     ],
     [
      "Nedeljni",
