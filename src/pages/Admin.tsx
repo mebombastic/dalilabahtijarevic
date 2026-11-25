@@ -8,6 +8,7 @@ import { SectionLabel, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { useLang } from "@/i18n";
 import { useAuth, isAdmin, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
+import { AdminFoodSummary } from "@/components/FoodCalculator";
 
 type Entry = { d: string; w?: string; wa?: string; sq?: string; pu?: string; su?: string; pl?: string };
 type Member = {
@@ -193,6 +194,7 @@ const Admin = () => {
                             </table></div>
                           )}
                         </div>
+                        <AdminFoodSummary userId={mb.id} lang={lang} />
                       </div>
                     )}
                   </li>

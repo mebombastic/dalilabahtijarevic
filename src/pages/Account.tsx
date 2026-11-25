@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Check, Crown, Sparkles, Download, Lock, LogOut, MessageCircle, Clock, Dumbbell, TrendingUp, Loader2, Trophy } from "lucide-react";
+import { Check, Crown, Sparkles, Download, Lock, LogOut, MessageCircle, Clock, Dumbbell, TrendingUp, Loader2, Trophy, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AuthDialog } from "@/components/AuthDialog";
 import { SectionLabel, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { useLang } from "@/i18n";
-import { useAuth, isActive, hasPlan, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
+import { useAuth, isActive, hasPlan, hasVip, userPlan, PLAN_NAMES, type PlanId } from "@/hooks/use-auth";
+import { FoodCalculator } from "@/components/FoodCalculator";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import pKit from "@/assets/p-kit.webp";
 import { supabase } from "@/integrations/supabase/client";
@@ -288,6 +289,18 @@ const Account = () => {
                   <div className="font-script text-3xl text-gold leading-none mb-2">Dalila</div>
                   <p className="font-body text-sm text-muted-foreground mb-6">{m.coach}</p>
                   <Button asChild className="mt-auto rounded-full h-12 px-7 bg-primary text-primary-foreground font-body text-[11px] tracking-luxe uppercase"><a href={IG_DM} target="_blank" rel="noopener noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> Instagram</a></Button>
+                </section>
+
+                {/* food calculator (VIP) */}
+                <section className={`${card} lg:col-span-3`}>
+                  <div className="flex flex-wrap items-center gap-x-3">
+                    <SectionLabel>{lang === "de" ? "Kalorienrechner" : lang === "sr" ? "Kalkulator hrane" : "Food calculator"}</SectionLabel>
+                    <span className="mb-4 inline-flex items-center gap-1 rounded-full bg-primary text-primary-foreground px-2.5 py-1 font-body text-[9px] tracking-luxe uppercase"><Crown className="h-3 w-3" /> VIP</span>
+                  </div>
+                  <p className="font-body text-xs text-muted-foreground -mt-2 mb-5 inline-flex items-start gap-1.5"><Utensils className="h-3.5 w-3.5 shrink-0 mt-px text-gold" />{lang === "de" ? "Lebensmittel suchen, Gramm eingeben — Kalorien, Eiweiß, Kohlenhydrate und Fett werden automatisch berechnet." : lang === "sr" ? "Pronađi namirnicu, upiši grame i kalkulator sabira kalorije, proteine, ugljene hidrate i masti." : "Search a food, enter the grams and it adds up calories, protein, carbs and fat for you."}</p>
+                  <FoodCalculator lang={lang} userId={user.id} unlocked={hasVip(user)}
+                    pending={!active && slug === "VIP-1-1"}
+                    onUpgrade={() => (active ? window.open(IG_DM, "_blank", "noopener") : setUpgradeOpen(true))} />
                 </section>
               </div>
             </div>

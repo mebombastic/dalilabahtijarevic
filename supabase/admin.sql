@@ -53,6 +53,8 @@ begin
   update auth.users
      set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb)
          || jsonb_build_object('membership', status, 'activated_at', start_date::text)
+         -- remember which plan was paid for, so members can't switch themselves to VIP
+         || jsonb_build_object('paid_plan', coalesce(raw_user_meta_data ->> 'plan', 'Strong-and-Toned'))
    where id = target;
 end;
 $$;
@@ -72,7 +74,8 @@ begin
     raise exception 'invalid plan';
   end if;
   update auth.users
-     set raw_user_meta_data = coalesce(raw_user_meta_data, '{}'::jsonb) || jsonb_build_object('plan', plan)
+     set raw_user_meta_data = coalesce(raw_user_meta_data, '{}'::jsonb) || jsonb_build_object('plan', plan),
+         raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || jsonb_build_object('paid_plan', plan)
    where id = target;
 end;
 $$;
