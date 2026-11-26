@@ -32,7 +32,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "title": "Squat",
    "steps": [
     "Stand tall, feet shoulder-width, toes slightly out.",
-    "Push hips back and down until thighs are parallel - knees out, heels down, chest up.",
+    "Push hips back and down until thighs are parallel, knees out, heels down, chest up.",
     "Drive through your heels back to standing. That's one rep."
    ],
    "easy": "Squat down to a chair and stand up again.",
@@ -42,7 +42,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "title": "Kniebeuge",
    "steps": [
     "Steh aufrecht, Füße schulterbreit, Zehen leicht nach außen.",
-    "Hüfte nach hinten und unten, bis die Oberschenkel parallel sind - Knie raus, Fersen unten, Brust hoch.",
+    "Hüfte nach hinten und unten, bis die Oberschenkel parallel sind, Knie raus, Fersen unten, Brust hoch.",
     "Drück dich über die Fersen zurück in den Stand. Das ist eine Wiederholung."
    ],
    "easy": "Setz dich kurz auf einen Stuhl und steh wieder auf.",
@@ -52,7 +52,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "title": "Čučanj",
    "steps": [
     "Stani uspravno, stopala u širini ramena, prsti blago ka spolja.",
-    "Kukove nazad i dole dok butine ne budu paralelne - kolena ka spolja, pete dole, grudi gore.",
+    "Kukove nazad i dole dok butine ne budu paralelne, kolena ka spolja, pete dole, grudi gore.",
     "Odgurni se petama nazad u stojeći stav. To je jedno ponavljanje."
    ],
    "easy": "Čučni do stolice i ponovo ustani.",
@@ -207,7 +207,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "steps": [
     "High plank, hands under shoulders.",
     "Drive one knee towards your chest.",
-    "Switch legs quickly. Each side counts as one rep - keep hips low."
+    "Switch legs quickly. Each side counts as one rep, keep hips low."
    ],
    "easy": "Slow steps instead of fast switches.",
    "easyLabel": "Easier"
@@ -217,7 +217,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "steps": [
     "Hoher Stütz, Hände unter den Schultern.",
     "Zieh ein Knie Richtung Brust.",
-    "Wechsle die Beine schnell. Jede Seite zählt als eine Wiederholung - Hüfte tief."
+    "Wechsle die Beine schnell. Jede Seite zählt als eine Wiederholung, Hüfte tief."
    ],
    "easy": "Langsame Schritte statt schneller Wechsel.",
    "easyLabel": "Leichter"
@@ -227,7 +227,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "steps": [
     "Visoki plank, šake ispod ramena.",
     "Povuci jedno koleno ka grudima.",
-    "Brzo menjaj noge. Svaka strana je jedno ponavljanje - kukovi nisko."
+    "Brzo menjaj noge. Svaka strana je jedno ponavljanje, kukovi nisko."
    ],
    "easy": "Spori koraci umesto brzih promena.",
    "easyLabel": "Lakše"
@@ -430,7 +430,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "title": "Plank",
    "steps": [
     "Forearms under shoulders, legs straight, toes on the floor.",
-    "Body in one straight line - belly and glutes tight, don't let the hips sag.",
+    "Body in one straight line, belly and glutes tight, don't let the hips sag.",
     "Hold for the time given and breathe calmly."
    ],
    "easy": "Knees on the floor, as in the second picture.",
@@ -440,7 +440,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "title": "Plank",
    "steps": [
     "Unterarme unter den Schultern, Beine gestreckt, Zehen auf dem Boden.",
-    "Körper in einer Linie - Bauch und Po fest, Hüfte nicht durchhängen lassen.",
+    "Körper in einer Linie, Bauch und Po fest, Hüfte nicht durchhängen lassen.",
     "Halte die vorgegebene Zeit und atme ruhig."
    ],
    "easy": "Knie auf dem Boden, wie im zweiten Bild.",
@@ -450,7 +450,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
    "title": "Plank",
    "steps": [
     "Podlaktice ispod ramena, noge ispružene, prsti na podu.",
-    "Telo u jednoj liniji - stomak i gluteusi stegnuti, kukovi ne propadaju.",
+    "Telo u jednoj liniji, stomak i gluteusi stegnuti, kukovi ne propadaju.",
     "Drži zadato vreme i diši mirno."
    ],
    "easy": "Kolena na podu, kao na drugoj slici.",
@@ -603,7 +603,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
   "en": {
    "title": "Pike push-up",
    "steps": [
-    "Hands and feet on the floor, hips high - an upside-down V.",
+    "Hands and feet on the floor, hips high, an upside-down V.",
     "Bend your elbows and lower your head towards the floor between your hands.",
     "Push back up. Works shoulders and arms."
    ],
@@ -613,7 +613,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
   "de": {
    "title": "Pike-Liegestütz",
    "steps": [
-    "Hände und Füße auf dem Boden, Hüfte hoch - ein umgedrehtes V.",
+    "Hände und Füße auf dem Boden, Hüfte hoch, ein umgedrehtes V.",
     "Beuge die Ellbogen und senk den Kopf zwischen den Händen Richtung Boden.",
     "Drück dich wieder hoch. Trainiert Schultern und Arme."
    ],
@@ -623,7 +623,7 @@ export const EXERCISES: Record<string, { frames: { svg: string; label: Record<"e
   "sr": {
    "title": "Pike sklek",
    "steps": [
-    "Šake i stopala na podu, kukovi visoko - obrnuto slovo V.",
+    "Šake i stopala na podu, kukovi visoko, obrnuto slovo V.",
     "Savij laktove i spusti glavu ka podu između šaka.",
     "Odgurni se nazad gore. Radi ramena i ruke."
    ],

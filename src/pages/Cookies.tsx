@@ -16,14 +16,14 @@ const Cookies = () => (
     <H2>Types of Cookies We Use</H2>
     <ul className="list-disc pl-5 space-y-2">
       <li>
-        <strong>Essential cookies</strong> - required for the site to function (e.g.,
+        <strong>Essential cookies</strong>: required for the site to function (e.g.,
         login, security, language preference).
       </li>
       <li>
-        <strong>Preference cookies</strong> - remember your theme and language choices.
+        <strong>Preference cookies</strong>: remember your theme and language choices.
       </li>
       <li>
-        <strong>Analytics cookies</strong> - help us understand how visitors use the
+        <strong>Analytics cookies</strong>: help us understand how visitors use the
         site so we can improve it. Only set if you accept.
       </li>
     </ul>
