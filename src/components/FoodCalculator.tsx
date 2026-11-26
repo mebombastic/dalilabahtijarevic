@@ -21,36 +21,36 @@ const T = {
     today: "Today", meals: ["Breakfast", "Lunch", "Dinner", "Snacks"], search: "Search food… e.g. chicken, rice, shake",
     grams: "Grams", add: "Add", per100: "per 100 g", noResults: "Not in the list?", addOwn: "Add your own food",
     own: "Your food", name: "Name", kcal: "kcal", protein: "Protein", carbs: "Carbs", fat: "Fat", saveFood: "Save food",
-    goal: "Daily goal", setGoal: "Set goal", empty: "Nothing logged yet — add your first food above.",
-    total: "Total", left: "left", over: "over", setup: "The food calculator is almost ready — Dalila is finishing the setup.",
-    lockedTitle: "Smart Plate Calculator is a VIP tool", lockedText: "Log every meal by grams and see your calories, protein, carbs and fat for each day — with goals set together with me.",
-    upgrade: "Upgrade to VIP 1:1", lockedPending: "Unlocks as soon as your VIP membership is active.", saving: "Saving…", error: "Couldn't save — check your connection.",
+    goal: "Daily goal", setGoal: "Set goal", empty: "Nothing logged yet - add your first food above.",
+    total: "Total", left: "left", over: "over", setup: "The food calculator is almost ready - Dalila is finishing the setup.",
+    lockedTitle: "Smart Plate Calculator is a VIP tool", lockedText: "Log every meal by grams and see your calories, protein, carbs and fat for each day - with goals set together with me.",
+    upgrade: "Upgrade to VIP 1:1", lockedPending: "Unlocks as soon as your VIP membership is active.", saving: "Saving…", error: "Couldn't save - check your connection.",
     approx: "Herbalife values are approximate.",
-    plate: "Your plate", plateFor: "for", plateHint: "Build your plate: add as many foods as you like — e.g. chicken + rice + salad + olive oil — then save the whole plate.", addPlate: "Add plate to", clear: "Clear", plateN: "Plate", addMore: "Add another food…", foods: "foods",
+    plate: "Your plate", plateFor: "for", plateHint: "Build your plate: add as many foods as you like - e.g. chicken + rice + salad + olive oil - then save the whole plate.", addPlate: "Add plate to", clear: "Clear", plateN: "Plate", addMore: "Add another food…", foods: "foods",
   },
   de: {
-    label: "Kalorienrechner", vip: "VIP", sub: "Lebensmittel suchen, Gramm eingeben — Kalorien, Eiweiß, Kohlenhydrate und Fett werden automatisch berechnet.",
+    label: "Kalorienrechner", vip: "VIP", sub: "Lebensmittel suchen, Gramm eingeben - Kalorien, Eiweiß, Kohlenhydrate und Fett werden automatisch berechnet.",
     today: "Heute", meals: ["Frühstück", "Mittagessen", "Abendessen", "Snacks"], search: "Lebensmittel suchen… z. B. Hähnchen, Reis, Shake",
     grams: "Gramm", add: "Hinzufügen", per100: "pro 100 g", noResults: "Nicht in der Liste?", addOwn: "Eigenes Lebensmittel",
     own: "Dein Lebensmittel", name: "Name", kcal: "kcal", protein: "Eiweiß", carbs: "KH", fat: "Fett", saveFood: "Speichern",
-    goal: "Tagesziel", setGoal: "Ziel setzen", empty: "Noch nichts eingetragen — füge oben dein erstes Lebensmittel hinzu.",
-    total: "Gesamt", left: "übrig", over: "drüber", setup: "Der Kalorienrechner ist fast fertig — Dalila schließt gerade die Einrichtung ab.",
-    lockedTitle: "Der Smart-Plate-Rechner ist ein VIP-Tool", lockedText: "Trag jede Mahlzeit in Gramm ein und sieh Kalorien, Eiweiß, Kohlenhydrate und Fett für jeden Tag — mit Zielen, die wir gemeinsam festlegen.",
-    upgrade: "Upgrade auf VIP 1:1", lockedPending: "Wird freigeschaltet, sobald deine VIP-Mitgliedschaft aktiv ist.", saving: "Speichert…", error: "Speichern fehlgeschlagen — prüfe deine Verbindung.",
+    goal: "Tagesziel", setGoal: "Ziel setzen", empty: "Noch nichts eingetragen - füge oben dein erstes Lebensmittel hinzu.",
+    total: "Gesamt", left: "übrig", over: "drüber", setup: "Der Kalorienrechner ist fast fertig - Dalila schließt gerade die Einrichtung ab.",
+    lockedTitle: "Der Smart-Plate-Rechner ist ein VIP-Tool", lockedText: "Trag jede Mahlzeit in Gramm ein und sieh Kalorien, Eiweiß, Kohlenhydrate und Fett für jeden Tag - mit Zielen, die wir gemeinsam festlegen.",
+    upgrade: "Upgrade auf VIP 1:1", lockedPending: "Wird freigeschaltet, sobald deine VIP-Mitgliedschaft aktiv ist.", saving: "Speichert…", error: "Speichern fehlgeschlagen - prüfe deine Verbindung.",
     approx: "Herbalife-Werte sind ungefähre Angaben.",
-    plate: "Dein Teller", plateFor: "für", plateHint: "Stell deinen Teller zusammen: so viele Lebensmittel wie du willst — z. B. Hähnchen + Reis + Salat + Olivenöl — und speichere dann den ganzen Teller.", addPlate: "Teller speichern:", clear: "Leeren", plateN: "Teller", addMore: "Weiteres Lebensmittel…", foods: "Lebensmittel",
+    plate: "Dein Teller", plateFor: "für", plateHint: "Stell deinen Teller zusammen: so viele Lebensmittel wie du willst - z. B. Hähnchen + Reis + Salat + Olivenöl - und speichere dann den ganzen Teller.", addPlate: "Teller speichern:", clear: "Leeren", plateN: "Teller", addMore: "Weiteres Lebensmittel…", foods: "Lebensmittel",
   },
   sr: {
     label: "Kalkulator hrane", vip: "VIP", sub: "Pronađi namirnicu, upiši grame i kalkulator sabira kalorije, proteine, ugljene hidrate i masti.",
     today: "Danas", meals: ["Doručak", "Ručak", "Večera", "Užine"], search: "Pretraži hranu… npr. piletina, pirinač, šejk",
     grams: "Grami", add: "Dodaj", per100: "na 100 g", noResults: "Nema na listi?", addOwn: "Dodaj svoju namirnicu",
     own: "Tvoja namirnica", name: "Naziv", kcal: "kcal", protein: "Proteini", carbs: "UH", fat: "Masti", saveFood: "Sačuvaj",
-    goal: "Dnevni cilj", setGoal: "Postavi cilj", empty: "Još ništa nije upisano — dodaj prvu namirnicu gore.",
-    total: "Ukupno", left: "preostalo", over: "preko", setup: "Kalkulator hrane je skoro spreman — Dalila završava podešavanje.",
-    lockedTitle: "Smart Plate kalkulator je VIP alat", lockedText: "Upiši svaki obrok u gramima i prati kalorije, proteine, ugljene hidrate i masti za svaki dan — sa ciljevima koje postavimo zajedno.",
-    upgrade: "Pređi na VIP 1:1", lockedPending: "Otključava se čim tvoje VIP članstvo bude aktivno.", saving: "Čuvam…", error: "Čuvanje nije uspelo — proveri internet.",
+    goal: "Dnevni cilj", setGoal: "Postavi cilj", empty: "Još ništa nije upisano - dodaj prvu namirnicu gore.",
+    total: "Ukupno", left: "preostalo", over: "preko", setup: "Kalkulator hrane je skoro spreman - Dalila završava podešavanje.",
+    lockedTitle: "Smart Plate kalkulator je VIP alat", lockedText: "Upiši svaki obrok u gramima i prati kalorije, proteine, ugljene hidrate i masti za svaki dan - sa ciljevima koje postavimo zajedno.",
+    upgrade: "Pređi na VIP 1:1", lockedPending: "Otključava se čim tvoje VIP članstvo bude aktivno.", saving: "Čuvam…", error: "Čuvanje nije uspelo - proveri internet.",
     approx: "Herbalife vrednosti su približne.",
-    plate: "Tvoj tanjir", plateFor: "za", plateHint: "Složi svoj tanjir: dodaj koliko god namirnica želiš — npr. piletina + pirinač + salata + maslinovo ulje — pa sačuvaj ceo tanjir.", addPlate: "Dodaj tanjir u", clear: "Obriši", plateN: "Tanjir", addMore: "Dodaj još namirnica…", foods: "namirnica",
+    plate: "Tvoj tanjir", plateFor: "za", plateHint: "Složi svoj tanjir: dodaj koliko god namirnica želiš - npr. piletina + pirinač + salata + maslinovo ulje - pa sačuvaj ceo tanjir.", addPlate: "Dodaj tanjir u", clear: "Obriši", plateN: "Tanjir", addMore: "Dodaj još namirnica…", foods: "namirnica",
   },
 };
 
@@ -268,7 +268,7 @@ const Calculator = ({ c, lang, userId, defaultGoal }: { c: typeof T.en; lang: La
                 <button key={r.key} onClick={() => pick(r)} className="w-full text-left px-4 py-3 border-b border-border last:border-0 hover:bg-secondary/60 flex items-center gap-3">
                   <span className="flex-1 min-w-0">
                     <span className="block font-body text-sm truncate">{r.hl && <Sparkles className="inline h-3 w-3 text-gold mr-1 -mt-0.5" />}{r.n}</span>
-                    <span className="block font-body text-[11px] text-muted-foreground">{r0(r.k)} kcal · P {r1(r.p)} · {c.carbs} {r1(r.c)} · {c.fat} {r1(r.f)} — {c.per100}</span>
+                    <span className="block font-body text-[11px] text-muted-foreground">{r0(r.k)} kcal · P {r1(r.p)} · {c.carbs} {r1(r.c)} · {c.fat} {r1(r.f)} - {c.per100}</span>
                   </span>
                   {plate.some((x) => x.key === r.key) ? <Check className="h-4 w-4 text-gold shrink-0" /> : <Plus className="h-4 w-4 text-gold shrink-0" />}
                 </button>
@@ -447,7 +447,7 @@ export const AdminFoodSummary = ({ userId, lang }: { userId: string; lang: Lang3
               isOpen && (
                 <tr key={r.day + "-d"}><td colSpan={5} className="pb-2">
                   <ul className="rounded-xl bg-secondary/40 px-3 py-2">{r.items.map((it, i) => (
-                    <li key={i} className="py-0.5"><span className="text-gold">{c.meals[it.m] ?? ""}</span> · {it.n} — {r1(it.g)} g · {r0((it.k * it.g) / 100)} kcal · P {r1((it.p * it.g) / 100)}</li>
+                    <li key={i} className="py-0.5"><span className="text-gold">{c.meals[it.m] ?? ""}</span> · {it.n} - {r1(it.g)} g · {r0((it.k * it.g) / 100)} kcal · P {r1((it.p * it.g) / 100)}</li>
                   ))}</ul>
                 </td></tr>
               ),

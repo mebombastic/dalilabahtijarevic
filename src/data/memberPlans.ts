@@ -1,4 +1,4 @@
-// Generated from the coaching-plan PDFs — member area data.
+// Generated from the coaching-plan PDFs - member area data.
 export const MEMBER_PLANS = {
  "Strong-and-Toned": {
   "en": {
@@ -35,7 +35,7 @@ export const MEMBER_PLANS = {
      "img": "p-tea",
      "photo": false,
      "title": "Instant Herbal Beverage",
-     "how": "½ tsp in 250 ml water — before training for energy.",
+     "how": "½ tsp in 250 ml water - before training for energy.",
      "tag": ""
     },
     {
@@ -82,7 +82,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brisk walk 30–45 min"
+      "label": "Brisk walk 30-45 min"
      },
      {
       "type": "r",
@@ -112,7 +112,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brisk walk 30–45 min"
+      "label": "Brisk walk 30-45 min"
      },
      {
       "type": "r",
@@ -142,7 +142,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brisk walk 30–45 min"
+      "label": "Brisk walk 30-45 min"
      },
      {
       "type": "r",
@@ -172,7 +172,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brisk walk 30–45 min"
+      "label": "Brisk walk 30-45 min"
      },
      {
       "type": "r",
@@ -190,7 +190,7 @@ export const MEMBER_PLANS = {
     "MAX tests": {
      "level": "Test",
      "kind": "Weeks 1 and 4",
-     "rules": "As many reps as you can in the time given — full range, good form. Rest 3 minutes between tests. Write every number in your tracker.",
+     "rules": "As many reps as you can in the time given - full range, good form. Rest 3 minutes between tests. Write every number in your tracker.",
      "cols": [
       "Time"
      ],
@@ -225,7 +225,7 @@ export const MEMBER_PLANS = {
     "Rise": {
      "level": "All levels",
      "kind": "5 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "R1",
       "R2",
@@ -265,12 +265,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "7–15 min"
+     "time": "7-15 min"
     },
     "Glow": {
      "level": "Legs & glutes",
      "kind": "4 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "R1",
       "R2",
@@ -315,12 +315,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "14–20 min"
+     "time": "14-20 min"
     },
     "Iron": {
      "level": "Strength",
      "kind": "4 rounds · 90 s rest between rounds",
-     "rules": "No equipment. Take the full 90 seconds rest between rounds — the rest counts in your time. Slow, controlled reps: 2 seconds down, 1 second up.",
+     "rules": "No equipment. Take the full 90 seconds rest between rounds - the rest counts in your time. Slow, controlled reps: 2 seconds down, 1 second up.",
      "cols": [
       "R1",
       "R2",
@@ -374,12 +374,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "22–30 min"
+     "time": "22-30 min"
     },
     "Power": {
      "level": "Advanced",
      "kind": "4 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "R1",
       "R2",
@@ -424,12 +424,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "16–25 min"
+     "time": "16-25 min"
     },
     "Core Flow": {
      "level": "Belly & back",
      "kind": "3 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "Round 1",
       "Round 2",
@@ -469,12 +469,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "9–14 min"
+     "time": "9-14 min"
     },
     "Ember": {
      "level": "Cardio",
      "kind": "5 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "R1",
       "R2",
@@ -514,12 +514,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "12–20 min"
+     "time": "12-20 min"
     },
     "Summit": {
      "level": "Endurance",
      "kind": "1 round · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time. Finish each exercise before you start the next.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time. Finish each exercise before you start the next.",
      "cols": [
       "Reps"
      ],
@@ -555,7 +555,7 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "15–25 min"
+     "time": "15-25 min"
     }
    }
   },
@@ -593,7 +593,7 @@ export const MEMBER_PLANS = {
      "img": "p-tea",
      "photo": false,
      "title": "Instant-Kräutergetränk",
-     "how": "½ TL in 250 ml Wasser — vor dem Training für Energie.",
+     "how": "½ TL in 250 ml Wasser - vor dem Training für Energie.",
      "tag": ""
     },
     {
@@ -640,7 +640,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Zügiger Spaziergang 30–45 Min."
+      "label": "Zügiger Spaziergang 30-45 Min."
      },
      {
       "type": "r",
@@ -670,7 +670,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Zügiger Spaziergang 30–45 Min."
+      "label": "Zügiger Spaziergang 30-45 Min."
      },
      {
       "type": "r",
@@ -700,7 +700,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Zügiger Spaziergang 30–45 Min."
+      "label": "Zügiger Spaziergang 30-45 Min."
      },
      {
       "type": "r",
@@ -730,7 +730,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Zügiger Spaziergang 30–45 Min."
+      "label": "Zügiger Spaziergang 30-45 Min."
      },
      {
       "type": "r",
@@ -748,7 +748,7 @@ export const MEMBER_PLANS = {
     "MAX-Tests": {
      "level": "Test",
      "kind": "Woche 1 und 4",
-     "rules": "So viele Wiederholungen wie möglich in der vorgegebenen Zeit — voller Bewegungsumfang, saubere Technik. 3 Minuten Pause zwischen den Tests. Trag jede Zahl ein.",
+     "rules": "So viele Wiederholungen wie möglich in der vorgegebenen Zeit - voller Bewegungsumfang, saubere Technik. 3 Minuten Pause zwischen den Tests. Trag jede Zahl ein.",
      "cols": [
       "Zeit"
      ],
@@ -783,7 +783,7 @@ export const MEMBER_PLANS = {
     "Rise": {
      "level": "Alle Level",
      "kind": "5 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "R1",
       "R2",
@@ -823,12 +823,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "7–15 min"
+     "time": "7-15 min"
     },
     "Glow": {
      "level": "Beine & Po",
      "kind": "4 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "R1",
       "R2",
@@ -873,12 +873,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "14–20 min"
+     "time": "14-20 min"
     },
     "Iron": {
      "level": "Kraft",
      "kind": "4 Runden · 90 s Pause zwischen den Runden",
-     "rules": "Kein Equipment. Nimm die vollen 90 Sekunden Pause zwischen den Runden — sie zählen zur Zeit. Langsam und kontrolliert: 2 Sekunden runter, 1 Sekunde hoch.",
+     "rules": "Kein Equipment. Nimm die vollen 90 Sekunden Pause zwischen den Runden - sie zählen zur Zeit. Langsam und kontrolliert: 2 Sekunden runter, 1 Sekunde hoch.",
      "cols": [
       "R1",
       "R2",
@@ -932,12 +932,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "22–30 min"
+     "time": "22-30 min"
     },
     "Power": {
      "level": "Fortgeschritten",
      "kind": "4 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "R1",
       "R2",
@@ -982,12 +982,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "16–25 min"
+     "time": "16-25 min"
     },
     "Core Flow": {
      "level": "Bauch & Rücken",
      "kind": "3 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "Runde 1",
       "Runde 2",
@@ -1027,12 +1027,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "9–14 min"
+     "time": "9-14 min"
     },
     "Ember": {
      "level": "Cardio",
      "kind": "5 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "R1",
       "R2",
@@ -1072,12 +1072,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "12–20 min"
+     "time": "12-20 min"
     },
     "Summit": {
      "level": "Ausdauer",
      "kind": "1 Runde · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben. Jede Übung fertig machen, bevor die nächste beginnt.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben. Jede Übung fertig machen, bevor die nächste beginnt.",
      "cols": [
       "Wdh."
      ],
@@ -1113,7 +1113,7 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "15–25 min"
+     "time": "15-25 min"
     }
    }
   },
@@ -1151,7 +1151,7 @@ export const MEMBER_PLANS = {
      "img": "p-tea",
      "photo": false,
      "title": "Instant biljni napitak",
-     "how": "½ kašičice u 250 ml vode — pre treninga za energiju.",
+     "how": "½ kašičice u 250 ml vode - pre treninga za energiju.",
      "tag": ""
     },
     {
@@ -1198,7 +1198,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brza šetnja 30–45 min"
+      "label": "Brza šetnja 30-45 min"
      },
      {
       "type": "r",
@@ -1228,7 +1228,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brza šetnja 30–45 min"
+      "label": "Brza šetnja 30-45 min"
      },
      {
       "type": "r",
@@ -1258,7 +1258,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brza šetnja 30–45 min"
+      "label": "Brza šetnja 30-45 min"
      },
      {
       "type": "r",
@@ -1288,7 +1288,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brza šetnja 30–45 min"
+      "label": "Brza šetnja 30-45 min"
      },
      {
       "type": "r",
@@ -1306,7 +1306,7 @@ export const MEMBER_PLANS = {
     "MAX testovi": {
      "level": "Test",
      "kind": "Nedelja 1 i 4",
-     "rules": "Što više ponavljanja u zadatom vremenu — pun pokret, dobra forma. 3 minuta odmora između testova. Upiši svaki broj.",
+     "rules": "Što više ponavljanja u zadatom vremenu - pun pokret, dobra forma. 3 minuta odmora između testova. Upiši svaki broj.",
      "cols": [
       "Vreme"
      ],
@@ -1341,7 +1341,7 @@ export const MEMBER_PLANS = {
     "Rise": {
      "level": "Svi nivoi",
      "kind": "5 krugova · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "K1",
       "K2",
@@ -1381,12 +1381,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "7–15 min"
+     "time": "7-15 min"
     },
     "Glow": {
      "level": "Noge i gluteusi",
      "kind": "4 kruga · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "K1",
       "K2",
@@ -1431,12 +1431,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "14–20 min"
+     "time": "14-20 min"
     },
     "Iron": {
      "level": "Snaga",
      "kind": "4 kruga · 90 s odmora između krugova",
-     "rules": "Bez opreme. Odmori punih 90 sekundi između krugova — odmor ulazi u vreme. Sporo i kontrolisano: 2 sekunde dole, 1 sekunda gore.",
+     "rules": "Bez opreme. Odmori punih 90 sekundi između krugova - odmor ulazi u vreme. Sporo i kontrolisano: 2 sekunde dole, 1 sekunda gore.",
      "cols": [
       "K1",
       "K2",
@@ -1490,12 +1490,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "22–30 min"
+     "time": "22-30 min"
     },
     "Power": {
      "level": "Napredne",
      "kind": "4 kruga · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "K1",
       "K2",
@@ -1540,12 +1540,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "16–25 min"
+     "time": "16-25 min"
     },
     "Core Flow": {
      "level": "Stomak i leđa",
      "kind": "3 kruga · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "Krug 1",
       "Krug 2",
@@ -1585,12 +1585,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "9–14 min"
+     "time": "9-14 min"
     },
     "Ember": {
      "level": "Kardio",
      "kind": "5 krugova · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "K1",
       "K2",
@@ -1630,12 +1630,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "12–20 min"
+     "time": "12-20 min"
     },
     "Summit": {
      "level": "Izdržljivost",
      "kind": "1 krug · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme. Završi svaku vežbu pre nego što kreneš na sledeću.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme. Završi svaku vežbu pre nego što kreneš na sledeću.",
      "cols": [
       "Pon."
      ],
@@ -1671,14 +1671,14 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "15–25 min"
+     "time": "15-25 min"
     }
    }
   }
  },
  "VIP-1-1": {
   "en": {
-   "tagline": "Everything personal: your targets, your menu and your training — adjusted with me every single week.",
+   "tagline": "Everything personal: your targets, your menu and your training - adjusted with me every single week.",
    "forwho": "Women who want the fastest, safest results with daily support and full accountability.",
    "eyebrow": "Maximum results",
    "stats": [
@@ -1702,7 +1702,7 @@ export const MEMBER_PLANS = {
      "img": "f1-vanilla",
      "photo": false,
      "title": "Formula 1 shake",
-     "how": "2 scoops + 250 ml milk — with protein if your goal needs it.",
+     "how": "2 scoops + 250 ml milk - with protein if your goal needs it.",
      "tag": ""
     },
     {
@@ -1720,7 +1720,7 @@ export const MEMBER_PLANS = {
      "img": "p-tea",
      "photo": false,
      "title": "Instant Herbal Beverage",
-     "how": "½ tsp in 250 ml water — hot or with ice.",
+     "how": "½ tsp in 250 ml water - hot or with ice.",
      "tag": ""
     },
     {
@@ -1738,7 +1738,7 @@ export const MEMBER_PLANS = {
      "img": "p-skin",
      "photo": true,
      "title": "HL/Skin routine",
-     "how": "Cleanse, serum, cream — your evening skincare.",
+     "how": "Cleanse, serum, cream - your evening skincare.",
      "tag": "If chosen"
     }
    ],
@@ -1755,7 +1755,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brisk walk 30–45 min"
+      "label": "Brisk walk 30-45 min"
      },
      {
       "type": "w",
@@ -1785,7 +1785,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brisk walk 30–45 min"
+      "label": "Brisk walk 30-45 min"
      },
      {
       "type": "w",
@@ -1815,7 +1815,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brisk walk 30–45 min"
+      "label": "Brisk walk 30-45 min"
      },
      {
       "type": "w",
@@ -1845,7 +1845,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brisk walk 30–45 min"
+      "label": "Brisk walk 30-45 min"
      },
      {
       "type": "w",
@@ -1875,7 +1875,7 @@ export const MEMBER_PLANS = {
     "MAX tests": {
      "level": "Test",
      "kind": "Weeks 1 and 4",
-     "rules": "As many reps as you can in the time given — full range, good form. Rest 3 minutes between tests. Write every number in your tracker.",
+     "rules": "As many reps as you can in the time given - full range, good form. Rest 3 minutes between tests. Write every number in your tracker.",
      "cols": [
       "Time"
      ],
@@ -1910,7 +1910,7 @@ export const MEMBER_PLANS = {
     "Iron": {
      "level": "Strength",
      "kind": "4 rounds · 90 s rest between rounds",
-     "rules": "No equipment. Take the full 90 seconds rest between rounds — the rest counts in your time. Slow, controlled reps: 2 seconds down, 1 second up.",
+     "rules": "No equipment. Take the full 90 seconds rest between rounds - the rest counts in your time. Slow, controlled reps: 2 seconds down, 1 second up.",
      "cols": [
       "R1",
       "R2",
@@ -1964,12 +1964,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "22–30 min"
+     "time": "22-30 min"
     },
     "Glow": {
      "level": "Legs & glutes",
      "kind": "4 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "R1",
       "R2",
@@ -2014,12 +2014,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "14–20 min"
+     "time": "14-20 min"
     },
     "Rise": {
      "level": "All levels",
      "kind": "5 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "R1",
       "R2",
@@ -2059,12 +2059,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "7–15 min"
+     "time": "7-15 min"
     },
     "Core Flow": {
      "level": "Belly & back",
      "kind": "3 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "Round 1",
       "Round 2",
@@ -2104,12 +2104,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "9–14 min"
+     "time": "9-14 min"
     },
     "Power": {
      "level": "Advanced",
      "kind": "4 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "R1",
       "R2",
@@ -2154,12 +2154,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "16–25 min"
+     "time": "16-25 min"
     },
     "Ember": {
      "level": "Cardio",
      "kind": "5 rounds · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time.",
      "cols": [
       "R1",
       "R2",
@@ -2199,12 +2199,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "12–20 min"
+     "time": "12-20 min"
     },
     "Summit": {
      "level": "Endurance",
      "kind": "1 round · for time",
-     "rules": "No equipment. No mandatory breaks — rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time. Finish each exercise before you start the next.",
+     "rules": "No equipment. No mandatory breaks - rest only when you really have to, and as short as possible. Do it as fast as you can with good form and write down your time. Finish each exercise before you start the next.",
      "cols": [
       "Reps"
      ],
@@ -2240,12 +2240,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "15–25 min"
+     "time": "15-25 min"
     }
    }
   },
   "de": {
-   "tagline": "Alles persönlich: deine Ziele, dein Menü und dein Training — jede Woche mit mir angepasst.",
+   "tagline": "Alles persönlich: deine Ziele, dein Menü und dein Training - jede Woche mit mir angepasst.",
    "forwho": "Frauen, die die schnellsten und sichersten Ergebnisse mit täglicher Begleitung wollen.",
    "eyebrow": "Maximale Ergebnisse",
    "stats": [
@@ -2269,7 +2269,7 @@ export const MEMBER_PLANS = {
      "img": "f1-vanilla",
      "photo": false,
      "title": "Formula-1-Shake",
-     "how": "2 Messlöffel + 250 ml Milch — mit Protein, wenn dein Ziel es braucht.",
+     "how": "2 Messlöffel + 250 ml Milch - mit Protein, wenn dein Ziel es braucht.",
      "tag": ""
     },
     {
@@ -2287,7 +2287,7 @@ export const MEMBER_PLANS = {
      "img": "p-tea",
      "photo": false,
      "title": "Instant-Kräutergetränk",
-     "how": "½ TL in 250 ml Wasser — heiß oder mit Eis.",
+     "how": "½ TL in 250 ml Wasser - heiß oder mit Eis.",
      "tag": ""
     },
     {
@@ -2305,7 +2305,7 @@ export const MEMBER_PLANS = {
      "img": "p-skin",
      "photo": true,
      "title": "HL/Skin-Routine",
-     "how": "Reinigen, Serum, Creme — deine Abendpflege.",
+     "how": "Reinigen, Serum, Creme - deine Abendpflege.",
      "tag": "Falls gewählt"
     }
    ],
@@ -2322,7 +2322,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Zügiger Spaziergang 30–45 Min."
+      "label": "Zügiger Spaziergang 30-45 Min."
      },
      {
       "type": "w",
@@ -2352,7 +2352,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Zügiger Spaziergang 30–45 Min."
+      "label": "Zügiger Spaziergang 30-45 Min."
      },
      {
       "type": "w",
@@ -2382,7 +2382,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Zügiger Spaziergang 30–45 Min."
+      "label": "Zügiger Spaziergang 30-45 Min."
      },
      {
       "type": "w",
@@ -2412,7 +2412,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Zügiger Spaziergang 30–45 Min."
+      "label": "Zügiger Spaziergang 30-45 Min."
      },
      {
       "type": "w",
@@ -2442,7 +2442,7 @@ export const MEMBER_PLANS = {
     "MAX-Tests": {
      "level": "Test",
      "kind": "Woche 1 und 4",
-     "rules": "So viele Wiederholungen wie möglich in der vorgegebenen Zeit — voller Bewegungsumfang, saubere Technik. 3 Minuten Pause zwischen den Tests. Trag jede Zahl ein.",
+     "rules": "So viele Wiederholungen wie möglich in der vorgegebenen Zeit - voller Bewegungsumfang, saubere Technik. 3 Minuten Pause zwischen den Tests. Trag jede Zahl ein.",
      "cols": [
       "Zeit"
      ],
@@ -2477,7 +2477,7 @@ export const MEMBER_PLANS = {
     "Iron": {
      "level": "Kraft",
      "kind": "4 Runden · 90 s Pause zwischen den Runden",
-     "rules": "Kein Equipment. Nimm die vollen 90 Sekunden Pause zwischen den Runden — sie zählen zur Zeit. Langsam und kontrolliert: 2 Sekunden runter, 1 Sekunde hoch.",
+     "rules": "Kein Equipment. Nimm die vollen 90 Sekunden Pause zwischen den Runden - sie zählen zur Zeit. Langsam und kontrolliert: 2 Sekunden runter, 1 Sekunde hoch.",
      "cols": [
       "R1",
       "R2",
@@ -2531,12 +2531,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "22–30 min"
+     "time": "22-30 min"
     },
     "Glow": {
      "level": "Beine & Po",
      "kind": "4 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "R1",
       "R2",
@@ -2581,12 +2581,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "14–20 min"
+     "time": "14-20 min"
     },
     "Rise": {
      "level": "Alle Level",
      "kind": "5 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "R1",
       "R2",
@@ -2626,12 +2626,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "7–15 min"
+     "time": "7-15 min"
     },
     "Core Flow": {
      "level": "Bauch & Rücken",
      "kind": "3 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "Runde 1",
       "Runde 2",
@@ -2671,12 +2671,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "9–14 min"
+     "time": "9-14 min"
     },
     "Power": {
      "level": "Fortgeschritten",
      "kind": "4 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "R1",
       "R2",
@@ -2721,12 +2721,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "16–25 min"
+     "time": "16-25 min"
     },
     "Ember": {
      "level": "Cardio",
      "kind": "5 Runden · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben.",
      "cols": [
       "R1",
       "R2",
@@ -2766,12 +2766,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "12–20 min"
+     "time": "12-20 min"
     },
     "Summit": {
      "level": "Ausdauer",
      "kind": "1 Runde · auf Zeit",
-     "rules": "Kein Equipment. Keine Pflichtpausen — Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben. Jede Übung fertig machen, bevor die nächste beginnt.",
+     "rules": "Kein Equipment. Keine Pflichtpausen - Pause nur, wenn du wirklich musst, und so kurz wie möglich. So schnell wie möglich mit sauberer Technik, dann Zeit aufschreiben. Jede Übung fertig machen, bevor die nächste beginnt.",
      "cols": [
       "Wdh."
      ],
@@ -2807,12 +2807,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "15–25 min"
+     "time": "15-25 min"
     }
    }
   },
   "sr": {
-   "tagline": "Sve lično: tvoji ciljevi, jelovnik i trening — sa mnom prilagođeni svake nedelje.",
+   "tagline": "Sve lično: tvoji ciljevi, jelovnik i trening - sa mnom prilagođeni svake nedelje.",
    "forwho": "Žene koje žele najbrže i najsigurnije rezultate uz svakodnevnu podršku.",
    "eyebrow": "Maksimalni rezultati",
    "stats": [
@@ -2836,7 +2836,7 @@ export const MEMBER_PLANS = {
      "img": "f1-vanilla",
      "photo": false,
      "title": "Formula 1 šejk",
-     "how": "2 merice + 250 ml mleka — sa proteinom ako to tvoj cilj traži.",
+     "how": "2 merice + 250 ml mleka - sa proteinom ako to tvoj cilj traži.",
      "tag": ""
     },
     {
@@ -2854,7 +2854,7 @@ export const MEMBER_PLANS = {
      "img": "p-tea",
      "photo": false,
      "title": "Instant biljni napitak",
-     "how": "½ kašičice u 250 ml vode — toplo ili sa ledom.",
+     "how": "½ kašičice u 250 ml vode - toplo ili sa ledom.",
      "tag": ""
     },
     {
@@ -2872,7 +2872,7 @@ export const MEMBER_PLANS = {
      "img": "p-skin",
      "photo": true,
      "title": "HL/Skin rutina",
-     "how": "Čišćenje, serum, krema — tvoja večernja nega.",
+     "how": "Čišćenje, serum, krema - tvoja večernja nega.",
      "tag": "Ako je izabrano"
     }
    ],
@@ -2889,7 +2889,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brza šetnja 30–45 min"
+      "label": "Brza šetnja 30-45 min"
      },
      {
       "type": "w",
@@ -2919,7 +2919,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brza šetnja 30–45 min"
+      "label": "Brza šetnja 30-45 min"
      },
      {
       "type": "w",
@@ -2949,7 +2949,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brza šetnja 30–45 min"
+      "label": "Brza šetnja 30-45 min"
      },
      {
       "type": "w",
@@ -2979,7 +2979,7 @@ export const MEMBER_PLANS = {
      },
      {
       "type": "k",
-      "label": "Brza šetnja 30–45 min"
+      "label": "Brza šetnja 30-45 min"
      },
      {
       "type": "w",
@@ -3009,7 +3009,7 @@ export const MEMBER_PLANS = {
     "MAX testovi": {
      "level": "Test",
      "kind": "Nedelja 1 i 4",
-     "rules": "Što više ponavljanja u zadatom vremenu — pun pokret, dobra forma. 3 minuta odmora između testova. Upiši svaki broj.",
+     "rules": "Što više ponavljanja u zadatom vremenu - pun pokret, dobra forma. 3 minuta odmora između testova. Upiši svaki broj.",
      "cols": [
       "Vreme"
      ],
@@ -3044,7 +3044,7 @@ export const MEMBER_PLANS = {
     "Iron": {
      "level": "Snaga",
      "kind": "4 kruga · 90 s odmora između krugova",
-     "rules": "Bez opreme. Odmori punih 90 sekundi između krugova — odmor ulazi u vreme. Sporo i kontrolisano: 2 sekunde dole, 1 sekunda gore.",
+     "rules": "Bez opreme. Odmori punih 90 sekundi između krugova - odmor ulazi u vreme. Sporo i kontrolisano: 2 sekunde dole, 1 sekunda gore.",
      "cols": [
       "K1",
       "K2",
@@ -3098,12 +3098,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "22–30 min"
+     "time": "22-30 min"
     },
     "Glow": {
      "level": "Noge i gluteusi",
      "kind": "4 kruga · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "K1",
       "K2",
@@ -3148,12 +3148,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "14–20 min"
+     "time": "14-20 min"
     },
     "Rise": {
      "level": "Svi nivoi",
      "kind": "5 krugova · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "K1",
       "K2",
@@ -3193,12 +3193,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "7–15 min"
+     "time": "7-15 min"
     },
     "Core Flow": {
      "level": "Stomak i leđa",
      "kind": "3 kruga · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "Krug 1",
       "Krug 2",
@@ -3238,12 +3238,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "9–14 min"
+     "time": "9-14 min"
     },
     "Power": {
      "level": "Napredne",
      "kind": "4 kruga · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "K1",
       "K2",
@@ -3288,12 +3288,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "16–25 min"
+     "time": "16-25 min"
     },
     "Ember": {
      "level": "Kardio",
      "kind": "5 krugova · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme.",
      "cols": [
       "K1",
       "K2",
@@ -3333,12 +3333,12 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "12–20 min"
+     "time": "12-20 min"
     },
     "Summit": {
      "level": "Izdržljivost",
      "kind": "1 krug · na vreme",
-     "rules": "Bez opreme. Bez obaveznih pauza — odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme. Završi svaku vežbu pre nego što kreneš na sledeću.",
+     "rules": "Bez opreme. Bez obaveznih pauza - odmaraj samo kad baš moraš, i što kraće. Radi što brže uz dobru formu i zapiši vreme. Završi svaku vežbu pre nego što kreneš na sledeću.",
      "cols": [
       "Pon."
      ],
@@ -3374,7 +3374,7 @@ export const MEMBER_PLANS = {
        ]
       ]
      ],
-     "time": "15–25 min"
+     "time": "15-25 min"
     }
    }
   }

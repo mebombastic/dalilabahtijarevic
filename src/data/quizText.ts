@@ -1,6 +1,6 @@
 /** Text for the plan quiz (/start) and the personal plan in My account. */
 const en = {
-  log: { mark: "Mark as done", done: "Done", undo: "Undo", result: "Your time or reps (optional)", resultPh: "e.g. 14:30 or 42", save: "Save", thisWeek: "This week", total: "Workouts done", streak: "weeks in a row", restLbl: "Rest", rest: { strength: "60–90 s between sets", circuit: "60 s after each round", hiit: "1 min between rounds", fortime: "only when you must, keep it short", max: "3 min between exercises" } },
+  log: { mark: "Mark as done", done: "Done", undo: "Undo", result: "Your time or reps (optional)", resultPh: "e.g. 14:30 or 42", save: "Save", thisWeek: "This week", total: "Workouts done", streak: "weeks in a row", restLbl: "Rest", rest: { strength: "60-90 s between sets", circuit: "60 s after each round", hiit: "1 min between rounds", fortime: "only when you must, keep it short", max: "3 min between exercises" } },
   welcome: "Welcome! Let's set up your plan.", welcomeSub: "A few quick questions so your calories, meals and workouts fit you.", skip: "Later", needAccount: "Create an account or sign in to get your personal plan.",
   nav: "Free plan",
   heroCta: "Get my free plan",
@@ -40,12 +40,12 @@ const en = {
     maxReps: "max reps", hold: "hold as long as you can", round: "R",
   },
   sessions: { lower: "Legs and glutes", upper: "Upper body and core", glutes: "Glutes and legs", fatburn: "Fat burn circuit", fullbody: "Full body", hiit: "Intervals", cardio: "Cardio", core: "Core", recovery: "Walk and stretch" , countdown: "Countdown", engine: "Engine", sprint: "Fast and short", pushday: "Push and core", pullday: "Pull and push", maxtest: "MAX test" },
-  kinds: { circuit: "Circuit: do every exercise, then repeat", strength: "Sets: do each exercise for all sets, rest 60–90 s", hiit: "Intervals: work, rest, next exercise", cardio: "Steady cardio", mobility: "Easy movement for recovery" , fortime: "For time: do the rounds in order as fast as you can with good form. Rest only when you really need to. Write down your time.", max: "MAX test: as many good reps as you can in the time. Rest 3 min between exercises. Write the numbers in your progress." },
+  kinds: { circuit: "Circuit: do every exercise, then repeat", strength: "Sets: do each exercise for all sets, rest 60-90 s", hiit: "Intervals: work, rest, next exercise", cardio: "Steady cardio", mobility: "Easy movement for recovery" , fortime: "For time: do the rounds in order as fast as you can with good form. Rest only when you really need to. Write down your time.", max: "MAX test: as many good reps as you can in the time. Rest 3 min between exercises. Write the numbers in your progress." },
 };
 type T = typeof en;
 
 const de: T = {
-  log: { mark: "Als erledigt markieren", done: "Erledigt", undo: "Rückgängig", result: "Deine Zeit oder Wiederholungen (optional)", resultPh: "z. B. 14:30 oder 42", save: "Speichern", thisWeek: "Diese Woche", total: "Trainings erledigt", streak: "Wochen am Stück", restLbl: "Pause", rest: { strength: "60–90 s zwischen den Sätzen", circuit: "60 s nach jeder Runde", hiit: "1 Min. zwischen den Runden", fortime: "nur wenn nötig, kurz halten", max: "3 Min. zwischen den Übungen" } },
+  log: { mark: "Als erledigt markieren", done: "Erledigt", undo: "Rückgängig", result: "Deine Zeit oder Wiederholungen (optional)", resultPh: "z. B. 14:30 oder 42", save: "Speichern", thisWeek: "Diese Woche", total: "Trainings erledigt", streak: "Wochen am Stück", restLbl: "Pause", rest: { strength: "60-90 s zwischen den Sätzen", circuit: "60 s nach jeder Runde", hiit: "1 Min. zwischen den Runden", fortime: "nur wenn nötig, kurz halten", max: "3 Min. zwischen den Übungen" } },
   welcome: "Willkommen! Lass uns deinen Plan erstellen.", welcomeSub: "Ein paar kurze Fragen, damit Kalorien, Mahlzeiten und Trainings zu dir passen.", skip: "Später", needAccount: "Erstelle ein Konto oder melde dich an, um deinen persönlichen Plan zu bekommen.",
   nav: "Gratis-Plan",
   heroCta: "Meinen Gratis-Plan holen",
@@ -85,11 +85,11 @@ const de: T = {
     maxReps: "max. Wdh.", hold: "so lange wie möglich halten", round: "R",
   },
   sessions: { lower: "Beine und Po", upper: "Oberkörper und Bauch", glutes: "Po und Beine", fatburn: "Fatburn-Zirkel", fullbody: "Ganzkörper", hiit: "Intervalle", cardio: "Ausdauer", core: "Rumpf", recovery: "Gehen und Dehnen" , countdown: "Countdown", engine: "Motor", sprint: "Kurz und schnell", pushday: "Drücken und Rumpf", pullday: "Ziehen und Drücken", maxtest: "MAX-Test" },
-  kinds: { circuit: "Zirkel: jede Übung einmal, dann wiederholen", strength: "Sätze: jede Übung alle Sätze, 60–90 s Pause", hiit: "Intervalle: Arbeit, Pause, nächste Übung", cardio: "Gleichmäßige Ausdauer", mobility: "Lockere Bewegung zur Erholung" , fortime: "Auf Zeit: Runden der Reihe nach, so schnell es mit sauberer Technik geht. Pause nur, wenn nötig. Zeit notieren.", max: "MAX-Test: so viele saubere Wiederholungen wie möglich in der Zeit. 3 Min. Pause zwischen den Übungen. Zahlen im Fortschritt eintragen." },
+  kinds: { circuit: "Zirkel: jede Übung einmal, dann wiederholen", strength: "Sätze: jede Übung alle Sätze, 60-90 s Pause", hiit: "Intervalle: Arbeit, Pause, nächste Übung", cardio: "Gleichmäßige Ausdauer", mobility: "Lockere Bewegung zur Erholung" , fortime: "Auf Zeit: Runden der Reihe nach, so schnell es mit sauberer Technik geht. Pause nur, wenn nötig. Zeit notieren.", max: "MAX-Test: so viele saubere Wiederholungen wie möglich in der Zeit. 3 Min. Pause zwischen den Übungen. Zahlen im Fortschritt eintragen." },
 };
 
 const sr: T = {
-  log: { mark: "Označi kao urađeno", done: "Urađeno", undo: "Poništi", result: "Tvoje vreme ili ponavljanja (nije obavezno)", resultPh: "npr. 14:30 ili 42", save: "Sačuvaj", thisWeek: "Ove nedelje", total: "Urađenih treninga", streak: "nedelja zaredom", restLbl: "Pauza", rest: { strength: "60–90 s između serija", circuit: "60 s posle svakog kruga", hiit: "1 min između krugova", fortime: "samo kad moraš, što kraće", max: "3 min između vežbi" } },
+  log: { mark: "Označi kao urađeno", done: "Urađeno", undo: "Poništi", result: "Tvoje vreme ili ponavljanja (nije obavezno)", resultPh: "npr. 14:30 ili 42", save: "Sačuvaj", thisWeek: "Ove nedelje", total: "Urađenih treninga", streak: "nedelja zaredom", restLbl: "Pauza", rest: { strength: "60-90 s između serija", circuit: "60 s posle svakog kruga", hiit: "1 min između krugova", fortime: "samo kad moraš, što kraće", max: "3 min između vežbi" } },
   welcome: "Dobrodošla! Hajde da napravimo tvoj plan.", welcomeSub: "Par kratkih pitanja da kalorije, obroci i treninzi budu baš za tebe.", skip: "Kasnije", needAccount: "Napravi nalog ili se prijavi da dobiješ svoj lični plan.",
   nav: "Besplatan plan",
   heroCta: "Uzmi besplatan plan",
@@ -129,7 +129,7 @@ const sr: T = {
     maxReps: "max ponav.", hold: "drži koliko možeš", round: "K",
   },
   sessions: { lower: "Noge i zadnjica", upper: "Gornji deo i stomak", glutes: "Zadnjica i noge", fatburn: "Kružni za topljenje masti", fullbody: "Celo telo", hiit: "Intervali", cardio: "Kardio", core: "Stomak i leđa", recovery: "Šetnja i istezanje" , countdown: "Odbrojavanje", engine: "Motor", sprint: "Kratko i brzo", pushday: "Potisak i stomak", pullday: "Vučenje i potisak", maxtest: "MAX test" },
-  kinds: { circuit: "Krug: uradi svaku vežbu, pa ponovi", strength: "Serije: svaka vežba sve serije, pauza 60–90 s", hiit: "Intervali: rad, pauza, sledeća vežba", cardio: "Ravnomeran kardio", mobility: "Lagano kretanje za oporavak" , fortime: "Na vreme: krugove redom, što brže možeš uz dobru formu. Odmaraj samo kad baš moraš. Zapiši vreme.", max: "MAX test: što više dobrih ponavljanja u zadatom vremenu. Pauza 3 min između vežbi. Upiši brojeve u napredak." },
+  kinds: { circuit: "Krug: uradi svaku vežbu, pa ponovi", strength: "Serije: svaka vežba sve serije, pauza 60-90 s", hiit: "Intervali: rad, pauza, sledeća vežba", cardio: "Ravnomeran kardio", mobility: "Lagano kretanje za oporavak" , fortime: "Na vreme: krugove redom, što brže možeš uz dobru formu. Odmaraj samo kad baš moraš. Zapiši vreme.", max: "MAX test: što više dobrih ponavljanja u zadatom vremenu. Pauza 3 min između vežbi. Upiši brojeve u napredak." },
 };
 
 export const QUIZ = { en, de, sr };

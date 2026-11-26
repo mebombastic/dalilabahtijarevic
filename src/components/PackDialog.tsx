@@ -31,7 +31,7 @@ export type Pack = {
 const FAQS: { q: string; a: string }[] = [
   {
     q: "How do I place an order?",
-    a: "Fill the short form on the right with your name, email and quantity. It opens your email app with the pack details prefilled — just press send.",
+    a: "Fill the short form on the right with your name, email and quantity. It opens your email app with the pack details prefilled - just press send.",
   },
   {
     q: "Can I change or combine packs?",

@@ -97,7 +97,7 @@ export const WeeklyCheckin = ({ lang, userId, onSaved }: { lang: Lang; userId: s
       <div className="flex gap-3">
         {x.photo && <PhotoThumb path={x.photo} className="h-24 w-20 shrink-0" />}
         <div className="min-w-0 font-body text-sm space-y-1">
-          {(x.energy || x.sleep || x.hunger) && <p className="text-xs text-muted-foreground">{c.energy} {x.energy ?? "–"}/5 · {c.sleep} {x.sleep ?? "–"}/5 · {c.hunger} {x.hunger ?? "–"}/5</p>}
+          {(x.energy || x.sleep || x.hunger) && <p className="text-xs text-muted-foreground">{c.energy} {x.energy ?? "-"}/5 · {c.sleep} {x.sleep ?? "-"}/5 · {c.hunger} {x.hunger ?? "-"}/5</p>}
           {x.note && <p>{x.note}</p>}
           {x.question && <p className="text-muted-foreground"><MessageCircle className="inline h-3.5 w-3.5 mr-1 text-gold" />{x.question}</p>}
         </div>
@@ -259,7 +259,7 @@ export const AdminCoach = ({ userId, lang, onAnswered }: { userId: string; lang:
           <div className="flex gap-3">
             {x.photo && <PhotoThumb path={x.photo} className="h-28 w-24 shrink-0" />}
             <div className="font-body text-sm space-y-1 min-w-0">
-              <p className="text-xs text-muted-foreground">{a.energy} {x.energy ?? "–"}/5 · {a.sleep} {x.sleep ?? "–"}/5 · {a.hunger} {x.hunger ?? "–"}/5</p>
+              <p className="text-xs text-muted-foreground">{a.energy} {x.energy ?? "-"}/5 · {a.sleep} {x.sleep ?? "-"}/5 · {a.hunger} {x.hunger ?? "-"}/5</p>
               {x.note && <p>{x.note}</p>}
               {x.question && <p><b className="font-medium text-[hsl(var(--vermilion))]">{a.question}:</b> {x.question}</p>}
             </div>

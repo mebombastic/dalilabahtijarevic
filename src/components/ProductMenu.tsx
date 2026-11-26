@@ -31,7 +31,7 @@ const ProductCard = ({ p, index, dmUrl, profileUrl, textMe }: { p: Product; inde
             <img
               key={current.src}
               src={current.src}
-              alt={`${p.name}${current.label ? ` – ${current.label}` : ""}`}
+              alt={`${p.name}${current.label ? ` - ${current.label}` : ""}`}
               loading="lazy"
               className="absolute inset-x-0 mx-auto bottom-[11%] h-[74%] w-auto max-w-[86%] object-contain drop-shadow-[0_20px_22px_rgba(0,0,0,0.3)] transition-transform duration-700 ease-luxe group-hover:-translate-y-2 group-hover:scale-[1.04] animate-blur-up"
               style={{ animationDuration: "0.5s" }}

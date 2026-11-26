@@ -198,7 +198,7 @@ const Admin = () => {
                           {prog.length === 0 ? <p className="font-body text-sm text-muted-foreground">{a.noProgress}</p> : (
                             <div className="overflow-x-auto"><table className="w-full min-w-[460px] font-body text-xs border-collapse">
                               <thead><tr className="text-left text-muted-foreground">{[m.date, m.weight, m.waist, m.squat, m.pushup, m.situp, m.plank].map((h) => <th key={h} className="font-normal py-1.5 pr-2">{h}</th>)}</tr></thead>
-                              <tbody>{prog.map((e, i) => <tr key={i} className="border-t border-border">{[e.d, e.w, e.wa, e.sq, e.pu, e.su, e.pl].map((v, k) => <td key={k} className="py-1.5 pr-2">{v || "—"}</td>)}</tr>)}</tbody>
+                              <tbody>{prog.map((e, i) => <tr key={i} className="border-t border-border">{[e.d, e.w, e.wa, e.sq, e.pu, e.su, e.pl].map((v, k) => <td key={k} className="py-1.5 pr-2">{v || "-"}</td>)}</tr>)}</tbody>
                             </table></div>
                           )}
                         </div>

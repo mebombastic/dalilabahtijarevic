@@ -43,7 +43,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SiteHeader onAuth={openAuth} />
 
-      {/* HERO — product carousel, giant headline, chips + coach bubble */}
+      {/* HERO - product carousel, giant headline, chips + coach bubble */}
       <section id="top" data-progress="through" className="bg-stage relative min-h-screen pt-24 pb-12 overflow-hidden text-[hsl(37_40%_90%)]">
         <div className="container mx-auto relative flex flex-col items-center text-center">
           <div className="animate-blur-up relative z-30 mt-4 md:mt-6" style={{ animationDelay: "0.4s" }}>
@@ -188,7 +188,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* METHOD — pill image that opens up on scroll */}
+      {/* METHOD - pill image that opens up on scroll */}
       <section className="py-20 md:py-32 bg-background overflow-hidden">
         <div className="container mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14" data-reveal="words" key={lang}>

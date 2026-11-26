@@ -13,7 +13,7 @@ export type Answers = {
   year: number;           // birth year
   level: 0 | 1 | 2 | 3;   // new, getting back, regular, advanced
   job: 0 | 1 | 2;         // sitting, on my feet, physical work
-  days: number;           // 2–6 workouts a week
+  days: number;           // 2-6 workouts a week
   minutes: 15 | 30 | 45;
   diet: "all" | "veg" | "fish";
   meals: 3 | 4 | 5;
@@ -22,7 +22,7 @@ export type Answers = {
 
 export const age = (a: Answers) => new Date().getFullYear() - a.year;
 
-/** Where the member is in the plan today: cycle (every 4 weeks a new round), week 0–3 and weekday 0–6. */
+/** Where the member is in the plan today: cycle (every 4 weeks a new round), week 0-3 and weekday 0-6. */
 export function planPosition(a: Answers, fallbackStart?: string) {
   const start = new Date((a.started || fallbackStart || new Date().toISOString()).slice(0, 10) + "T00:00:00");
   // align to the Monday of the start week

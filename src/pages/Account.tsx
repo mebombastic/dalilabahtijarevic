@@ -275,7 +275,7 @@ const Account = () => {
                           {[m.date, m.weight, m.waist, m.squat, m.pushup, m.situp, m.plank].map((h) => <th key={h} className="font-normal py-2 pr-3">{h}</th>)}
                         </tr></thead>
                         <tbody>{entries.map((e, i) => (
-                          <tr key={i} className="border-t border-border">{[e.d, e.w, e.wa, e.sq, e.pu, e.su, e.pl].map((v, k) => <td key={k} className="py-2 pr-3">{v || "—"}</td>)}</tr>
+                          <tr key={i} className="border-t border-border">{[e.d, e.w, e.wa, e.sq, e.pu, e.su, e.pl].map((v, k) => <td key={k} className="py-2 pr-3">{v || "-"}</td>)}</tr>
                         ))}</tbody>
                       </table>
                     )}
@@ -296,7 +296,7 @@ const Account = () => {
                     <SectionLabel>{lang === "de" ? "Smart-Plate-Rechner" : lang === "sr" ? "Smart Plate kalkulator" : "Smart Plate Calculator"}</SectionLabel>
                     <span className="mb-4 inline-flex items-center gap-1 rounded-full bg-primary text-primary-foreground px-2.5 py-1 font-body text-[9px] tracking-luxe uppercase"><Crown className="h-3 w-3" /> VIP</span>
                   </div>
-                  <p className="font-body text-xs text-muted-foreground -mt-2 mb-5 inline-flex items-start gap-1.5"><Utensils className="h-3.5 w-3.5 shrink-0 mt-px text-gold" />{lang === "de" ? "Stell jeden Teller grammgenau zusammen — Kalorien, Eiweiß, Kohlenhydrate und Fett werden sofort berechnet." : lang === "sr" ? "Složi svaki tanjir na gram — kalorije, proteini, ugljeni hidrati i masti se računaju odmah." : "Build every plate to the gram — calories, protein, carbs and fat are calculated instantly."}</p>
+                  <p className="font-body text-xs text-muted-foreground -mt-2 mb-5 inline-flex items-start gap-1.5"><Utensils className="h-3.5 w-3.5 shrink-0 mt-px text-gold" />{lang === "de" ? "Stell jeden Teller grammgenau zusammen - Kalorien, Eiweiß, Kohlenhydrate und Fett werden sofort berechnet." : lang === "sr" ? "Složi svaki tanjir na gram - kalorije, proteini, ugljeni hidrati i masti se računaju odmah." : "Build every plate to the gram - calories, protein, carbs and fat are calculated instantly."}</p>
                   <FoodCalculator lang={lang} userId={user.id} unlocked={hasVip(user)}
                     defaultGoal={profile ? (() => { const nn = calcNutrition(profile); return { k: nn.kcal, p: nn.protein }; })() : undefined}
                     pending={!active && slug === "VIP-1-1"}

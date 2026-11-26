@@ -140,7 +140,7 @@ const Start = () => {
                 <h1 className="font-display text-4xl md:text-5xl mb-8">{q.weight.q}</h1>
                 {numInput("weight", q.weight.unit, "65")}
                 <div className="font-body text-[10px] tracking-luxe uppercase text-muted-foreground mt-8 mb-2">{q.weight.target}</div>
-                {numInput("target", q.weight.unit, "–")}
+                {numInput("target", q.weight.unit, "-")}
                 {d.weight !== undefined && !valid && <p className="font-body text-xs text-destructive mt-3">{q.weight.err}</p>}
               </>}
               {step === "year" && <>
@@ -148,7 +148,7 @@ const Start = () => {
                 <p className="font-body text-sm text-muted-foreground mb-6">{q.year.hint}</p>
                 <select value={d.year ?? ""} onChange={(e) => set({ year: parseInt(e.target.value) || undefined })}
                   className="h-16 w-48 rounded-2xl border border-input bg-card px-5 font-display text-3xl">
-                  <option value="">–</option>
+                  <option value="">-</option>
                   {Array.from({ length: 75 }, (_, k) => yearNow - 16 - k).map((y) => <option key={y} value={y}>{y}</option>)}
                 </select>
               </>}

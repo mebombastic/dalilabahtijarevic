@@ -77,15 +77,15 @@ const defs: ProductDef[] = [
     subtitle: { en: "Nutritional shake mix", de: "Nährstoff-Shake", sr: "Nutritivni šejk" },
     category: cat.shakes, badge: badge.best, kind: "cutout", images: f1Images,
     desc: {
-      en: "A balanced, nutritious meal in a glass — the heart of a healthy breakfast. Just shake with milk or a plant drink and go.",
-      de: "Eine ausgewogene, nährstoffreiche Mahlzeit im Glas — das Herz eines gesunden Frühstücks. Einfach mit Milch oder Pflanzendrink shaken und los.",
-      sr: "Uravnotežen, hranljiv obrok u čaši — srce zdravog doručka. Samo promućkaj sa mlekom ili biljnim napitkom i kreni.",
+      en: "A balanced, nutritious meal in a glass - the heart of a healthy breakfast. Just shake with milk or a plant drink and go.",
+      de: "Eine ausgewogene, nährstoffreiche Mahlzeit im Glas - das Herz eines gesunden Frühstücks. Einfach mit Milch oder Pflanzendrink shaken und los.",
+      sr: "Uravnotežen, hranljiv obrok u čaši - srce zdravog doručka. Samo promućkaj sa mlekom ili biljnim napitkom i kreni.",
     },
     facts: [
       { en: "High-quality protein in every serving", de: "Hochwertiges Protein in jeder Portion", sr: "Kvalitetni proteini u svakoj porciji" },
       { en: "25 vitamins & minerals", de: "25 Vitamine & Mineralstoffe", sr: "25 vitamina i minerala" },
       { en: "Ready in under 2 minutes", de: "In unter 2 Minuten fertig", sr: "Spremno za manje od 2 minuta" },
-      { en: "7 delicious flavours — tap a colour", de: "7 leckere Sorten — tippe auf eine Farbe", sr: "7 ukusa — dodirni boju" },
+      { en: "7 delicious flavours - tap a colour", de: "7 leckere Sorten - tippe auf eine Farbe", sr: "7 ukusa - dodirni boju" },
     ],
   },
   {
@@ -93,9 +93,9 @@ const defs: ProductDef[] = [
     subtitle: { en: "Everything to begin", de: "Alles für den Start", sr: "Sve za početak" },
     category: cat.shakes, kind: "cutout", images: () => [{ src: pKit }],
     desc: {
-      en: "Formula 1 Healthy Meal, Oat Apple Fibre, a Herbalife shaker and a measuring scoop — the easiest way to start your morning routine.",
-      de: "Formula 1 Healthy Meal, Hafer-Apfel-Ballaststoffe, ein Herbalife Shaker und ein Messlöffel — der einfachste Start in deine Morgenroutine.",
-      sr: "Formula 1 Healthy Meal, vlakna od ovsa i jabuke, Herbalife šejker i merica — najlakši način da započneš jutarnju rutinu.",
+      en: "Formula 1 Healthy Meal, Oat Apple Fibre, a Herbalife shaker and a measuring scoop - the easiest way to start your morning routine.",
+      de: "Formula 1 Healthy Meal, Hafer-Apfel-Ballaststoffe, ein Herbalife Shaker und ein Messlöffel - der einfachste Start in deine Morgenroutine.",
+      sr: "Formula 1 Healthy Meal, vlakna od ovsa i jabuke, Herbalife šejker i merica - najlakši način da započneš jutarnju rutinu.",
     },
     facts: [
       { en: "Formula 1 Healthy Meal (550 g)", de: "Formula 1 Healthy Meal (550 g)", sr: "Formula 1 Healthy Meal (550 g)" },
@@ -123,9 +123,9 @@ const defs: ProductDef[] = [
     subtitle: { en: "Mango & pitaya · 102 g", de: "Mango & Pitaya · 102 g", sr: "Mango i pitaja · 102 g" },
     category: cat.tea, kind: "cutout", images: () => [{ src: pTea }],
     desc: {
-      en: "A refreshing, low-calorie tea drink with tea extracts — enjoy it hot or over ice for a natural lift during the day.",
-      de: "Ein erfrischendes, kalorienarmes Teegetränk mit Teeextrakten — heiß oder auf Eis, für einen natürlichen Kick am Tag.",
-      sr: "Osvežavajući, niskokalorični napitak sa ekstraktima čaja — topao ili sa ledom, za prirodnu energiju tokom dana.",
+      en: "A refreshing, low-calorie tea drink with tea extracts - enjoy it hot or over ice for a natural lift during the day.",
+      de: "Ein erfrischendes, kalorienarmes Teegetränk mit Teeextrakten - heiß oder auf Eis, für einen natürlichen Kick am Tag.",
+      sr: "Osvežavajući, niskokalorični napitak sa ekstraktima čaja - topao ili sa ledom, za prirodnu energiju tokom dana.",
     },
     facts: [
       { en: "With green & black tea extracts", de: "Mit Grün- & Schwarztee-Extrakten", sr: "Sa ekstraktima zelenog i crnog čaja" },
@@ -133,9 +133,9 @@ const defs: ProductDef[] = [
       { en: "Delicious hot or iced", de: "Heiß oder eisgekühlt köstlich", sr: "Ukusno toplo ili hladno" },
     ],
     note: {
-      en: "Contains caffeine — not for children, pregnant or breastfeeding women.",
-      de: "Enthält Koffein — nicht für Kinder, Schwangere oder Stillende.",
-      sr: "Sadrži kofein — nije za decu, trudnice ni dojilje.",
+      en: "Contains caffeine - not for children, pregnant or breastfeeding women.",
+      de: "Enthält Koffein - nicht für Kinder, Schwangere oder Stillende.",
+      sr: "Sadrži kofein - nije za decu, trudnice ni dojilje.",
     },
   },
   {
@@ -143,9 +143,9 @@ const defs: ProductDef[] = [
     subtitle: { en: "New skincare line", de: "Neue Hautpflege-Linie", sr: "Nova linija nege kože" },
     category: cat.skin, badge: badge.new, kind: "photo", images: () => [{ src: pSkin }],
     desc: {
-      en: "Herbalife's new skincare, made with Korean skincare science — from a gentle resurfacing gel cleanser to a 10% niacinamide serum and the Ultimate Tension Cream.",
-      de: "Die neue Hautpflege von Herbalife, entwickelt mit koreanischer Hautpflege-Wissenschaft — vom sanften Gel-Reiniger bis zum 10 % Niacinamid-Serum und der Ultimate Tension Cream.",
-      sr: "Nova Herbalife nega kože, razvijena uz korejsku nauku o nezi — od nežnog gel čistača do seruma sa 10 % niacinamida i Ultimate Tension kreme.",
+      en: "Herbalife's new skincare, made with Korean skincare science - from a gentle resurfacing gel cleanser to a 10% niacinamide serum and the Ultimate Tension Cream.",
+      de: "Die neue Hautpflege von Herbalife, entwickelt mit koreanischer Hautpflege-Wissenschaft - vom sanften Gel-Reiniger bis zum 10 % Niacinamid-Serum und der Ultimate Tension Cream.",
+      sr: "Nova Herbalife nega kože, razvijena uz korejsku nauku o nezi - od nežnog gel čistača do seruma sa 10 % niacinamida i Ultimate Tension kreme.",
     },
     facts: [
       { en: "Cleanser, serum, lotion & creams", de: "Reiniger, Serum, Lotion & Cremes", sr: "Čistač, serum, losion i kreme" },
@@ -188,9 +188,9 @@ const steps: { time: L; title: L; text: L; img: string; kind: RitualStep["kind"]
     time: { en: "Morning · 7:00", de: "Morgens · 7:00", sr: "Jutro · 7:00" },
     title: { en: "Shake up your breakfast", de: "Shake dein Frühstück", sr: "Šejk za doručak" },
     text: {
-      en: "Start with a Formula 1 Healthy Meal — protein, vitamins and minerals in two minutes, so you're full and focused until lunch.",
-      de: "Starte mit einem Formula 1 Healthy Meal — Protein, Vitamine und Mineralstoffe in zwei Minuten, damit du bis zum Mittag satt und fokussiert bist.",
-      sr: "Počni dan uz Formula 1 Healthy Meal — proteini, vitamini i minerali za dva minuta, da budeš sita i fokusirana do ručka.",
+      en: "Start with a Formula 1 Healthy Meal - protein, vitamins and minerals in two minutes, so you're full and focused until lunch.",
+      de: "Starte mit einem Formula 1 Healthy Meal - Protein, Vitamine und Mineralstoffe in zwei Minuten, damit du bis zum Mittag satt und fokussiert bist.",
+      sr: "Počni dan uz Formula 1 Healthy Meal - proteini, vitamini i minerali za dva minuta, da budeš sita i fokusirana do ručka.",
     },
     img: f1Vanilla, kind: "cutout",
   },
@@ -208,9 +208,9 @@ const steps: { time: L; title: L; text: L; img: string; kind: RitualStep["kind"]
     time: { en: "Afternoon · 16:00", de: "Nachmittags · 16:00", sr: "Popodne · 16:00" },
     title: { en: "Feel light with fibre", de: "Leicht mit Ballaststoffen", sr: "Lakoća uz vlakna" },
     text: {
-      en: "Mix Fibre Concentrate into water — an easy way to get more fibre into your day.",
-      de: "Rühre Ballaststoff-Konzentrat in Wasser — ein einfacher Weg zu mehr Ballaststoffen.",
-      sr: "Umešaj koncentrat vlakana u vodu — lak način da uneseš više vlakana tokom dana.",
+      en: "Mix Fibre Concentrate into water - an easy way to get more fibre into your day.",
+      de: "Rühre Ballaststoff-Konzentrat in Wasser - ein einfacher Weg zu mehr Ballaststoffen.",
+      sr: "Umešaj koncentrat vlakana u vodu - lak način da uneseš više vlakana tokom dana.",
     },
     img: pFibreConc, kind: "cutout",
   },
@@ -218,9 +218,9 @@ const steps: { time: L; title: L; text: L; img: string; kind: RitualStep["kind"]
     time: { en: "Evening · 21:00", de: "Abends · 21:00", sr: "Veče · 21:00" },
     title: { en: "Glow while you rest", de: "Strahlen im Schlaf", sr: "Sijaj dok se odmaraš" },
     text: {
-      en: "Wind down with your HL/Skin routine — cleanse, treat and moisturise so your skin looks as good as you feel.",
-      de: "Komm mit deiner HL/Skin-Routine zur Ruhe — reinigen, pflegen, Feuchtigkeit spenden, damit deine Haut so gut aussieht, wie du dich fühlst.",
-      sr: "Opusti se uz HL/Skin rutinu — očisti, neguj i hidriraj kožu da izgleda dobro koliko se i ti osećaš.",
+      en: "Wind down with your HL/Skin routine - cleanse, treat and moisturise so your skin looks as good as you feel.",
+      de: "Komm mit deiner HL/Skin-Routine zur Ruhe - reinigen, pflegen, Feuchtigkeit spenden, damit deine Haut so gut aussieht, wie du dich fühlst.",
+      sr: "Opusti se uz HL/Skin rutinu - očisti, neguj i hidriraj kožu da izgleda dobro koliko se i ti osećaš.",
     },
     img: pSkin, kind: "photo",
   },
