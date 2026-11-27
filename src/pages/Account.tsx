@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Check, Crown, Sparkles, Download, Lock, LogOut, MessageCircle, Clock, TrendingUp, Loader2, Utensils } from "lucide-react";
+import { Check, Crown, Sparkles, Lock, LogOut, MessageCircle, Clock, TrendingUp, Loader2, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AuthDialog } from "@/components/AuthDialog";
@@ -109,7 +109,6 @@ const Account = () => {
   };
   const reportPaid = async () => { await supabase.auth.updateUser({ data: { payment_reported: new Date().toISOString() } }); await refresh(); };
 
-  const pdf = `${import.meta.env.BASE_URL}plans/Dalila-${slug}-${lang.toUpperCase()}.pdf`;
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -146,7 +145,6 @@ const Account = () => {
               </div>
               <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                 {!active && <Button onClick={() => setUpgradeOpen(true)} className="btn-shine flex-1 sm:flex-none rounded-full h-11 px-6 bg-vermilion text-white hover:bg-vermilion/90 font-body text-[10px] tracking-luxe uppercase"><Sparkles className="mr-2 h-4 w-4" /> {m.upgrade}</Button>}
-                {active && <Button asChild className="flex-1 sm:flex-none rounded-full h-11 px-6 bg-[hsl(37_40%_90%)] text-primary hover:bg-[hsl(37_40%_95%)] font-body text-[10px] tracking-luxe uppercase"><a href={pdf} download><Download className="mr-2 h-4 w-4" /> {m.download}</a></Button>}
                 <Button onClick={() => signOut()} variant="outline" className="rounded-full h-11 px-5 shrink-0 bg-transparent border-[hsl(37_40%_90%/0.35)] text-[hsl(37_40%_90%)] hover:text-gold font-body text-[10px] tracking-luxe uppercase"><LogOut className="mr-2 h-4 w-4" /> {m.logout}</Button>
               </div>
             </div>
